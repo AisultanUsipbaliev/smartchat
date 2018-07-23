@@ -1,0 +1,11 @@
+{
+	"domen" 		: "aida.market",
+	"wsport": 5454,
+	"port": 5152,
+	"server": {
+	    "host": "localhost",
+	    "user": "anvar",
+	    "password": "Anvar2018",
+	    "database": "smartEdu"
+	}
+}
