@@ -1,1 +1,1 @@
-let hello = true
+let hello = true;
