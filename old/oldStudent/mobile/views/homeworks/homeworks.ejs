@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<link rel="icon" type="img/png" href="/mobile/img/logo.png">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+	<link rel="stylesheet" href="/mobile/css/homework.css?ver=<%=version%>">
+	<%include ./../parts/metrica%>
+</head> 
+<body>
+	<%include ./../parts/header%>
+	<div class="content" id="content"></div>
+	<script type="text/javascript">
+	window.content = document.getElementById('content');
+
+	POST('/homework', 'method=GET', function(res, status) 
+	{
+		if(status === 200){
+			content.innerHTML = `
+			<div class="all_homeworks" id="homeworks">
+				<h2 class="homework_title">${res.body[0].rate_name}</h2>
+			</div>		
+			`;
+			let div = document.getElementById('homeworks');
+			for (var i = 0; i < res.body.length; i++)
+				paintHomeworks(res.body[i], div);
+		}else{
+			content.innerHTML = `<h2 class="homework_title">У вас ещё нет домашнего задания</h2>`
+		}
+		
+	})
+
+	function paintHomeworks(data, layout){
+		layout.innerHTML +=	`
+		<div class="homework">
+			<div class="homework_info">
+				<p class="left" style="width:100%">${data.content ? subStr(data.content) : ''}</p><br>
+				<p class="left">Дата:</p><p class = 'hw_date table'>${getDateName(data.dt)}</p><br>
+				<p class="left">Результат: </p><p class = 'actions table'>${data.score ? data.score : 'Не выполнен'}</p>
+			</div>
+			<div class="complete_homework">
+				<a href="/homework/${data.template}">Просмотреть</a>
+			</div>
+		</div>
+		`;
+	}
+
+	function subStr(data){
+		for (var i = 0; i < data.length; i++) {
+			if(data.length > 25){
+				data = data.substr(0, 22) + '...';
+			}
+		}
+		return data;
+	}
+</script>
+</body>
+</html>

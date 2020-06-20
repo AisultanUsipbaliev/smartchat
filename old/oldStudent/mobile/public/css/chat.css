@@ -1,0 +1,608 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+/*-----------------------------container--------------------------*/
+    body{
+        margin: 0;
+        padding: 0;
+        overflow-y: hidden;
+    }
+    .chat_container
+    {
+        background: white;
+        position: relative;
+        margin-top: 40px;
+        width: 100vw;
+        height: 85vh; 
+        font-size: 16px;
+        text-align: center;
+        display: inline-block;
+        overflow: hidden;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+/*------------------------------chat------------------------------*/
+    .chat
+    {
+        /*padding: 0 5%;*/
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+        position: relative;
+    }
+
+    .logotip
+    {
+        width: 90%;
+    }
+    .msgs
+    {
+        width: 82.5%;
+        padding: 1vh 7.5% 3vh 0; 
+        overflow: hidden;
+        bottom: 0;
+        position: relative;  
+    }
+    #preBox
+    {
+    overflow-x: hidden;
+    margin: -45vh 10vw;
+    border-bottom: 0.33vh solid #e6edf4;
+    border-radius: 2vh;
+    text-align: center;
+    font-weight: bold;
+    font-size: 4vh;
+    }
+    .box
+    {
+        z-index: 5;
+        position: relative;
+        height: 33%;
+    }
+
+    .msg_div
+    {
+        width: 100%;
+        margin-top: 0.5%;
+        position: fixed;
+        padding: 8px;   
+        bottom: 0;
+        box-sizing: border-box;
+        background-color: #EBEBEB;
+    }
+
+    .text
+    {
+        padding: 10px;
+        width: 80%;
+        padding: 5px 20px 5px 5px;
+        box-sizing: border-box;
+        font-size: 16px;
+        margin-bottom: 0;
+        outline:none;
+        border: 1px solid lightgray;
+        border-radius: 5px;
+        margin-left: 15px;  
+    }
+
+    .screpka
+    {
+        height: 25px;
+        cursor: pointer;
+        position: absolute;
+        bottom: 8px;
+        left: 5px;  
+        top: 15px;
+    }
+
+    .microfon
+    {
+        height: 25px;
+        cursor: pointer;
+        position: absolute;
+        right: 45px;
+        top: 22px;
+    }
+
+/*    .send
+    {
+        border: none;
+        background: #0088b8;
+        padding: 1vh 1.75vw;
+        display: block;
+        color: #fff;
+        font-size: 2vh;
+        border-radius: 5vh;
+        float: right;
+        position: absolute;
+        right: 15%;
+        bottom: 5%;
+        outline: none;
+        cursor: pointer;
+    }*/
+    .send_message{
+        top: -12.5px;   
+        position: relative; 
+        height: 25px; 
+        right: -10px; 
+    }
+    .send {
+        background: #fff;
+        float: right;
+        position: absolute;
+        right: 0;
+        bottom: 5%;
+        font-size: 12px;
+        padding: 1vh 1.75vw;
+        outline: none;
+        cursor: pointer;
+        text-decoration: none;
+        outline: none;
+        display: inline-block;
+        overflow: hidden;
+        border: 2px solid #85a4af;
+        border-radius: 8px;
+        font-family: 'Montserrat', sans-serif;
+        color: #4b717d;
+        transition: .2s ease-in-out;
+    }
+    .send:before {
+        content: "";
+        background: linear-gradient(90deg, rgba(255,255,255,.1), rgba(255,255,255,.5));
+        height: 50px;
+        width: 50px;
+        position: absolute;
+        top: -8px;
+        left: -75px;
+        transform: skewX(-45deg);
+    }
+    .send:hover {
+        background: #5ba3ea;
+        color: #fff;
+    }
+    .send:hover:before {
+      left: 150px;
+      transition: .5s ease-in-out;
+    }
+
+
+
+    .fullMessage{
+        width: 100%;
+        height: auto;
+        float: left;
+    }
+    .messageChees{
+        height: inherit;
+        width: auto;
+        min-width: 5vw;
+        max-width: 70%;
+    }
+    div.right_message{
+        float: right;
+        background-color: #92a7d0;
+        color: #fff;
+        border-radius: 5vh 5vh 0vh 5vh;
+        margin-right: 1vh;
+        margin-top: -5vh; 
+    }
+    .left_message, .right_message{
+        width: inherit;
+        overflow: hidden;
+        max-width: 89%;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+        display: block;
+        padding: 5px 10px;
+        line-height: 130%;
+        border: 2px solid #92a7d0;
+        clear: both;
+        font-size: 12px;
+        text-align: left;
+        margin-top: 10px;
+        font-family: 'Montserrat', sans-serif;
+    }
+    .left_message{
+        position: relative;
+        float: left;
+        clear: both;
+        color: #0277bd;
+        border-radius: 0vh 5vh 5vh 5vh;
+        margin-left: 1vh;
+        margin-top: 4vh;
+    }
+    .aseessment_message{
+        position: relative;
+        text-align: center;
+        width: 70%;
+        margin-top: 2vh;
+        font-size: 2.5vh;
+        background-color: #fff;
+        border-radius: 5vh;
+        padding: 1.5vh 2vw;
+        border: 0.1vw solid #5F9EA0;
+        margin-left: 15%;
+        clear:both;
+    }
+    .student_name
+    {
+        position: relative;
+        float: left;
+        top: 3vh;
+        margin: 0;
+        display: block;
+        color: #92a7d0;
+        font-size: 14px;
+        font-weight: bold;
+    }
+    .teacher{
+        font-weight: bold;
+        color:  #0088b8;
+        /* color: rgba(255, 185, 56, 0.8); */
+    }
+    .complete{
+        width: 0;
+        height: 50px;
+        display: inherit;
+        position: relative;
+        margin: 0 auto;
+        margin-right: 5vw;
+    }
+    .complete>img{
+        bottom: 0vh;
+        height: 100%;
+    }
+    .chat_picture 
+    {
+        max-width: 100%;
+        height: 100px;
+        border-radius: 1vh;
+        cursor: pointer;
+    }
+    .play_btn
+    {
+        height: 20px;
+        cursor: pointer;
+        display: inline-grid;
+    }
+    .chat_audio
+    {
+        display: none;
+    }
+    .audio_line
+    {
+        display: inline-grid;
+        height: 1vh;
+        background: #b7b4b4;
+        width: 18vh;
+        position: relative;
+    }
+    .audio_progress
+    {
+        background: black;
+        width: 1vh;
+        height: 2vh;
+        position: absolute;
+        top: -.5vh;
+        cursor: pointer;
+    }
+   .file_href
+    {
+        background: transparent;
+        padding: 1vh;
+        vertical-align: center;
+        border-radius: 1vh;
+        text-decoration: none;
+        font-size: 4vh;
+        color: black;
+        position: relative;
+    }
+    .file_href:hover{
+        background: rgba(255,255,255,0.2);
+    }
+    .download_file
+    {
+        width: 20px;
+        position: absolute;
+    }
+    .filename
+    {
+        margin-left: 30px;
+        font-size: 16px;    
+    }
+
+    .files
+    {
+        /*margin-top: .5vh;*/
+        /*margin-left: 10%;*/
+        width: 98%;
+        height: 32%;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .file_block
+    {
+        overflow-x: hidden;
+        border: 1px solid lightgray;
+        width: inherit;
+        height: 5vh;
+        margin-bottom: 1vh;
+        position: relative;
+    }
+
+    .file_img
+    {
+        height: 5vh;
+        top: -.3vh;
+        left: 0;
+        position: absolute;
+    }
+
+    .fname
+    {
+        text-align: left;
+        width: 32vh;
+        display: inline-block;
+        left: 5vh;
+        top: .3vh;
+        position: absolute;
+        overflow: hidden;
+    }
+
+    .rem_img
+    {
+        height: 4vh;
+        right: 1.5vh;
+        top: .3vh;
+        position: absolute;
+        cursor: pointer;
+        border-left: 1px solid lightgray;
+    }
+
+    .chat_video
+    {
+        max-width: 100%;
+        max-height: 125px;
+        border-radius: 1vh;
+    }
+
+    .fileTitle
+    {
+        margin: .5vh 0 .5vh 1vh;
+        font-size: 16px;
+        color: black;
+        /*z-index: 9999;*/
+        text-align: left;
+        font-weight: 600;
+    }
+
+    .startTask{
+        font-size: 90%;
+        border-radius: 1vh;
+        width: 6.8vw;
+        height: 3.4vh;
+        outline: none;
+        border: 0;
+        color: #fff;
+        background-color: #40a6f9;
+        transition: 0.2s;
+        margin-bottom: 2vh;
+        margin-top: 1vh;
+        padding: 0.5vh 0.5vw;
+        text-decoration: none;
+    }
+    
+    .startTask:hover{
+        background-color: #0088b8;
+    }
+    
+    .messageTask{
+        color: #0277bd;
+        font-size: 2vh;
+        border-radius: 0.2vh;
+    }
+
+    .taskBlock{
+        text-align: center;
+        min-width:5vw;
+        width: 95%;
+        border-radius: 2vh;
+        overflow-x: hidden;
+        border: 0.2vh solid #0277bd;
+        background-color: #fff;
+        margin-left: 2.5%;
+        color: #000; 
+        padding-bottom: 1vh;
+    }
+    .nochat
+    {
+        font-size: 30px;
+        
+    }
+    /*Tests*/
+    
+    .testHref{
+        background-color: #fff;
+        border: 1px solid #e0e0e0;
+        color:  black;
+    }
+    .testHref>a{
+        width: 30vw;
+        float: left;
+        height: auto;
+        padding: 10px 0;
+        text-transform: none;
+        text-align: center;
+        color: rgba(3, 0, 89, 1);
+        text-decoration: none;
+        font-size: 18px;
+    }
+    .testHref>a>span{
+        display: block;
+        padding: 0 0 5px;   
+    }
+    .testHref>a>img{
+        position: relative;
+        display: block;
+        width: 60%;
+        margin-left: 20%;
+    }
+    .message_type_image{
+        background-color: transparent;
+        border: none;
+    }
+    .message_type_image img{
+        border-radius: 3vh;
+    }
+
+    .bottom_arrow {
+    -webkit-transition: bottom .5s, opacity .5s, visibility 0.5s;
+    -webkit-transition-property: bottom, opacity, visibility;
+    -webkit-transition-duration: 0.5s;
+    visibility: hidden;
+    opacity: 0;
+    bottom: 15%;
+    position: absolute;
+    right: 14%;
+    width: 5vh;
+    height: 5vh;
+    border-radius: 50%;
+    background: #fff;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.62);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.62);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.62);
+    padding-top: 1.2vh;
+    padding-right: 1.2vh;
+    padding-bottom: 1.2vh;
+    padding-left: 1.2vh;
+    z-index: 1;
+    cursor: pointer;
+}
+.bottom_arrow img {
+    width: 100%;
+    height: 100%;
+}
+
+.scroll{
+    position:absolute;
+    display: none;
+    top: 0;
+    right:0%; 
+    width: 1vw; 
+    min-height:2vh;
+    background: #0088b8;
+    cursor:pointer;
+    border-radius: 0.5vh;
+    transition: 0.1s;
+}
+
+
+.answerMesBlock{
+    height: 15px;
+    margin: 15px;
+    margin-top: 20px; 
+    position: relative;
+    cursor: pointer;
+}
+.left_ans{
+    float: left;
+    margin-left: -25px;
+}
+.right_ans{
+    float: right;
+    margin-right: -25px;
+    top: 55px;
+    margin-top: 0;
+}
+.refer{
+    background: rgba(0,0,0,0.1);
+    width: calc(100% + 20px);
+    margin-left: -10px;
+    cursor: pointer;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.select_name{
+    top: 0;
+    color: #0088b8;
+    margin-bottom: 10px;
+    float: none;
+    position: relative;
+    left: 17.5px;
+}
+
+div.selectMes{
+    background-color: rgb(59, 170, 224) !important;
+    border: none !important;
+}
+
+
+.answerMesBlock{
+    height: 15px;
+    margin: 15px;
+    margin-top: 20px; 
+    position: relative;
+    cursor: pointer;
+}
+.left_ans{
+    float: left;
+    margin-left: -25px;
+}
+.right_ans{
+    float: right;
+    margin-right: -25px;
+    top: 55px;
+    margin-top: 0;
+}
+.refer{
+    background: rgba(0,0,0,0.1);
+    width: calc(100% + 20px);
+    /*margin-left: -10px;*/
+    margin-left: 0;
+    cursor: pointer;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    border-left: 5px solid dodgerblue;
+    padding-left: 5px;
+    margin-bottom: 5px;
+}
+
+.select_name{
+    top: 5px;
+    color: #0088b8;
+    margin-bottom: 0;
+    float: none;
+    position: relative;
+    left: 15px;
+}
+
+div.selectMes{
+    background-color: rgb(59, 170, 224) !important;
+    border: 2px solid rgb(59, 170, 224) !important;
+}
+
+.refMesInBlock{
+    position: absolute;
+    background-color: #fff;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-left: 5px solid rgb(59, 170, 224);
+    border-top: 2.5px solid rgba(0,0,0,0.25);
+    z-index: 1;
+    font-size: 1em;
+}
+
+.refMesInBlock>div>.refer, .refMesInBlock>div>.sms_date{
+    display: none;
+}
+
+.closeAns{
+    position: absolute;
+    right: 0.5em;
+    top: 0;
+    cursor: pointer;
+    height: 1.25em;
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" href="/static/img/topLogo.png" type="image/x-icon">
+	<title></title>
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/recorderjs/0.1.0/recorder.min.js"></script> -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+  
+</head>
+<body>
+	<div style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+		<button id='start' style="width: 30vw; height: 5vh; margin-top: 10vh; font-size: 30px">Start</button>
+		<button id='stop' style="width: 30vw; height: 5vh; margin-top: 10vh; font-size: 30px">Stop</button>
+		<!-- <button id='start' style="width: 30vw; height: 5vh; margin-top: 10vh; font-size: 30px">Start</button> -->
+
+		<audio id = 'aud' src="https://cabinet.smartchat.kz/common/files/1539060706581WhatsApp Audio 2018-10-06 at 02.41.53.mpeg" controls style="margin-top: 10vh;"></audio>
+	</div>
+</body>
+<script type="text/javascript">
+	function sendFile(route ,file, funct, name) {
+		//Создаем объек FormData
+		var data = new FormData();
+		data.append('method', 'sendFile');
+
+		//Добавлем туда файл
+		data.append('uploadFile', file);
+		if(name) data.append('name', name);
+		$.ajax({
+			url: route,
+			data: data,
+			cache: false,
+			contentType: false,
+			processData: false,
+			type: 'POST',
+			success: function(response) {
+				funct(response);
+			}
+		});
+	}
+</script>
+	<script type="text/javascript">
+		let aud = document.getElementById('aud')
+
+
+		// Глобальный stream
+		var gumStream; 
+		// Глобальный recorder
+		var rec; //Recorder.js object
+
+		var recordButton = document.getElementById("start");
+		var stopButton = document.getElementById("stop");
+		 
+		recordButton.addEventListener("click", startRecording);
+		stopButton.addEventListener("click", stopRecording);
+
+		var AudioContext = window.AudioContext || window.webkitAudioContext; //new audio context to help us record
+		 
+		function startRecording() {
+			recordButton.style.display = 'none'
+	
+			navigator.mediaDevices.getUserMedia({ audio: true, video:false }).then(function(stream) {
+
+				gumStream = stream;
+				let input = (new AudioContext).createMediaStreamSource(stream);
+				rec = new Recorder(input,{numChannels:1})
+				rec.record()
+
+			})
+		}
+
+		function stopRecording() {
+
+			stopButton.style.display = 'none'
+		 
+		 	/**/
+			rec.stop();
+			gumStream.getAudioTracks()[0].stop();
+			rec.exportWAV(createDownloadLink);
+			/**/
+		}
+
+		// Результат тут
+		function createDownloadLink(blob) {
+				
+			sendFile('/api', blob, (e)=>{
+				aud.src = 'https://m.smartchat.kz/common/files/' + e.name
+				console.log(e)
+			}, new Date().valueOf()+'.ogg')
+
+		}
+	</script>
+</html>

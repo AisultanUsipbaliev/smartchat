@@ -1,0 +1,91 @@
+<!Doctype html>
+			<!-- <div class="notice" id="Das ist Fantastish!">Тестовое уведомление, в последствии они будут приходить с сервера :P</div> -->
+
+<script type="text/javascript">
+let wrapper = document.querySelector('.wrapper');
+let originalid = 0;
+
+//Глобальная функция для вызова уведомлений (принимает id и сообщение)
+function GetNotice(id, text)
+{
+	let div = document.createElement('div');
+	let msg = text;
+	div.innerHTML=`<h4>${msg}</h4>`;
+	div.id = id + '%%' + originalid;
+
+	//Переменная для записи позиции элемента
+	let idDiv = div.id.split('%%');
+	
+	originalid++; 
+	div.classList.add('notice');
+
+	//Переменная для записи длинны wrapper-а
+	let forbottom = wrapper.childNodes.length;
+	div.addEventListener('click', ()=>{
+		// Вызов функции для удаления из базы
+		deleteNotice(id);
+
+		//Поиск первого сообщения
+		let j = 0;
+		while(wrapper.childNodes[j].classList != 'notice'){
+			j++;
+		}
+		//Проверка на существования следующего сообщения
+		if(wrapper.childNodes[j+1]){
+			//for для пробега по всем сообщениям до длинны  родителя на момент создания сообщения
+			for (var i = j; i < forbottom; i++) {
+				//if-ы (в порядке убывания) проверка на существования дочернего элемента
+				//                          проверка на существование класса-"notice"
+				//                          проверка на оригинальные id, если id элемента меньше id удаляемого то сдвиг вниз на 							высоту удаляемого, отступ снизу и margin самого элемента
+				if(wrapper.childNodes[i])
+				if(wrapper.childNodes[i].classList == 'notice'){
+					let ider = wrapper.childNodes[i].id.split('%%');
+					if(parseInt(ider[1]) < parseInt(idDiv[1])){
+						let child = getComputedStyle(wrapper.childNodes[i]);
+						let bottom = parseInt(child.bottom);
+						let margin = parseInt(child.marginTop);
+						let height = parseInt(getComputedStyle(div).height);
+						bottom += - margin - height;
+						wrapper.childNodes[i].style.bottom = bottom - 22.5 + 'px';
+					}
+				}
+			}
+		}
+		//дашь за экран и последующее удаление элемента
+		div.style.right = '-20vw';
+		setTimeout(function(){
+			wrapper.removeChild(div);
+		},300);
+	});
+	//Добавление сообщения в wrapper
+	wrapper.appendChild(div);
+	//Все сообщения кроме последнего двигаются вверх в зависимости от высоты новосозданного сообщения. И НЕТ! Их нельзя менять 	  местами!
+	for (var i = 0; i < wrapper.childNodes.length-1; i++) {
+		if(wrapper.childNodes[i].classList == 'notice'){
+			let child = getComputedStyle(wrapper.childNodes[i]);
+			let bottom = parseInt(child.bottom);
+			let margin = parseInt(child.marginTop) * 2;
+			let height = parseInt(getComputedStyle(div).height);
+			bottom += height + margin;
+			wrapper.childNodes[i].style.bottom = bottom + 22.5 + 'px';
+		}
+	}
+	
+	//Ограничение в 7 оповещений
+	let j = 0;
+	while(wrapper.childNodes[j].classList != 'notice'){
+		j++;
+	}
+	if(wrapper.childNodes.length - j > 7){
+		wrapper.childNodes[j].style.right = '-20vw';
+		setTimeout(function(){
+			wrapper.removeChild(wrapper.childNodes[j]);
+		},300);
+	}
+}
+//Функция удаляет из базы сообщение (наверное)
+function deleteNotice(id)
+{
+	POST('/notice', `method=DELETE&&id=${id}`, (e)=>{});
+}
+</script>

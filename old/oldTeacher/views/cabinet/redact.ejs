@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SmartChat</title>
+	<meta charset="utf-8">
+	<link rel="icon" type="img/png" href="static/img/logo.png">
+	<link rel="stylesheet" type="text/css" href="static/style/redact.css?ver=<%=version%>">
+</head>
+<body>
+	<% include ../partial/header %>
+	<div class="wrapper">
+		<% include ../partial/menu %>
+		<h3 id = 'err' style="position: absolute; margin-left: 120vh;"></h3>
+		<div class="profile container">
+			<div class="profile_user_ava">
+				<img class = 'profile_photo' title="Изменить фото профиля" id = 'ava' src="static/img/avatar.jpg">
+				<input type="file" name="" id ='newPhoto' style="display: none;">
+			</div>
+			<label for='login'>Имя</label>
+			<input class="edit_input" type="text" name="" id = 'login'>
+			<label for='lastname'>Фамилия</label>
+			<input class="edit_input" type="text" name="" id = 'lastname'>
+			<label for='phone'>Телефон</label>
+			<input class="edit_input" type="text" name="" id = 'phone'>
+			<button class="edit_btn" id = 'edit_info'>Изменить</button>
+		</div>
+		<div class="edit_profile container">	
+			<label for="username">Старый пароль</label>
+			<input class="edit_input" type="password" name="" id="oldpass" autocomplete="off">
+			<label for="pass">Новый пароль</label>
+			<input class="edit_input" type="password" name="" id="pass" autocomplete="off">
+			<label for="Repass">Повторите пароль</label>
+			<input class="edit_input" type="password" name="" id="Repass" autocomplete="off">
+			<button class="edit_btn" id = 'edit_pass'>Изменить</button>
+		</div>
+	</div>
+</body>
+<script src="static/js/cabinet/redact.js?ver=<%=version%>" type="text/javascript"></script>
+</html>

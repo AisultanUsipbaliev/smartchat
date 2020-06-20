@@ -1,0 +1,59 @@
+.settings {
+	
+}
+.settings__item {
+	margin-top: 1rem;
+}
+.settings__item label {
+	font-size: 1rem;
+  font-weight: 400;
+  color: #6c757d;
+}
+.settings__item input {
+	margin-top: .25rem;
+}
+.settings__item_pass {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+.settings__item_pass button {
+  background-color: #fff;
+  border: 1px solid #E5E5E5;
+  color:  #777;
+}
+.settings__item_pass button:hover {
+  color: #333333;
+}
+
+.popup{
+	position: fixed;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #00000050;
+	min-width: 100vw;
+	min-height: 100vh;
+	z-index: 1000;
+	top: 0;
+	left: 0;
+}
+.transparent{
+	background-color: transparent;
+}
+.popup-content{
+	width: 40%;
+	background-color: #fff;
+	padding: 0 0 15px;
+	border-radius: 0.3125em;
+  transition: 0.05s;
+}
+
+.popup-content-fade-enter-active, .popup-content-fade-leave-active{
+  transition: 0.3s;
+  transform: scale(1.075);
+}
+.popup-content-fade-enter, .popup-content-fade-leave-to{
+  opacity: 0;
+  transform: scale(0.2);
+}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SmartChat</title>
+	<meta charset="utf-8">
+	<link rel="icon" type="img/png" href="static/img/logo.png">
+	<link rel="stylesheet" type="text/css" href="static/style/students.css?ver=<%=version%>">
+	<link rel="stylesheet" type="text/css" href="static/style/profile.css?ver=<%=version%>">
+</head>
+<body>
+	<% include ../partial/header %>
+	<div class="wrapper">
+		<% include ../partial/menu %>
+		<div class="list">
+			<div class="list__header">Список студентов</div>
+			<div class="list__names" id ='studentNames'></div>
+		</div>
+		<div class="list list-display_none" id="studentData">
+			<div class="list__header">Информация</div>
+			<div class="list__body" id="listBody">
+				<div class="list__avatar">
+					<img src="/static/img/avatar.jpg" alt=""  id = 'studentPhoto'>
+				</div>
+				<div class="list__name" id = 'studentName'></div>
+				<div class="list__email" id="studentEmail"></div>
+				<div class="list__tel" id = 'studentTel'></div>
+				<div class="list__lvl-block">
+					<div class="list__lvl-title">Уровень:</div>
+					<div class="list__lvl-description" id = 'studentLvl'></div>
+					<div class="list__lvl-title">Тариф:</div>
+					<div class="list__lvl-description" id="studentRate"></div>
+				</div>
+				<div class="training">
+					<a href="/" class="training__title" id = 'studentGroup'></a>
+					<div id="training"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="static/js/students/students.js?ver=<%=version%>" type="text/javascript"></script>
+</html>

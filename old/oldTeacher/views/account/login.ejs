@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SmartChat</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="static/style/login.css?ver=<%=version%>">
+	<link rel="icon" type="img/png" href="static/img/logo.png">
+</head>
+<body>
+	<div class="wrapper">
+		<div class="login">
+			<h1 class="login_title">Вход</h1>
+			<h3 class = 'err' id = 'err'></h3>
+			<form>
+				<label for="username" class="label">Email</label>
+				<input class="login_input" type="text" name="username" id="username" style="margin-bottom: 15px;">
+				<label for="pass" class="label">Пароль</label>
+				<input class="login_input" type="password" name="pass" id="pass">
+				<div>
+					<a class = 'link_to_reg' href="/registration">Регистрация</a>
+					<a class="pass_forget" href="#">Забыли пароль?</a>
+				</div><br>
+				<button class="login_btn" id ='login_btn'>Войти</button>
+			</form>
+		</div>
+	</div>
+	<script src="static/js/account/login.js?ver=<%=version%>" type="text/javascript"></script>
+</body>
+</html>

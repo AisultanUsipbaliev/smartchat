@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SmartChat</title>
+	<meta charset="utf-8">
+	<link rel="icon" type="img/png" href="static/img/logo.png">
+	<link rel="stylesheet" type="text/css" href="static/style/template.css?ver=<%=version%>">
+</head> 
+<body>
+	<% include ../partial/header %>
+	<div class="wrapper">
+		<% include ../partial/menu %>
+
+		<div class="nav-temp">
+			<div class="nav-temp__header">Навигация</div>
+			<div class="nav-temp__body" id ='nav_template'></div>
+		</div>
+
+		<div class="nav-content" id="template-container">
+			<div class="nav-content__header" id="template-path"></div>
+			<div class="nav-content__body" id="template-list"></div>
+		</div>
+
+		<div id="myModal" class="modal">
+			<!-- <span class="close-popup">&times;</span> -->
+			<img class="modal-content" id="img01">
+			<div id="caption" class="caption"></div>
+		</div>
+		
+		<div class="modal hidden" id="modal">
+			<div class="modal__backdrop"></div>
+			<div class="modal__inner">
+
+				<div class="modal__header">
+
+					<div id="home_work" class="modal__header_left-block" onclick="toggleModalHomework()">
+						<div class="modal__btn">
+							<img id="home_work_img" title="Пометить как домашнее задание" src="/static/img/homeWork.png" alt="#">
+						</div>
+					</div>
+
+					<div class="modal__header_right-block">
+						<div id='progres_upload' class="modal__btn" title="Файл загружается" style="display: none;">
+							<img src="/static/img/prog.gif" alt="#">
+						</div>
+						<div class="modal__btn" onclick="addContent()">
+							<img src="/static/img/down-arrow.svg" alt="#" title="Загрузить файл">
+						</div>
+						<div class="modal__btn" onclick="saveModal()">
+							<img src="/static/img/complete.png" title="Сохранить" alt="#">
+						</div>
+						<div class="modal__btn" onclick="closeModal();">
+							<img src="/static/img/close.png" title="Закрыть" alt="#">
+						</div>
+					</div>
+
+				</div>
+
+				<div class="modal__body">
+					<div class="modal__block" style="height: 100%;">
+						<div class="modal-data" id="modalData">
+							<input type="file" id="myFile" onchange="uploadF()" style="display: none;">
+							<div class="modal-content-title link">Текст</div>
+							<div class="modal-content-block">
+								<textarea  id="modalText" cols="30" rows="10" class="modal-text" autofocus placeholder="Введите текст"></textarea>
+							</div>
+							<div class="modal-content-title link" id="modalImgHeader" style="display: none;">Изображение</div>
+							<div class="modal-img" id="modalImg" style="display: none;"></div>
+							<div class="modal-content-title link" id="modalVideoHeader" style="display: none;">Видео</div>
+							<div class="modal-img" id="modalVideo" style="display: none;"></div>
+							<div class="modal-content-title link" id="modalAudioHeader" style="display: none;">Аудио</div>
+							<div class="modal-img" id="modalAudio" style="display: none;"></div>
+							<div class="modal-content-title link" id="modalFileHeader" style="display: none;">Файл</div>
+							<div class="modal-img" id="modalFile" style="display: none;"></div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+<script src="static/js/cabinet/template.js?ver=<%=version%>"></script>
+</body>
+</html>
+

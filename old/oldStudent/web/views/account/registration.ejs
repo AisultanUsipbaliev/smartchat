@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru" >
+<head>
+  <meta charset="UTF-8">
+  <title>SmartChat</title>
+    <!-- google auth -->
+    <meta name='google-signin-client_id' content = '560601805027-1rbukc25d0h5kjpa56vdm6mjc30e8sc9.apps.googleusercontent.com'>
+    <script type="text/javascript" src="https://apis.google.com/js/platform.js" async defer></script>
+  <link rel="icon" type="img/png" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/vendor/reset.min.css?ver=<%=version%>">
+    <link rel='stylesheet' href="/css/vendor/font-awesome.min.css?ver=<%=version%>">
+    <link rel="stylesheet" href="/css/authorization.css?ver=<%=version%>">
+    <script type="text/javascript" src="/js/auth.js?ver=<%=version%>"></script>
+</head>
+
+<body>
+  <div class="backdrop">
+    <div class="module form-module">
+      <div class="form show-form" id="reg">
+        <h2>Регистрация</h2>
+        <form>
+          <label class="alert" id = 'signup-err'></label>
+           <div class='tel'>
+            <label class="tel__label">+7</label>
+            <input class="tel__input" type="text" name = 'username' placeholder="Телефон" onkeydown ="keyUpReqTel(event)" id ='tel'/>
+            </div><br>
+          <input id="firstname" placeholder="Имя" type="text"><br>
+          <input type="password" name = 'password' placeholder="Пароль" id = 'pass'/><br>
+          <input type="password" placeholder="Повторите пароль" id = 'repass'/><br>
+          <button class="btn" onclick="registrate(event)">Зарегистрироваться</button>
+        </form>
+      </div>
+      <div class="cta" id="cta">
+        <a class="signer" href="/sign">Войти</a>
+      </div>
+      
+      
+      <div class="log_with">
+          <img src="/img/vk.svg" class="log_with_icon" onclick='authVk()'>
+          <img src="/img/iconfinder_mailru_386659.svg" class="log_with_icon" onclick='authMail()'>
+          <img src="/img/iconfinder_facebook_386622.svg" class="log_with_icon" onclick='authFb()'>
+          <div style="display: none" id='fuckin-google' class = 'g-signin2' data-onsuccess = 'authG'></div>
+          <button class="google-button" id="googleButton">
+            <div style="height:36px;width:120px;" class="abcRioButton abcRioButtonLightBlue" onclick="reallyAuth()">
+              <div class="abcRioButtonContentWrapper">
+                <div class="abcRioButtonIcon" style="padding:8px">
+                  <div style="width:18px;height:18px;" class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 48 48" class="abcRioButtonSvg"><g><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path fill="none" d="M0 0h48v48H0z"></path></g>
+                    </svg>
+                  </div>
+                </div>
+                <span style="font-size:13px;line-height:34px;" class="abcRioButtonContents">
+                  <span id="not_signed_in2prlyiggck33">Sign in</span>
+                  <span id="connected2prlyiggck33" style="display:none">Signed in</span>
+                </span>
+              </div>
+            </div>
+          </button>
+
+            <!--<script async src="https://telegram.org/js/telegram-widget.js?5" data-userpic="false" data-telegram-login="sm_auth_bot" data-size="medium" data-radius="5" data-scope='username' data-onauth="authTg(user)"></script> -->
+
+      </div>
+    </div>
+    </div>
+  </div>
+  <script type="text/javascript" src="js/functions.js?ver=<%=version%>"></script>
+  <script type="text/javascript" src="/js/detector.js?ver=<%=version%>"></script>
+  <script src="js/pages/account/sign.js?ver=<%=version%>.01"></script>
+
+</body>
+</html>

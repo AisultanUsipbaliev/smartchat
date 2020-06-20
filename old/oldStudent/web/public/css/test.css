@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+.contentTest{
+	margin: 5vh 0 0 5vh;
+	width: 80%;
+	height: 80vh;
+	position: relative;
+	border: .1vh solid #dadada;
+}
+.testBlock
+{ 
+	width: 100%;
+	margin: 0 auto;
+	height: 100%;
+	position: relative;
+    font-family: 'Montserrat', sans-serif;
+}
+ 
+.testTitle
+{
+	background: linear-gradient(135deg, #7db9e8 0%,#2989d8 33%,#1e5799 100%);
+	display: flex;
+	align-items: center;
+	text-align: left;
+	border-bottom: 0;
+	font-weight: bold;
+	font-size: 150%;
+	height: 12%;
+/*	height: 7.5%;
+	padding: 1.5% 3%; */
+}
+
+
+.testTitle>span{
+	padding-left: 2vh;
+	min-width: 40vw;
+}
+.scrollBody{
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: 40vh;
+}
+.testBody
+{
+	border-top: 0;
+	background: white;	
+	overflow-y:  scroll;
+	overflow-x: hidden; 
+	height: 90.3%;
+	font-size: 1.5em;
+	border-bottom-right-radius: 0.1vw;
+	border-bottom-left-radius: 0.1vw;
+
+}
+.test_question
+{
+	display: block;
+	width: 100%;
+}
+
+.test_question>span
+{
+	font-size: 1rem;
+}
+.questTitle{
+	padding: 1vh 1vw;
+	padding-left: 3%;
+	background-color: #E5ECF4;
+}
+
+.test-title {
+	display: flex;
+    font-size: 90%;
+    align-items: center;
+    width: 65%;
+    min-height: 7.5%;
+    padding-left: 3%;
+}
+
+.test_control
+{
+	width: 45%;
+	position: relative;
+	float: right; 
+	min-height: 7.5%;
+}
+
+button.test_button
+{
+	display: flex;
+    min-width: 15%;
+    font-weight: 500;
+    width: 40%;
+    float: right;
+    cursor: pointer;
+    right: 1vw;
+    margin: 0 auto;
+    background: #fff;
+    padding: 1vh 2vw;
+    outline: none;
+    margin: 0 5px;
+    border-radius: 8px;
+    align-items: center;
+    justify-content: center;
+}
+
+.endBut{
+	vertical-align: middle;
+	text-align: center;
+	align-content: center;
+	align-items: center;
+}
+.hr1{
+	width: 100%;
+	background-color: #000;
+	height: 2px;
+	margin-top: 10px;
+}
+.test_answer{
+	height: 14%;
+	padding: 1vh 0.5vw;
+	margin: 0 auto;
+	font-size: 0.8em;
+	background-color: #fff;
+}
+.active:hover{
+	background-color: skyblue!important;
+	transition: .3s ease;
+}
+.blockLeftTest{
+	left: 0;
+	float: left;
+}
+.blockTest{
+	margin-top: 2vh;
+	border-bottom: 0.2vh solid #dadada;
+}
+.levelSt{
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	flex-flow: column nowrap;
+}
+.levelSt h2 {
+    font-size: 125%;
+    padding: 0% 5%;
+    margin: 0
+}
+.test-button {
+	background-color: #fff;
+	font-size: 100%;
+	margin: 0px;
+}
+.popContent{
+	width: 100%;
+	height: 100%;
+	background: #fff;
+	display: flex;
+	flex-flow: column nowrap;
+	align-items: center;
+	padding: 5%;
+	box-sizing: content-box;
+}
+.popContent>button{
+	background: #fff;
+}
+
+/*Result*/
+.containerRes{
+	border: 0.3vh solid #dadada;
+	border-radius: 2vh;
+	width: 15%;
+	height: 100%;
+	display: flex;
+	text-align: center;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	float: right;
+	transition: 0.3s;
+	margin: 0 1.5%;
+}
+.containerRes>h6{
+	font-size: 50%;
+	padding: 0;
+	margin: 0 auto;
+}
+.boxColor{
+	width: 1vh;
+	height: 1vh;
+	border-radius: 50%;
+}
+.boxColor.red{
+	background-color: #ce1f1f;
+}
+.boxColor.green{
+	background-color: #489934;
+}
+.boxColor.blue{
+	background-color: #87ceeb;
+}

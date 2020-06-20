@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+.test_block{
+	margin: 5vh 0 0 5vh;
+	width: 80%;
+	height: 80vh;
+	position: relative;
+	border: .1vh solid #dadada;
+	background: white;
+	overflow-y: hidden;
+	overflow-x: hidden;
+    font-family: 'Montserrat', sans-serif;
+	font-size: 2.3vh;
+}
+	
+.test_tests
+{
+	width: 100%;
+	overflow: hidden; 
+}
+.PreTests{
+	margin: 3vh 10vw;
+    border-bottom: 0.33vh solid #e6edf4;
+    border-radius: 2vh;
+    text-align: center;
+    font-weight: bold;
+    font-size: 4vh;
+	background: #000;
+	/*background: linear-gradient(-3deg, #000 35%, #92a7d0 45%, #000 55%);*/
+	-webkit-background-clip:text;
+	color: transparent;
+}
+/***********scroll***********/
+.hidescroll::-webkit-scrollbar{
+width: 0vh;
+}
+
+.hidescroll::-webkit-scrollbar-track {
+background-color: transparent;
+}
+
+.hidescroll::-webkit-scrollbar-thumb {
+-webkit-border-radius: 1vh;
+-webkit-height: 0vh;
+border-radius: 0vh;
+}
+.noneOverflow{
+	overflow: hidden;
+	height: 100%;
+	position: relative;
+}
+.contentBlock{
+	height: 100%;
+	width: 115%;
+	margin-right: -15%;
+	position: relative;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+/*--------------test_courses-----------------*/
+.test_course
+{
+	width: 100%;
+	height: 7vh;
+	border-bottom: .5vh solid #e0e0e0;
+	cursor: pointer;
+	position: relative;
+}
+p.testStat{
+	overflow: hidden;
+}
+.test_course_current
+{
+	background: #c6ced9;
+}
+.active
+{
+	cursor: pointer;
+}
+.active:hover
+{
+	background: #e6edf4;
+}
+.activer{
+	background-color: #c6ced9;
+}
+.test_course p
+{
+	margin: 0;
+	position: absolute;
+	top: 2.4vh;
+	left: 2vh;
+	width: 70%;
+}
+
+.test_course a
+{
+	text-align: center;
+	position: absolute;
+	right: 2vh;
+	top: 1.5vh;
+	background: lightgray;
+	padding: 1vh;
+	border-radius: 100%;
+	width: 2vh;
+	height: 2vh;
+}
+.coursesTitle{
+	width: 100%;
+	text-align: center;
+	background-color: #e6edf4;
+	font-size: 3vh;
+	padding: 1.8vh 0;
+	border-bottom: 0.5vh solid #e0e0e0;
+
+}
+/*---------------test_tests---------------*/
+.test_test
+{
+	width: 88%;
+	height: 7.9vh;
+	border-bottom: .1vh solid #e0e0e0;
+	position: relative;
+	border-top: .1vh solid #dadada;
+}
+
+.testTop
+{
+	background: #e6edf4;
+}
+
+.table
+{
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	border: 0.05vw solid #e0e0e0;
+	border-top: 0;
+	border-bottom: 0;
+	position: relative;
+	width: calc(20% - 0.2vw);
+	float: left;
+	overflow: hidden;
+}
+
+button.ended{
+	background-color: transparent;
+	border-radius: 5px;
+	padding: 1.5vh 2vw;
+	font-size: 70%;
+	color: #4b717d;
+}
+.nonended{
+	border: none;
+}
+.actions button
+{
+    padding: 1vh;
+    outline: none;
+    color: #4b717d;
+    background: transparent;
+    width: 90%;
+    font-size: 70%;
+}
+.getResultBlock{
+	cursor: pointer;
+}
+.getResultBlock:hover{
+	background-color: #75b4e5 !important;
+	color: white;
+	transition: .3s;
+}
+.viewResult:hover{
+	background: rgba(255,255,255,0.5);
+}
+.actions1 {
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.actions1 button {
+	margin: 0;
+}
+.testNope{
+	width: 100%;
+	text-align: center;
+	font-weight: 400;
+	margin-top: 20vh;
+	border-bottom: 0.66vh solid #e6edf4;
+}

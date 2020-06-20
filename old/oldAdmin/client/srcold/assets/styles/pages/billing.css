@@ -1,0 +1,11 @@
+.between{
+  border-bottom: 1px solid #dadada;
+}
+.between__activ{
+  color: #009688;
+  border-color: #009688;
+}
+
+.text-cent{
+	text-align: center;
+}

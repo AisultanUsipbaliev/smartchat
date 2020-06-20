@@ -1,0 +1,76 @@
+<!Doctype html>
+
+<div class="nav_menu" id = 'nav_menu' onclick="navClick(event)">
+	<a link = 'profile' href="/">
+		<div class="menu_item--desc">
+			<img src="/img/profile.svg">
+			<span>Профиль</span>
+		</div>
+	</a>
+	<a link = 'courses' href="/courses">
+		<div class="menu_item--desc">
+			<img src="/img/courses.svg">
+			<span>Тарифы</span>
+		</div>
+	</a>
+	<a link = 'schedule' href="/schedule">
+		<div class="menu_item--desc">
+			<img src="/img/schedule.svg">
+			<span>Расписание</span>
+		</div>
+	</a>
+	<a link = 'groups' href="/groups">
+		<div class="menu_item--desc">
+			<img src="/img/groups.svg">
+			<span>Группа</span>
+		</div>
+	</a>
+	<a link = 'chat' href="/chat">
+		<div class="menu_item--desc" id="navChat">
+			<img src="/img/chat.svg">
+			<span>Чат</span>
+		</div>
+	</a>
+	 <a link = 'tests' id="navTestLink" href="tests">
+		<div class="menu_item--desc" id='navTest'>
+			<img src="/img/tests.svg">
+			<span>Тесты</span>
+		</div>
+	</a>
+	<a link = 'homeworks' id="navHomeworkLink" href="homeworks">
+		<div class="menu_item--desc" id='navHomework'>
+			<img src="/img/homework.svg">
+			<span>Задачи</span>
+		</div>
+	</a> 
+	<a link = 'feedback' href="/feedback">
+		<div class="menu_item--desc">
+			<img src="/img/like.svg">
+			<span>Отзыв</span>
+		</div>
+	</a> 
+	<a link = 'exit'>
+		<div class="menu_item--desc">
+			<img src="/img/exit.svg">
+			<span>Выход</span>
+		</div>
+	</a>
+</div>
+
+<script>
+	
+	document.getElementById('navTestLink').addEventListener('click', function(e) {
+		let newTest = document.getElementById('navTest');
+		if(newTest.children[2]){
+			newTest.removeChild(newTest.children[2]);
+		}
+	})
+
+	document.getElementById('navHomeworkLink').addEventListener('click', function(e) {
+		let newDz = document.getElementById('navHomework');
+		if(newDz.children[2]){
+			newDz.removeChild(newDz.children[2]);
+		}
+	})
+
+</script>

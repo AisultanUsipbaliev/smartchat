@@ -1,0 +1,274 @@
+/*tests*/
+body{
+	margin: 0;
+	padding: 0;
+}
+.test_block{
+	margin-top: 60px;
+	font-family: 'Montserrat', sans-serif;
+}
+.test{
+	margin-top: 15px;
+}
+.test_title{
+	text-align: center;
+}
+.test_info{
+	width: 90%;
+	margin: 0 auto;
+	background-color: #fff;
+	border: #4487c3 1px solid;
+	padding: .5vh 2vh;
+	box-sizing: border-box;
+	font-size: 14px;
+	text-align: center;
+	border-radius: 1vh 1vh 0 0;
+}
+.testName, .testDate, .actions{
+	font-weight: 600;
+	text-align: right!important;
+}
+.homework{
+	margin-bottom: 2vh;
+}
+.test_info p{
+	display: inline-block;
+	text-align: left;
+	width: 50%;
+}
+.completeTest{
+	width: 100%;
+	margin: 0 auto;
+	text-align: center;
+}
+.completeTest a{
+	box-sizing: border-box;
+	border-radius: 0 0 1vh 1vh;
+	text-decoration: none;
+	color: white;
+	font-size: 16px;
+	width: 90%;
+	padding: 1vh;
+	background-color: #4487c3;
+	border: #4487c3 1px solid;
+	display: block;
+	margin: 0 auto;
+}
+
+/*test*/
+.contentTest{
+	margin: 5vh 0 0 5vh;
+	width: 80%;
+	height: 80vh;
+	position: relative;
+	border: .1vh solid #dadada;
+	margin-top: 8vh;
+}
+.testBlock
+{
+	width: 100%;
+	margin: 0 auto;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+	margin-top: 60px;
+}
+ 
+.testTitle
+{
+	background: #e6edf4;
+	font-weight: 400;
+	font-size: 16px;
+	display: flex;		
+	align-items: center;
+	padding: 10px 10px;
+}
+.testTitle>span{
+	float: right;
+	margin: 0 10px;
+}
+.scrollBody{
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: 40vh;
+}
+.testBody
+{
+	border-top: 0;
+	background: white;	
+	overflow-y:  scroll;
+	overflow-x: hidden; 
+	height: 87.5%;
+	font-size: 16px;
+}
+.right_result{
+	padding: 5px 10px;
+}
+.test_question
+{
+	display: block;
+}
+
+.test_question>span
+{
+	font-size: 1rem;
+}
+.questTitle{
+	padding: 10px;
+	background-color: #dadada;
+}
+.test_control
+{
+	width: calc(100% - 4vh);
+	position: relative;
+	float: right; 
+	margin-left: 40%;
+}
+.test_name{
+	width: 20%;
+}
+
+.test_button
+{
+	text-decoration: none;
+	color:  black; 
+	background: none;
+    border: none;
+	float: right;
+    outline: none;
+    position: absolute;
+    right: 25px;
+}
+
+.endBut{
+	vertical-align: middle;
+	text-align: center;
+	align-content: center;
+	align-items: center;
+}
+.hr1{
+	width: 100%;
+	background-color: #000;
+	height: 2px;
+	margin-top: 10px;
+}
+.test_answer{
+	padding: 5px 10px;
+	font-size: 16px;
+	width: 100%;
+	display: block;
+	margin: 0;
+	background-color: #E5ECF4;
+}
+.active:hover{
+	background-color: skyblue!important;
+	transition: .3s ease;
+}
+.blockLeftTest{
+	left: 0;
+	float: left;
+}
+.blockTest{
+	margin-top: 2vh;
+	border-bottom: 0.2vh solid #dadada;
+}
+.levelSt{
+	vertical-align: middle;
+	align-content: center;
+	align-content: center;
+	text-align: center;
+	width: 100%;
+	height: 100%;
+}
+.popContent{
+	width: 100%;
+	height: 100;
+	text-align: center;
+	display: block;
+}
+.popContent>button{
+	background: #fff;
+}
+
+/*Result*/
+.containerRes{
+	border: 0.3vh solid #dadada;
+	border-radius: 2vh;
+	width: 15%;
+	height: 100%;
+	display: flex;
+	text-align: center;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	float: right;
+	transition: 0.3s;
+	margin: 0 1.5%;
+}
+.containerRes>h6{
+	font-size: 50%;
+	padding: 0;
+	margin: 0 auto;
+}
+.boxColor{
+	width: 1vh;
+	height: 1vh;
+	border-radius: 50%;
+}
+.boxColor.red{
+	background-color: #ce1f1f;
+}
+.boxColor.green{
+	background-color: #489934;
+}
+.boxColor.blue{
+	background-color: #87ceeb;
+}
+.send_result{
+	position: fixed;
+	outline: none;
+	bottom: 10px;
+	right: 10px;
+	padding: 10px;
+	font-size: 16px;
+	border-radius: 10px;
+	border:  none;
+}
+.play_btn
+{
+    height: 20px;
+    cursor: pointer;
+    display: inline-grid;
+}
+.audio_line
+{
+    display: inline-grid;
+    height: 1vh;
+    background: #b7b4b4;
+    width: 18vh;
+    position: relative;
+}
+.audio_progress
+{
+    background: black;
+    width: 1vh;
+    height: 2vh;
+    position: absolute;
+    top: -.5vh;
+    cursor: pointer;
+}
+
+.levelSt{
+	text-align: center;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	flex-flow: column nowrap;
+}
+.levelSt h2 {
+    font-size: 125%;
+    padding: 0% 5%;
+    margin: 0
+}

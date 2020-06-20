@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="icon" type="img/png" href="/mobile/img/logo.png">
+	<link rel="stylesheet" type="text/css" href="/mobile/css/profile.css?ver=<%=version%>">
+	<meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+  <%include ./parts/metrica%>
+</head>
+<body>
+<%include ./parts/header%>
+
+<div class="container" id="container_profile"></div>
+</body>
+</html>
+<script>
+
+  POST('/student', `method=PROFILE&&id=${getCookie('SAI')}`, function (res, status) {
+    if(!res.body.firstname) top.location.href = '/redact'
+    let container_profile = document.getElementById('container_profile');
+		container_profile.innerHTML = ` <div class="profile" onmousemove="click(event)">
+											<div class="photo">
+												${res.body.ava  ? '<img src="common/photo/'+res.body.ava+'">'
+															: '<img src="/img/profile.svg">'
+												}
+											</div>
+											<h1>${res.body.firstname} ${res.body.lastname == '*' ? '' : res.body.lastname}</h1>
+											<h1>${res.body.birthday? getAgeName(res.body.birthday): ''}</h1>
+                      <h1>${res.body.phone ? res.body.phone : ''}</h1>
+											<h1>${res.body.lvl_name != 'No level' ? 'Уровень:' + res.body.lvl_name : '<a class="btnProfile" href="/leveltest">Узнать уровень</a>'}</h1>
+											<a class="btnProfile" href="/redact">${res.body.lastname == '*' || res.body.age == '0' ? 'Добавить информацию' : 'Редактировать'}</a>
+										</div>`;
+    POST('/course', 'method=NEED-REQUEST', (res1, stat) =>
+    {
+      if(stat =QUICKLY= 200)
+      {
+        let profile = document.getElementsByClassName('profile')[0];
+        profile.innerHTML += `${res.body.lvl_name === 'No level' ? '<a class="btnProfile" onclick="goCourse(\'' + res.body.lvl_name +'\',' + stat + ')">Записаться на пробный урок</a>' : '<buttom class="btnProfile" onclick="popupCourse1()">Записаться на пробный урок</button>'}`;
+      }
+    });
+
+	});
+
+  function popupCourse1(){
+      let date = new Date()
+      let weekday = date.getDay()
+      let hour  = date.getHours()
+      let minutes = date.getMinutes()
+      let answer = getNearTime(hour, weekday, minutes);
+
+    showPopup(`
+        <div class="haveCourse">
+          <h3>Вы можете записаться на ближайшее время, либо выбрать удобное для вас в любой день недели! 
+          Ближайшее занятие: ${getWeekDay(answer.day)} c ${answer.time}:${answer.minutes==0?'00':'30'} до ${answer.time+1}:${answer.minutes==0?'00':'30'}</h3>
+          <div class="button-container">
+            <button onclick="nearTime(${answer.day}, ${answer.time}, ${answer.minutes})" class="btnProfile">Ближайшее время</button>
+            <button onclick="setTime()" class="btnProfile">Выбрать самому</button>
+          </div>
+        </div>`, { width: '80%', height: 'auto', top: '50%', background: '#fff'});
+  }
+  function goCourse(stat1, stat2){
+    if(stat1 === 'No level' && stat2 === 200){
+       let script =
+        `
+            <div class="welcome">
+              <div class="welcome__body">
+                <div class="welcome__text">Для того чтобы пробный урок был более интересным для вас, необоходимо пройти тест и узнать ваш уровень. Это займет от 3 минут вашего времени. Если вы ранее не изучали английский и хотите начать с азов нажмите "Начать с нуля"
+                </div>
+              </div>
+              <a class="btnProfile" style="border-radius:0" href="/request/1">Начать с нуля</a>
+              <a class="btnProfile" style="border-radius:0" href="/leveltest">Пройти тест</a>
+            </div>
+        `;
+        showPopup(script, {width: '80%  ', height: 'auto', border:'none', background: '#fff', top: '40%'});
+    }
+  }
+
+      POST('/notice', 'method=GET', (res, stat) =>
+      {
+        if(res.isActivated != 1) 
+        {
+          let div = document.createElement('div');
+          div.classList.add('notActivated');
+          div.id = 'notActivated';
+          div.innerHTML = `
+          <span>Вы ещё не активировали вашу почту!</span><br>
+          <button class="emBut" id="repeatemail">Повторно отправить</button>
+          <button class="emBut" id="changeemail">Сменить почту</button>
+          `;
+          document.body.appendChild(div);
+          document.getElementById('repeatemail').addEventListener('click',()=>{
+            POST('/data', 'method=REPEAT',(res1,status)=>{
+              if(status === 200)
+                div.innerHTML = `<span style="color:#41c941">На почту ${res.email} отправленно повторное письмо с активацией!</span>`;
+              else
+                div.innerHTML = `<span>Кажется что-то пошло не так, попробуйте позже!</span>`
+            })
+          });
+          document.getElementById('changeemail').addEventListener('click',()=>{
+            div.innerHTML = `
+            <span id="emSpan">Введите почту для отправки письма с активацией!</span>
+            <form>
+            <input type="email" class="emInput" id="emInput" placeholder="Новый e-mail" required>
+            <button class="emBut" id="sendNewEmail">Отправить</button>
+            </form>
+            `;
+            let mail = document.getElementById('emInput');
+            mail.addEventListener('keyup', ()=> mail.style.backgroundColor = 'transparent')
+            document.getElementById('sendNewEmail').addEventListener('click',()=>{
+              let stat = false;
+              for (var i = 0; i < mail.value.length; i++) {
+                if(mail.value[i] == '@'){
+                  for (var j = i+1; j < mail.value.length; j++) {
+                    if(mail.value[j] == '.'){
+                      stat = true;
+                    }else if(mail.value[j].charCodeAt() < 65 || mail.value[j].charCodeAt() > 122){
+                      mail.style.backgroundColor = 'linen';
+                      document.getElementById('emSpan').innerHTML = 'Некорректный e-mail!';
+                      return false;
+                    }
+                  }
+                }
+              }
+              if(stat)
+              POST('/data', `method=NEW_EMAIL&&email=${mail.value}`,(res, status)=>{
+                if(status === 200)
+                div.innerHTML = `<span style="color:#41c941">На почту ${mail.value} отправленно письмо с активацией!</span>`;
+              else if(status === 401){
+                document.getElementById('emSpan').innerHTML = `Данной почты не существует, попробуйте другую!`
+              }else document.getElementById('emSpan').innerHTML = `Кажется что-то пошло не так, попробуйте позже!`
+              })
+            else {
+              mail.style.backgroundColor = 'linen';
+              document.getElementById('emSpan').innerHTML = 'Некорректный e-mail!';
+            }
+            })
+          })
+          if(!res.email){
+            document.getElementById('changeemail').click();
+          }
+        }
+      });
+
+
+	offX = 0;
+	offY = 0;
+	function click(event){
+		offY = event.screenY;
+		offX = event.screenX;
+		event = window.event;
+		console.log(event);
+	}
+	function getAgeName(a)
+	{
+    a = getAgeCount(a);
+		if(a <= 0) return '';
+		else if(a < 21)
+		{
+			if(a == 1) 			return a + ' год';
+			else if(a < 5) 		return a + ' года';
+			else 			 	return a + ' лет';
+		}
+		else
+		{
+			if 		(a%10 == 1) 			return a + ' год';
+			else if (a%10 > 0 && a%10 < 5)  return a + ' года';
+			else 							return a + ' лет';
+		}
+	}
+
+function getAgeCount(a){
+  let day = new Date(a);
+  let today = new Date();
+  let year = -1;
+  if(day.getMonth() < today.getMonth()){
+    if(day.getMonth() == today.getMonth()){
+      if(day.getDate() >= today.getDate())
+        year = 0;
+    }else year = 0;
+
+  }
+  return today.getFullYear() - day.getFullYear() + year;
+}
+
+
+function setTime(){
+    top.location.href = 'request/1'
+  }
+  function nearTime(day, time, minutes){
+    POST('/request', `method=QUICKLY&&teacher_id=10`, (res, status)=>{
+      if(status == 200) alert(`Заявка принята. Ваше занятие начнется в ${time}:${minutes==0?'00':'30'}`)
+      else alert('В данный момент мы не можем принять вашу заявку! Попробуйте выбрать время самостоятельно!');
+      closePopup();
+    })
+  }
+    
+function getNearTime(hour, weekday, minutes) {
+  if(minutes < 30) minutes = 30;
+  else{minutes = 0; hour++} 
+
+  while(true){
+    if(minutes == 60) {minutes = 0; hour++}
+    if(weekday > 5 || weekday == 0) {weekday = 1; hour = 9; minutes = 0}
+    if(hour >= 9){
+      if(hour < 20){
+        if(hour == 19 && minutes == 30){}
+        else break;
+      }else {hour = 9; weekday++;}  
+    }else {hour = 9; minutes = -30;}
+    minutes += 30;
+  }
+  return {day: weekday, time: hour, minutes};
+}
+
+function getWeekDay(i) {
+  switch(i) {
+    case 0: return "Воскресенье"
+    case 1: return "Понедельник"
+    case 2: return "Вторник"
+    case 3: return "Среда"
+    case 4: return "Четверг"
+    case 5: return "Пятница"
+    case 6: return "Суббота"
+  }
+}
+</script>	

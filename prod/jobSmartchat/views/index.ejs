@@ -1,0 +1,71 @@
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Приглашаем в команду SMARTCHAT</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1e83d4">
+    <link rel="stylesheet" href="public/style/style.css">
+    <link rel="shortcut icon" href="/public/images/topLogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
+<body>
+	<div class="wrapper">
+		<div class="header">
+			<img src="public/images/logo.png" class="logo">
+			<div class="social-div">
+				<p class="social-title">Возникли вопросы? Пишите нам</p>
+				<div class="social-logo">
+					<a target="_blank" href="https://api.whatsapp.com/send?phone=77079476788" class="whatsapp"><i class="fab fa-whatsapp"></i></a>
+					<a target="_blank" href="https://t.me/qaraline" class="telegram"><i class="fab fa-telegram-plane"></i></a>
+					<a target="_blank" href="https://www.instagram.com/smart_chat.vip/" class="instagram"><i class="fab fa-instagram"></i></a>
+				</div>
+			</div>
+
+		</div>
+			<div class="body-content">
+				<div class="halfs">
+					<p class="teacher-title">Вступай в нашу команду!</p>
+					<p class="text-teacher"><b class="strong-b">Зарабатывай учителем английского языка</b> <br> в команде самой инновационной компании Казахстана в онлайн образовании - <span class="blue-text">SMARTCHAT</span></p>
+					<div class="beatles">
+						<p class="metallica"><i class="far fa-user"></i>Свободный график</p>
+						<p class="metallica"><i class="far fa-star"></i>Инновационный подход к преподаванию</p>
+						<p class="metallica"><i class="far fa-paper-plane"></i>Дополнительный или основный доход</p>
+						<p class="metallica"><i class="far fa-clock"></i>Легкость и удобство в работе с платформой</p>
+					</div>
+					<a href="/welcome" class="btn"></i>Узнать условия и пройти отбор</a>
+				</div>
+				<div class="second-half">
+					<div class="video-div">
+						<video src="public/video/smartchat.mp4" id="video" controls="true"></video>
+						<img onclick="playVideo()" src="public/images/12.jpg" id="bgcimg"  class="bgc-div">
+						<i onclick="playVideo()" class="fas playing fa-play" id="btnp"></i>
+					</div>
+					<p class="text-second"><span class="red-text">ОГРАНИЧЕННЫЙ</span> набор преподавателей в команду SMARTCHAT с возможностью работать по выбранному самим графиком работы! <br><span class="underline">Торопись, проходи отбор, мы тебя ждем!</span></p>
+				</div>
+			</div>
+	</div>
+</body>
+</html>
+
+<script>
+	function playVideo(){
+		let btn = document.getElementById('btnp');
+		let bgc = document.getElementById('bgcimg');
+		let video = document.getElementById('video');
+		btn.style.display = 'none';
+		bgc.style.display = 'none';
+		video.play();
+	}
+</script>

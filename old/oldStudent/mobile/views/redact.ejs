@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="icon" type="img/png" href="/mobile/img/logo.png">
+	<link rel="stylesheet" type="text/css" href="/mobile/css/profile.css?ver=<%=version%>0.1">
+	<meta name="viewport" content="user-scalable=no">
+</head> 
+<body>
+<%include ./parts/header%>
+<div class="container" id="container"></div>
+<script type="text/javascript">
+
+	POST('/student', `method=PROFILE&&id=${getCookie('SAI')}`, function(res,stat){
+		let container = document.getElementById('container');
+		let day = res.body.birthday? new Date(new Date(res.body.birthday).setDate(new Date(res.body.birthday).getDate() + 1)).toISOString().slice(0,10): null
+		console.log(day)
+		container.innerHTML = `
+		<div class="profile" id="profile" id="avaBlock">
+		<div class="photo">
+		${res.body.ava ?
+			'<img src="common/photo/' + res.body.ava + '" id="ava">'
+		:'<img src="/img/profile.svg" id="ava">'
+		}
+		</div>
+		<div id="err" class="profile_err"></div>
+		<input id = 'file' accept="image/*" type = 'file' style = 'display:none'>
+		<h1 class="redactInfo">Имя<br><input class="redactInput" type="text" id="name" value="${res.body.firstname?res.body.firstname:''}"></h1>
+		<h1 class="redactInfo">Фамилия<br><input class="redactInput" type="text" id="lastname" value="${res.body.lastname == '*' ? '' : res.body.lastname?res.body.lastname:'' }"></h1>
+		<h1 class="redactInfo">День рождения<br><input class="redactInput" type="date" id="age" value="${day}"></h1>
+		<div class="buttons">
+			${res.body.firstname? '<a href="/profile"><button class="btnRedact">Назад</button></a><button class="btnRedact passBtn" onclick="changeBlock()">Пароль</button>': ''}
+			<button class="btnRedact saveBtn" onclick="saveInfo()">Сохранить</button>
+		</div>
+		`
+		startRedact();
+	})
+function startRedact(){
+	let file = document.getElementById('file');
+	let ava = document.getElementById('ava');
+
+	file.addEventListener('change', function()
+		{
+			var xhr = new XMLHttpRequest(),
+		    fd = new FormData();
+			let f = file.files[0];
+			fd.append( 'uploadFile', f);
+			xhr.open( 'POST', '/uploadPicture', true );
+			xhr.withCredentials = true;
+			ava.src = "/img/2.svg"
+			xhr.onreadystatechange = function()
+			  {
+			    if(xhr.readyState == 4) {
+			    	top.location.href = '/redact'
+			    }
+			  };
+			xhr.send( fd );
+		});
+	ava.addEventListener('click', function()
+		{
+			file.click();
+		});
+}
+
+function saveInfo(){
+	let firstname = document.getElementById('name');
+	let lastname = document.getElementById('lastname');
+	let age = document.getElementById('age');
+	let err = document.getElementById('err');
+
+	if(!firstname.value.length) { throwError(err, 'Введите имя!', firstname); return;}
+	else { hideError(err, firstname); }
+	if(lastname.value.length < 2) { throwError(err, 'Введите фамилию!', lastname); return;}
+	else { hideError(err, lastname); }
+	if(!age.value.length) { throwError(err, 'Введите дату рождения!', age); return;}
+	else { hideError(err, age); }
+	if(age.value > 100 || age.value < 1) { throwError(err, 'Некорректные данные!', age); return;}
+	else { hideError(err, age); }
+
+	POST('/student', 
+		`method=PATCH&&id=${getCookie('SAI')}&&firstname=${firstname.value.trim()}&&lastname=${lastname.value.trim()}&&birthday=${age.value.trim()}`,
+		function(res,stat)
+		{
+			if(stat == 200)
+			{
+				top.location.href = '/profile';
+			}
+		});
+}
+
+window.blockState = 1;
+function changeBlock(){
+	let layout = document.getElementById('profile');
+	if(blockState == 1){
+		layout.innerHTML = `
+		<div id="blockWithPass">
+			<div id="err_block" class="profile_err"></div>
+			<input type="password" id="oldP" class="redactInput" placeholder="Старый пароль">
+			<input type="password" id="newP" class="redactInput" placeholder="Новый пароль">
+			<input type="password" id="repeatP" class="redactInput" placeholder="Повторите новый пароль">
+			<div class="buttons">
+				<a href="/redact" class="btnRedact saveBtn" onclick="changeBlock()">Отмена</a>
+				<button class="btnRedact passBtn" onclick="validatePass()">Изменить</button>
+			</div>
+		</div>
+		`;
+		blockState = 0;
+	}else{
+		POST('/student', `method=PROFILE&&id=${getCookie('SAI')}`, function(res,stat){
+		layout.innerHTML=`
+		${res.body.ava ?
+			'<img src="common/photo/' + res.body.ava + '" id="ava">'
+		:'<img src="/img/profile.svg" id="ava">'
+		}
+		</div>
+		<div id="err" class="profile_err"></div>
+		<input id = 'file' type = 'file' style = 'display:none'>
+		<h1 class="redactInfo">Имя<br><input class="redactInput" type="text" id="name" value="${res.body.firstname}"></h1>
+		<h1 class="redactInfo">Фамилия<br><input class="redactInput" type="text" id="lastname" placeholder=${res.body.lastname == '*' ? '' : 'Фамилия'} value="${res.body.lastname == '*' ? '' : res.body.lastname}"></h1>
+		<h1 class="redactInfo">Возраст<br><input class="redactInput" type="nubmer" id="age" placeholder=${res.body.age == '0' ? '' : 'Возраст'} value="${res.body.age == '0' ? '' : res.body.age}"></h1>
+		<div class="buttons">
+			<button class="btnRedact passBtn" onclick="changeBlock()">Пароль</button>
+			<button class="btnRedact saveBtn" onclick="saveInfo()">Сохранить</button>
+		`;
+		blockState = 1;})
+	}
+	}
+	function validatePass(){
+		let oldPass = document.getElementById('oldP');
+		let newPass = document.getElementById('newP');
+		let newPassRepeat = document.getElementById('repeatP');
+		let err = document.getElementById('err_block');
+		if (!oldPass.value) {
+			throwError(err, 'Введите старый пароль', oldPass); 
+			return;
+		}else if (!newPass.value) {
+			hideError(err, oldPass);
+			throwError(err, 'Введите новый пароль', newPass); 
+			return;
+		}else if (!newPassRepeat.value) {
+			hideError(err, newPass);
+			throwError(err, 'Повторите новый пароль', newPassRepeat); 
+			return;
+		}else{
+			hideError(err, newPassRepeat);
+			testNewPass(oldPass, newPass, newPassRepeat);
+			}
+	}
+	function testNewPass(oldpass, newpass, repeatpass){
+		let err = document.getElementById('err_block');
+		if (newpass.value !== repeatpass.value) {
+			throwError(err, '', repeatpass);
+			throwError(err, 'Пароли не совпадают', newpass); 
+				return;
+		}else{
+			POST('/student', `method=PASSWORD&&old=${oldpass.value}&&password=${newpass.value}`, function(res,stat){
+				if(res.status === 403){
+					throwError(err, 'Неверный пароль!', oldpass);
+
+				}else if (res.status === 200){
+					err.style.display = 'block';
+					err.innerHTML = 'Пароль успешно изменён!';
+					err.style.color = 'rgba(0,180,0,0.5)';
+					setTimeout(function(){
+						changeBlock();
+						err.style.display = 'none';
+						err.style.color = 'red';
+					},2500);
+				}
+			});
+		}
+	}
+
+	function throwError(err, msg, inp)
+	{
+		console.log(err);
+		err.innerHTML = msg;
+		err.style.display = 'block';
+		inp.style.background = 'linen';
+	}
+
+	function hideError(err, inp)
+	{
+		err.style.display = 'none';
+		inp.style.background = 'white';
+	}
+</script>	
+</div>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SmartChat</title>
+	<meta charset="utf-8">
+	<link rel="icon" type="img/png" href="static/img/logo.png">
+	<link rel="stylesheet" type="text/css" href="static/style/graph&reqs.css?ver=<%=version%>">
+</head>
+<body>
+	<% include ../partial/header %>
+	<div class="wrapper">
+		<% include ../partial/menu %>
+		<div class="profile">
+			<div class="container requests">
+				<h3>Заявки</h3>
+				<ul id = 'reqs' class = 'ulreqs'>
+				</ul>
+				<ul id = 'ones' class = 'ulreqs'>
+				</ul>
+			</div>
+			<div class="container student_graph" style="display: none;" id = 'graph'>
+				<h2 id='rate_name' class = 'rate_name'></h2>
+				<div class="graph_block">
+					<table id = 'tbl' cellspacing="5">
+					</table>
+				</div>
+				<!-- <button id = 'ignore' class="button ignore" onclick="rejectReq()">Отклонить</button> -->
+				<button id = 'accept' class="button accept">Принять</button>
+			</div>
+
+			<div class="back" style="display: none;">
+				<div id = 'groups' class="container acception">
+					<h2>Подходящие группы</h2>
+					<div id = 'cont' class ='cont'></div>
+					<button id = 'new_group_btn' class ='button new_group'>В новую</button>
+					<button id = 'cancel' class="button cancel">Отмена</button>
+					<button id = 'accept_btn' class="button accept">Принять</button>
+				</div>
+
+				<div id = 'new_group' class="container new_group_cont">
+						<h2 id = 'new_group_title'></h2>
+						<label for="new_group_name" id ='new_group_name_title'></label>
+						<input type="text" name="" id ='new_group_name' class = 'new_group_name'>
+						<div style="overflow-y: auto; height: 40vh">
+							<table id = 'grafik' class="table_grafik">
+							</table>
+						</div>
+					<input type="text" id = 'firstday' class="firstday" placeholder="Первое занятие" onfocus="(this.type='date')">
+					<button id = 'cancel_new' class="button cancel">Отмена</button>
+					<button id = 'create_btn' class="button accept">Принять</button>
+				</div>
+
+			</div>
+		</div>
+		<div class = 'background'>
+			<div id = 'validator' class="validator">
+			</div>
+		</div>
+	</div>
+</body>
+<script src="static/js/students/requests.js?ver=<%=version%>" type="text/javascript"></script>
+</html>

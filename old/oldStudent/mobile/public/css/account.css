@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+body{
+	margin: 0;
+	padding: 0;
+	background: linear-gradient(115deg, #f6f7fb,#92a7d0);
+	height: 100vh;
+	overflow-y: hidden;
+	font-family: 'Montserrat', sans-serif;
+}
+.form, .sign_form{
+	width: 90%;
+	margin: 20vh auto;
+	transition: .3s ease;
+}
+.sign_form{
+	width: 90%;
+	margin: 15vh auto;
+	transition: .3s ease;
+}
+.form_reg{
+	width: 90%;
+	margin: 5vh auto;
+}
+.form h1{
+	color:  #33b5e5;
+	padding: 20px 0 0;
+	margin: 0;
+	font-size: 20px;
+}
+.reg_h1{
+	margin: 0;
+	padding: 0;
+	font-size: 24px;
+}
+.signup-err{
+	padding: 0;
+	margin: 10px 0 0;
+	font-size: 16px;
+}
+form{
+	padding: 10px;
+	background-color: #fff;
+	border-top: 5px solid #33b5e5;
+	border-radius: 15px;
+	box-sizing: border-box;
+	padding: 15px 20px;
+}
+form input{
+	width: 100%;
+	box-sizing: border-box;
+	border-radius: 5px;
+    border: 1px solid #4486c3;
+	color:  black;
+	font-size: 16px;
+	outline: none;
+	height: 30px;
+	padding: 0 20px;
+	font-family: 'Montserrat', sans-serif;
+}
+form a{
+	text-decoration: none;
+	margin: 0;
+	padding: 0;
+	font-size: 14px;
+	color:  #33b5e5;
+}
+.submit{
+	background-color: #33b5e5;
+	color: white;
+	font-size: 14px;
+	cursor: pointer;
+	border: none;
+}
+.phoneInput{
+	width: 100%;
+	font-size: 16px;	
+	border-radius: 5px;
+	padding:  0 0 0 30px;
+}
+.tel_label span{
+	position: relative;
+	font-size: 16px;
+	top: 24px;
+	left: 5px;
+	font-family: 'Montserrat', sans-serif;
+}
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+#signin-err{
+	font-size: 16px;
+	padding: 10px 0 0;
+	margin: 0;
+}
+.forgot{
+	text-align: center;
+    padding: 20px 0 10px;
+}
+.closeFuck{
+    border: 1px solid #0297b5;
+    background: white;
+    margin-top: 20px;
+    border-radius: 10px;
+    padding: 5px 10px;
+    font-family: 'Montserrat', sans-serif;
+    display: block;
+    text-align: center;
+    width: 100%;
+    font-size: 14px;
+}
+.welcome_reg{
+	text-align: center;
+}
+
+.log_with{
+  /*position: absolute;*/
+  /*margin: 20px 15% 0;*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+}
+.log_with_icon{
+  width: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 1%;
+}
+button.google-button{
+  padding-left: 1px;
+  padding-top: -1px;
+}
+div.abcRioButton, .google-button{
+  background: #fff;
+  height: 40px !important;
+  width: 40px !important;
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 0;
+  outline: none;
+  box-shadow: 0.1px 2px 4px 0 rgba(0,0,0,.25) !important;
+}
+div.abcRioButton{
+  padding: 1px 2px;
+  border-width: 2px;
+  border-style: outset;
+  border-color: buttonface;
+  border-image: initial;
+}
+.google-button:hover,  .abcRioButton:hover{
+  background: #fff !important;
+}
+.abcRioButton:hover{
+  box-shadow:0 2px 4px 0 rgba(0,0,0,.25) !important;
+}

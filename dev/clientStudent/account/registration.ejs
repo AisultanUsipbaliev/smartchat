@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="/account/styles/sign.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<link rel="shortcut icon" href="/static/img/topLogo.png" type="image/x-icon">
+	<title><%=strings.title%></title>	
+</head>
+<body>
+	<div class="noscrollingbody">
+		<div class="login">
+			<div class="form">
+				<p class="title_login"><%=strings.title%></p>
+				<div class="needPadding">
+					<span class="another_service"><%=strings.logWithIcons%></span>
+					<div class="imgs">
+						<i class="logos fab fa-vk vk" onclick="authVk()"></i>
+						<i class="logos fab fa-facebook-f face" onclick="authFb()"></i>
+						<i class="logos fas fa-at at-at" onclick="authMail()"></i>
+					</div>
+					<form>
+						<span class="wrong" id="mistake" style="font-size: 16px"><%=strings.mistake%></span>
+
+						<label for="country"><%=strings.country%></label>
+						<div class="input input_focus" onclick="selectCountry()"><span id="countryName"></span></div>
+						<img src="/account/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" style="display: block;">
+						
+						<div class="main_inputs">
+							<label for="phone"><%=strings.phone%></label>
+							<span class="place_phone">+7</span><input autocomplete="off" class="input" onfocus="makeblue(this)" onfocusout="validatePhone()"  id="phone" type="text" maxlength="10">
+							<img src="/account/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="phone_right">
+							<span class="mistake" id="phone_mistake"></span>
+						</div>
+
+						<div class="main_inputs">
+							<label for="name"><%=strings.name%></label>
+							<input class="input" id="name" type="text" onfocusout="validateName()" onfocus="makeblue(this)" autocomplete="off">
+							<img src="/account/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="name_right">
+							<span class="mistake" id="name_mistake"></span>
+						</div>
+											
+						<div class="main_inputs">
+							<label for="password"><%=strings.password%></label>
+							<input class="input" type="password" id="password" autocomplete="off" onfocus="makeblue(this)" onfocusout="validatePass()">
+							<img src="/account/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="password_right">
+							<span class="mistake" id="password_mistake"></span>
+						</div>
+
+						<div class="main_inputs">
+							<label for="password"><%=strings.repeat%></label>
+							<input class="input" type="password" id="repeat" autocomplete="off" onfocus="makeblue(this)" onfocusout="validatePass2()">
+							<img src="/account/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="password2_right">
+							<span class="mistake" id="repeat_mistake"></span>
+						</div>
+						
+						<button class="sign" id="sign" onclick="registrate(event)"><%=strings.input%></button>
+						<span class="not_reg"><%=strings.input%> <br> <a href="/login"><%=strings.sign%></a></span>
+					</div>
+				</form>
+			</div>
+		</div>
+		<% include ./countries %>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+
+let phone =						document.getElementById('phone'); 
+let name = 						document.getElementById('name'); 
+let password = 					document.getElementById('password');
+let repeat = 					document.getElementById('repeat'); 
+let phone_mistake = 			document.getElementById('phone_mistake');
+let name_mistake = 				document.getElementById('name_mistake');
+let password_mistake = 			document.getElementById('password_mistake');
+let repeat_mistake = 			document.getElementById('repeat_mistake');
+let mistake = 					document.getElementById('mistake'); 
+let rep = 						/[-\.;":'a-zA-Zа-яА-Я]/
+let place_phone = 				document.getElementsByClassName('place_phone')[0];
+
+POST('/account', `method=STRINGS&&page=registration`, (res)=>{
+	window.strings = res.strings;
+})
+
+function makeblue(el) {
+	el.classList.add('input_focus')
+	el.classList.remove('input_error')
+
+	switch(el) {
+		case phone: 	phone_mistake.style.display = "none";		break;
+		case name: 		name_mistake.style.display = "none";		break;
+		case password: 	password_mistake.style.display = "none";	break;
+		case repeat: 	repeat_mistake.style.display = "none"; 		break;
+	}
+}
+
+function registrate(e) {
+	e.preventDefault()
+	if(validateForm()) {
+		let tel = phone.value.replace(/\s/g, '');
+		let countryCode = convertPlus(place_phone.innerHTML);
+		POST('/account', 
+			`method=REGISTRATION&&password=${password.value.trim()}&&phone=${countryCode + '' + tel.trim()}&&firstname=${name.value}`, 
+			(res, stat)=> {
+				if(stat == 200) {
+					POST('/account', `method=SMS&&phone=${countryCode + '' + tel.trim()}`, (res, stat)=> {
+						if(stat == 200) {
+							top.location.href = '/activate';
+							localStorage.setItem("tel", place_phone.innerHTML + '' + tel.trim());
+						}
+				      	else if (stat == 404)			        showErr(mistake, strings.err_404);
+				      	else if(stat == 403)					showErr(mistake,strings.err_403);
+						else console.log('Error: ', res);
+						});
+					} else if(stat == 409)						showErr(mistake, '<%=strings.err_409%> <a href="/sign">Войти</a>', '#1e83d4');
+					else console.log(res);		
+			});
+	}
+}
+
+function validateForm(){
+	let ok = true
+	if(!validatePhone()) 	ok = false
+	if(!validateName()) 	ok = false
+	if(!validatePass()) 	ok = false
+	if(!validatePass2()) 	ok = false
+	return ok
+}
+
+function validatePhone() {
+	if(phone.value.length == 10 && !rep.test(phone.value)){ 
+	
+		document.getElementById('phone_right').style.display = 'block';
+		phone_mistake.style.display = "none";
+		return true
+
+	} else if(phone.value.length != 10 || !rep.test(phone.value))
+		phone_mistake.innerHTML = strings.phone_err;
+	else if(phone.value.length = 0)
+		phone_mistake.innerHTML = strings.phone_mistake;
+	
+	document.getElementById('phone_right').style.display = 'none';
+	phone_mistake.style.display = "block";
+	phone.classList.add('input_error')
+
+	return false
+}
+
+function validateName() {
+	let rep = /[-\.;":'a-zA-Zа-яА-Я]/; 
+    
+    if (!rep.test(name.value)){ 
+
+		name.classList.add('input_error')
+		name_mistake.style.display = 'block'
+		name_mistake.innerHTML = strings.name_mistake;		
+		document.getElementById('name_right').style.display = 'none';
+
+		return false
+    }else{
+
+		document.getElementById('name_right').style.display = 'block';				
+		name_mistake.style.display = 'none';				
+		return true
+
+	}
+}
+
+function validatePass() {
+	if(password.value.length >= 6){
+		document.getElementById('password_right').style.display = 'block';
+		password_mistake.style.display = 'none';
+		return true		
+	}
+	else if(password.value.length == 0) password_mistake.innerHTML = strings.password_mistake
+	else if(password.value.length < 6) 	password_mistake.innerHTML = strings.password_short
+
+	document.getElementById('password_right').style.display = 'none';
+	password.classList.add('input_error')
+	password_mistake.style.display= 'block';
+	return false
+}
+
+function validatePass2() {
+	if(repeat.value.length >= 6 && repeat.value == password.value && password.value.length> 0){
+		document.getElementById('password2_right').style.display = 'block';
+		repeat_mistake.style.display = 'none';				
+		return true
+	}
+	else {
+		repeat_mistake.innerHTML = strings.repeat_no_pas
+		document.getElementById('password2_right').style.display = 'none';
+		repeat_mistake.style.display = 'block';				
+		repeat.classList.add('input_error')
+		return false
+	}
+}
+</script>

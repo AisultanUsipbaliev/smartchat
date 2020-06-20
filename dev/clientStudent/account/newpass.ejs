@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%=strings.new_password%></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="/account/styles/sign.css">
+	<link rel="shortcut icon" href="/static/img/topLogo.png" type="image/x-icon">
+</head>
+<body>
+	<div class="noscrollingbody">
+		<div class="login">
+			<div class="form">
+				<p class="title_login"><%=strings.new_password%></p>
+
+				<p class="new_pass_title"><%=strings.all_input%></p>
+				<span class="wrong" id="mistake"><%=strings.code_err%></span>
+
+				<label for="password"><%=strings.new_password%></label>
+				<input class="input" onfocus="makeblue(this)" onfocusout="validatePass()" type="password" id="password">
+				<img src="/account/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="password_right">
+				<span class="mistake" id="password_mistake"><%=strings.password%></span>
+
+				<label for="password2"><%=strings.repeat_password%></label>
+				<input class="input" type="password" id="repeat" onfocus="makeblue(this)" onfocusout="validatePass2()">
+				<img src="/account/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="password2_right">
+				<span class="mistake" id="repeat_mistake"></span>
+
+				<button class="sign" id="sign" onclick="sendCode()"><%=strings.send%></button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="/account/script/functions.js"></script>
+<script> 
+	let mistake = document.getElementById('mistake')
+	let div 	= document.getElementsByClassName('noscrollingbody')[0] 
+	let rep 	= /[-\.;":'a-zA-Zа-яА-Я]/ 
+
+	POST('/account', `method=STRINGS&&page=restore`, (res)=>{ window.strings = res.strings })
+
+function validatePass() {
+	let password = 			document.getElementById('password');
+	let repeat = 			document.getElementById('repeat');
+	let password_mistake = 	document.getElementById('password_mistake');
+	let repeat_mistake = 	document.getElementById('repeat_mistake');
+
+	if(password.value.length > 5 && !rep.test(password.value)){
+		document.getElementById('password_right').style.display = 'block';
+		password_mistake.style.display = "none";
+		return true
+
+	} else if(password.value.length < 5 && password.value.length >= 1)
+		password_mistake.innerHTML = strings.short_password;
+	else if(password.value.length = 0)
+		password_mistake.innerHTML = strings.password_mistake;
+	
+	document.getElementById('password_right').style.display = 'none';
+	password.classList.add('input_error');
+	password_mistake.style.display = "block";
+
+	return false
+}
+
+function validatePass2() {
+	if(repeat.value.length >= 6 && repeat.value == password.value){
+		document.getElementById('password2_right').style.display = 'block';
+		repeat_mistake.style.display = 'none';				
+		return true
+	}
+	else if(repeat.value.length == 0) 
+		repeat_mistake.innerHTML = strings.password_mistake;
+	else if(repeat.value.length > 5 && password.value != repeat.value)
+		repeat_mistake.innerHTML = strings.repeat_mistake;
+	else if(repeat.value.length < 6)
+		repeat_mistake.innerHTML = strings.password_short;
+
+		document.getElementById('password2_right').style.display = 'none';
+		repeat_mistake.style.display = 'block';				
+		repeat.classList.add('input_error');
+		return false
+}
+
+function validateForm(){
+	let ok = true
+		if(!validatePass()) 	ok = false
+		if(!validatePass2()) 	ok = false
+		return ok
+}
+
+function sendCode() {
+	let password = 			document.getElementById('password');
+	let repeat = 			document.getElementById('repeat');
+	let password_mistake = 	document.getElementById('password_mistake');
+	let mistake = 			document.getElementById('mistake');
+	let repeat_mistake = 	document.getElementById('repeat_mistake');
+
+	if(validateForm())
+		POST('/api', `method=NEW-PASSWORD&&password=${password.value}&&old=smartchat`, (res, stat)=> {
+			if(stat == 200){
+				mistake.style.display = 'none';
+				div.innerHTML = `
+					<div class="login">
+    					<div class="form">
+    					<h2 style="color: #1e83d4; text-align: center; margin: 20px 20px 0">`+strings.success+`</h2>
+    					</div>
+    				</div>
+				`;
+				setTimeout(()=>{location.reload()}, 3000);
+			} else location.reload()
+		})
+}
+
+function makeblue(el) {
+	el.classList.add('input_focus')
+	el.classList.remove('input_error')
+
+	switch(el) {
+		case password: 	password_mistake.style.display = "none";	break;
+		case repeat: 	repeat_mistake.style.display = "none";		break;
+	}
+}
+
+</script>

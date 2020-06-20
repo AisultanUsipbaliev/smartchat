@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SmartChat</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="static/style/login.css?ver=<%=version%>">
+	<link rel="icon" type="img/png" href="static/img/logo.png">
+</head>
+<body>
+	<div class="wrapper">
+		<div class="login reg">
+			<h1 class="login_title">Регистрация</h1>
+			<h3 class = 'err' id = 'err'></h3>
+			<form>
+				<label for="email">Email</label>
+				<input class="login_input" type="text"  name="" id="email"><span class="err" id="email_err"></span><br>
+				<label for="login">Имя</label>
+				<input class="login_input" type="text" name=""  id="login">
+				<label for="lastname">Фамилия</label>
+				<input class="login_input" type="text" name="" id="lastname">
+				<label for="phone">Телефон</label><br>
+				<span id="code" class="currency">8</span><input class="login_input" type="phone" name="" id="phone" maxlength="10"><span class="err" id="phone_err"></span><br>
+				<label for="pass">Пароль</label>
+				<input class="login_input" type="password" name="" autocomplete="off" id="pass"><span class="err" id="pass_err"></span><br>
+				<label for="Cpass">Повторите пароль</label>
+				<input class="login_input" type="password" name="" autocomplete="off" id="Cpass"><span class="err" id="Cpass_err"></span><br>
+				<a class = 'link_to_reg' href="/login">У меня есть аккаунт</a>
+				<button class="login_btn" id ='login_btn'>Регистрация</button>
+			</form>
+		</div>
+	</div>
+	<script src="static/js/account/registration.js?ver=<%=version%>" type="text/javascript"></script>
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SmartChat</title>
+	<meta charset="utf-8">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<link rel="icon" type="img/png" href="static/img/logo.png">
+	<link rel="stylesheet" type="text/css" href="static/style/chat.css?ver=<%=version%>">
+	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script> -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.sound.js"></script> -->
+	<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.2/addons/p5.sound.min.js"></script> -->
+ 
+</head>
+<body>
+	<% include ../partial/header %>
+	<div class="wrapper">
+		<% include ../partial/menu %>
+		<div class = 'chat_container'>
+			<div id = 'contacts' class="contacts">
+			</div>
+			<div id = 'chat' class = 'chat'>
+			<div class="templateArrow" onclick="openTemplate()" id="templateArrow">
+				<img src="static/img/right.svg" title="Открыть/закрыть методики" id="templateArrowImg" class="arrowActive">
+			</div>
+
+			
+			<div style="overflow: hidden;height: 82%; position:relative; transition: 0.3s" id="msgs_block">
+				<div style="overflow-x: hidden;overflow-y: auto; margin-right:-15%;height:100%; width:115%; padding-right:13.75%;  " id="scrollBlock">		
+					<div class="bottom_arrow" id="bottom_arrow" onclick="downChat()">
+						<img src="static/img/bottom-arrow.svg" alt="">
+					</div>		
+					<div id = 'msgs' class = 'msgs'> 
+						<img src="static/img/logo.png" class="logotip">
+					</div>
+					<div id="scroll" class="scroll" onmousedown="personalScroll()"></div>
+				</div>
+			</div>
+
+
+				<div class = 'box'>
+					<div class = 'msg_div'>
+						<textarea onkeypress.enter="sendMes(event)" id = 'text' autofocus placeholder="Введите сообщение" class = 'text'></textarea>
+						<div class="buttons">
+							<div class="btnChat"><img src="static/img/if_Document_928418.png" id='imgWithTask' title = "Отправить задание" class = "test_screpka" onclick="TaskEnter('blockWithTasks')"></div>
+							<div class="btnChat"><img src="static/img/paperclip.png" class  = 'screpka' title = 'Прикрепить файл' onclick="document.getElementById('file').click()"></div>
+							<div class="btnChat"><img src="static/img/microfon.png" title="Записать аудио" class="microfon" id='microfon'></div>
+						</div>
+						<div id="blockWithTasks">
+							<img class='send_message' id="send" title="Отправить" src="https://www.applozic.com/assets/resources/lib/images/icon-send.png" onclick = 'sendMes(event)'/>	
+						</div>
+						<input type="file" id = 'file' style="display: none">
+					</div>
+					<div id ='files' class= 'files'>
+					</div>
+				</div>
+			</div>
+			<div id ='templates' class = 'templates'>
+			</div>
+		</div>
+	</div>
+	<div class = 'popImg' id="close_img">
+		<div id="caption" class="caption" style="position: relative; width: 100%; height: 100%">
+				<img id = 'popImg' class="picture" src="static/img/avatar.jpg"> 
+		</div>
+	</div>
+</body>
+<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+<script src="static/js/students/chat.js?ver=<%=version%>.1"></script>
+</html>

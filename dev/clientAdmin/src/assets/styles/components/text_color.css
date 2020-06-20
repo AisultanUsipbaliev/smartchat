@@ -1,0 +1,29 @@
+.text-success {
+	color: #28a745;
+}
+.text-danger {
+	color: #dc3545;
+}
+.text-info {
+	color: #17a2b8;
+}
+.text-warning{
+	color: #ffc107;
+}
+.text-primary {
+	color: #007bff;
+}
+.text-secondary {
+	color: #6c757d;
+}
+.text-muted {
+    color: #dadada;
+}
+.text-dark {
+    color: #343a40;
+}
+.text-link {
+    color: teal;
+    text-decoration: underline;
+    cursor: pointer;
+}

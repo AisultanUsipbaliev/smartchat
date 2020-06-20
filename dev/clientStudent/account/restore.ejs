@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%=strings.title%></title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="/account/styles/sign.css">
+	<link rel="shortcut icon" href="/static/img/topLogo.png" type="image/x-icon">
+</head>
+<body>
+	<div class="noscrollingbody">
+		<div class="login">
+			<div class="form">
+				<p class="title_login"><%=strings.title%></p>
+				<form class="needPadding">
+					<span class="wrong" id="mistake"></span>
+					<label for="republic" class="label"><%=strings.country%></label>
+					<div class="input input_focus" onclick="selectCountry()"><span id="countryName">Kazakhstan</span></div>
+					<img src="/account/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" style="display: block;">
+					
+					<div class="main_inputs">
+						<label for="phone" class="label"><%=strings.phone%></label>
+						<span class="place_phone">+7</span>
+						<input class="input" onfocus="makeblue(this)" onfocusout="validatePhone()" id="phone" type="phone" maxlength="10">
+						<img src="/account/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="phone_right">
+						<span class="mistake" id="phone_mistake"> <%=strings.phone_mistake%></span>
+					</div>
+
+					<button class="fsend" onclick="validateNumber(event)"><%=strings.send%></button>
+				</form>
+			</div>
+		</div>
+
+		<% include ./countries %>
+	</div>
+</body>
+</html>
+<script> 
+	let phone = 				document.getElementById('phone'); 
+	let code = 					document.getElementById('codesms'); 
+	let mistake =				document.getElementById('mistake');
+	let div = 					document.getElementsByClassName('noscrollingbody')[0]; 
+	let place_phone = 			document.getElementsByClassName('place_phone')[0];
+	let rep = 					/[-\.;":'a-zA-Zа-яА-Я]/; 
+
+	POST('/account', `method=STRINGS&&page=restore`, (res)=>{
+		window.strings = res.strings;
+	})
+
+function validatePhone()
+{
+	if(phone.value.length == 10 && !rep.test(phone.value)){
+		document.getElementById('phone_right').style.display = 'block';
+
+		phone_mistake.style.display = "none";
+		return true
+
+	} else if(phone.value.length != 10 || !rep.test(phone.value))
+		phone_mistake.innerHTML = strings.phone_err;
+	else if(phone.value.length = 0)
+		phone_mistake.innerHTML = strings.phone_mistake;
+	
+	document.getElementById('phone_right').style.display = 'none';
+	phone_mistake.style.display = "block";
+	phone.classList.add('input_error')
+
+	return false
+}
+
+function validateNumber(event)
+{
+	event.preventDefault();
+	if(validatePhone()){
+		POST('/account', `method=SMS&&phone=${convertPlus(place_phone.innerHTML + phone.value)}`, (res, stat)=>
+		{
+			if(stat == 404 || stat == 403){
+				mistake.innerHTML = strings.err_404;
+				mistake.style.display = "block";
+			}else if(stat == 200){
+				div.innerHTML = `
+					<div class="login">
+						<div class="form">
+							<p class="title_login">`+strings.title+`</p>
+							<form class="needPadding">
+									<p class="new_pass_title">`+strings.all_input+`</p>
+									<span class="wrong" id="mistake">`+strings.code_err+`</span>
+
+								<div class="main_inputs">
+									<label for="password">`+strings.code+`</label>
+									<input class="input" type="text" id="codesms" onfocus="makeblue(this)" onfocusout="validateCode()" maxlength="4">
+									<img src="/account/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="code_right">
+									<span class="mistake" id="code_mistake">`+strings.code_err+`</span>
+								</div>
+
+								<div class="main_inputs">
+									<label for="password">`+strings.new_password+`</label>
+									<input class="input" onfocus="makeblue(this)" onfocusout="validatePass()" type="password" id="password">
+									<img src="/account/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="password_right">
+									<span class="mistake" id="password_mistake">`+strings.password+`</span>
+								</div>
+
+								<div class="main_inputs">
+									<label for="password2">`+strings.repeat_password+`</label>
+									<input class="input" type="password" id="repeat" onfocus="makeblue(this)" onfocusout="validatePass2()">
+									<img src="/account/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="password2_right">
+									<span class="mistake" id="repeat_mistake"></span>
+								</div>
+
+								<button class="sign" id="sign" onclick="sendCode(event)">`+strings.button+`</button>
+							</form>
+						</div>
+					</div>
+				`
+			}
+		})
+	}
+}
+
+function validateCode()
+{
+	if(document.getElementById('codesms').value.length != 4){
+		document.getElementById('codesms').classList.add('input_error');
+		document.getElementById('code_mistake').style.display = 'block';
+		return false
+	}else{
+		document.getElementById('code_mistake').style.display = 'none';
+		document.getElementById('code_right').style.display = 'block';
+		return true
+	}
+}
+
+
+function validatePass()
+{
+	let password = 			document.getElementById('password');
+	let repeat = 			document.getElementById('repeat');
+	let password_mistake = 	document.getElementById('password_mistake');
+	let repeat_mistake = 	document.getElementById('repeat_mistake');
+	let rep = 				/[-\.;":'a-zA-Zа-яА-Я]/
+
+	if(password.value.length > 5 && !rep.test(password.value)){
+		document.getElementById('password_right').style.display = 'block';
+		password_mistake.style.display = "none";
+		return true
+
+	} else if(password.value.length < 5 && password.value.length >= 1)
+		password_mistake.innerHTML = strings.short_password;
+	else if(password.value.length = 0)
+		password_mistake.innerHTML = strings.password_mistake;
+	
+	document.getElementById('password_right').style.display = 'none';
+	password.classList.add('input_error');
+	password_mistake.style.display = "block";
+
+	return false
+}
+
+function validatePass2()
+{
+	if(repeat.value.length >= 6 && repeat.value == password.value){
+		document.getElementById('password2_right').style.display = 'block';
+		repeat_mistake.style.display = 'none';				
+		return true
+	}
+	else if(repeat.value.length == 0) 
+		repeat_mistake.innerHTML = strings.password_mistake;
+	else if(repeat.value.length > 5 && password.value != repeat.value)
+		repeat_mistake.innerHTML = strings.repeat_mistake;
+	else if(repeat.value.length < 6)
+		repeat_mistake.innerHTML = strings.password_short;
+
+		document.getElementById('password2_right').style.display = 'none';
+		repeat_mistake.style.display = 'block';				
+		repeat.classList.add('input_error');
+		return false
+}
+
+function validateForm(){
+	let ok = true
+		if(!validateCode()) 	ok = false
+		if(!validatePass()) 	ok = false
+		if(!validatePass2()) 	ok = false
+		return ok
+}
+
+function sendCode(event)
+{
+	event.preventDefault();
+	let password = 			document.getElementById('password');
+	let codesms = 			document.getElementById('codesms');
+	let repeat = 			document.getElementById('repeat');
+	let password_mistake = 	document.getElementById('password_mistake');
+	let code_mistake =		document.getElementById('code_mistake');
+	let mistake = 			document.getElementById('mistake');
+	let repeat_mistake = 	document.getElementById('repeat_mistake');
+
+	if(validateForm()){
+		POST('/account', `method=PASSWORD&&phone=${convertPlus(place_phone.innerHTML + phone.value)}&&code=${codesms.value}&&password=${password.value}`, (res, stat)=>{
+			if(stat == 417){
+				mistake.innerHTML = strings.code_err;
+				mistake.style.display = 'block';
+			}else if(stat == 400){
+				mistake.innerHTML = strings.new_old_pass_err;
+				mistake.style.display = 'block';
+			}else if(stat == 200){
+				mistake.style.display = 'none';
+				div.innerHTML = `
+					<div class="activatedNumber">
+						<div>
+							<p class="activatedNumberTitle">Ваш успешно сменили пароль!</p>
+						</div>
+						<div>
+							<img class="activatedNumberImg" src="account/img/restore.png">
+						</div>
+					</div>
+				`;
+				console.log('бла бла бла! *#$%,й')
+				setTimeout(()=>{top.location.href = '/'}, 3000);
+			}
+		})
+	}
+}
+
+function makeblue(el) {
+	el.classList.add('input_focus')
+	el.classList.remove('input_error')
+
+	switch(el) {
+		case phone: 	phone_mistake.style.display = "none";		break;
+		case password: 	password_mistake.style.display = "none";	break;
+		case code: 		code_mistake.style.display = "none";		break;
+		case repeat: 	repeat_mistake.style.display = "none";		break;
+	}
+}
+
+</script>

@@ -1,0 +1,145 @@
+.swal-btn {
+	background-color: transparent;
+	color: white;
+	border: none;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	font-size: 17px;
+	font-weight: 500;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	padding: 8px 30px;
+	margin: 26px 5px 0 5px;
+	cursor: pointer;
+	display: inline-block;
+}
+.swal-btn__cancel {
+  background-color: #C1C1C1;
+}
+.swal-btn__cancel:hover {
+  background-color: #b9b9b9;
+}
+.swal-btn__cancel:focus {
+	box-shadow: #009688 0px 0px 2px, #009688 0px 0px 0px 1px inset;
+	outline: none;
+}
+.swal-btn__confirm {
+  background-color: #009688;
+}
+.swal-btn__confirm:hover {
+  background-color: #00877a;
+}
+.swal-btn__confirm:focus {
+	box-shadow: #009688 0px 0px 2px, #009688 0px 0px 0px 1px inset;
+	outline: none;
+}
+.swal-radio-container {
+	position: relative;
+}
+.swal-radio-container .row {
+	width: calc(100% - 2.25em);
+}
+.swal-radio-container .row>div p {
+  margin-top: 0;
+  margin-bottom: .25rem;
+  font-weight: 400;
+  color: #444;
+  width: 100%;
+}
+.swal-radio-container .row>div small {
+  font-size: 70%;
+  font-weight: 400;
+  margin-top: 0.25rem;
+  color: #6c757d;
+  width: 100%;
+}
+.swal-radio-container .row>div p a {
+	font-size: 17px;
+}
+.swal-radio {
+  margin: 0.5rem;
+	display: flex;
+	overflow-x: auto;
+	max-height: 50vh;
+	flex-direction: column;
+	justify-content: flex-start!important;
+}
+.swal-radio label {
+	width: 100%;
+	margin-bottom: 1rem!important;
+	border: 1px solid #eee;
+	border-radius: 5px;
+}
+.swal-radio label:hover {
+	background-color: #E5E5E5;
+}
+.swal-radio label span {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+.swal-radio input[type=radio] {
+  position: relative;
+  opacity: 0;
+  display: none;
+}
+.swal-radio input[type=radio] + span:before {
+  content: "";
+  background: #f4f4f4;
+  border-radius: 100%;
+  border: 1px solid #b4b4b4;
+  display: inline-block;
+  width: 1.25em;
+  height: 1.25em;
+  position: relative;
+  top: 0;
+  margin-right: 1em;
+  vertical-align: top;
+  cursor: pointer;
+  text-align: center;
+  transition: all 250ms ease;
+}
+.swal-radio input[type=radio]:checked + span:before {
+  background-color: #6c757d;
+  box-shadow: inset 0 0 0 4px #f4f4f4;
+}
+.swal-radio input[type=radio]:focus + span:before {
+  outline: none;
+  border-color: #6c757d;
+}
+.swal-radio input[type=radio]:disabled + span:before {
+  box-shadow: inset 0 0 0 4px #f4f4f4;
+  border-color: #b4b4b4;
+  background: #b4b4b4;
+}
+.swal-radio input[type=radio] + span:empty:before {
+  margin-right: 0;
+}
+.swal-radio::-webkit-scrollbar {
+  width: 1em;  
+  height: 0;
+}
+.swal-radio::-webkit-scrollbar-thumb {
+  background-color: #009688;
+  height: .5em;
+  border: 0.25em solid rgba(0, 0, 0, 0);  
+  background-clip: padding-box;
+  -webkit-border-radius: 1em;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.025);
+}
+.swal-radio::-webkit-scrollbar-thumb:hover {
+  background-color: #00877a;;
+}
+.swal-radio::-webkit-scrollbar-button {
+  width: 0;
+  height: 0;
+  display: none;
+}
+.swal-radio::-webkit-scrollbar-track {
+  background-color: #ccc;
+  height: .5em;
+  border: 0.25em solid rgba(0, 0, 0, 0);  
+  background-clip: padding-box;
+  -webkit-border-radius: 1em;
+  -webkit-box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.025);
+}

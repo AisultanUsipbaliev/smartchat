@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+body{
+	font-family: 'Montserrat', sans-serif;
+}
+.calendar_div{
+	margin-top: 2vh;
+}
+.calendar_top{
+	width: 100%;
+	text-align: center;
+}
+.calendar_top td{
+	height: 7vh;
+	font-size: 2vh;
+}
+.calendar_mob{
+	width: 100%;
+	text-align: center;
+}
+.calendar_mob td{
+	height: 7vh;
+	font-size: 2vh;
+}
+#refresh{
+	height: 30px;
+	width: 30px;
+	position: relative;
+	top: 45px;
+	left: 10px;
+}
+.navi{
+	text-align: center;
+	font-size: 16px;
+	margin-top: 10px;
+	margin: 0;
+	padding: 0;	
+}
+.top_title{
+	width: 25%;
+	display: inline-block;
+	padding: 1vh;
+	box-sizing: border-box;
+}
+#goright{
+	width: 25%;
+	margin: 0;
+	padding: 0;
+}
+#goleft{
+	width: 25%;
+	margin: 0;
+	padding: 0;
+}
+#goright img{
+	height: 30px;
+	top: 0px;
+	width: 30px;
+	margin-right: 20px;
+	position: relative;
+}
+#goleft img{
+	height: 30px;
+	top: 0px;
+	margin-left: 20px;
+	width: 30px;
+	position: relative;
+}
+.day_div{
+	width: 90%;
+    text-align: center;
+    box-sizing: border-box;
+    margin-left: 5%;
+    background: #dadada;
+    border-radius: 10px;
+}
+.day_title{
+	font-size: 18px;
+}
+.day_name{
+	font-size: 18px;	
+}
+.table_title{
+	display: none;
+}
+.chart_table{
+	margin: 0 auto;
+	font-size: 18px;
+}
+.table_block{
+	margin-bottom: 15px;
+	font-size: 16px;
+}

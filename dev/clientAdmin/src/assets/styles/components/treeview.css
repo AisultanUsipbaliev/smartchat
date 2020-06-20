@@ -1,0 +1,58 @@
+.treeview {
+  cursor: pointer;
+}
+.treeview.is-expanded [data-toggle='treeview'] {
+  border-left-color: #009688;
+  background: #0d1214;
+}
+.treeview.is-expanded .treeview-menu {
+  max-height: 100vh;
+}
+.treeview.is-expanded .treeview-indicator {
+  -webkit-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+          transform: rotate(90deg);
+}
+.treeview-menu {
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: max-height 0.3s ease;
+  -o-transition: max-height 0.3s ease;
+  transition: max-height 0.3s ease;
+  background: #2a383e;
+}
+.treeview-item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 5px 5px 5px 20px;
+  font-size: 1em;
+  color: #fff;
+}
+.treeview-item.active, .treeview-item:hover, .treeview-item:focus {
+  background: #0d1214;
+  text-decoration: none;
+  color: #fff;
+}
+.treeview-item .icon {
+  margin-right: 5px;
+}
+.treeview-indicator {
+  -webkit-transform-origin: center;
+      -ms-transform-origin: center;
+          transform-origin: center;
+  -webkit-transition: -webkit-transform 0.3s ease;
+  transition: -webkit-transform 0.3s ease;
+  -o-transition: transform 0.3s ease;
+  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+}
+
+.treeview-item.active, .treeview-item:hover, .treeview-item:focus {
+    background: #0d1214;
+    text-decoration: none;
+    color: #fff;
+}

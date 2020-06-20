@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ru" >
+<head>
+  <meta charset="UTF-8">
+  <title>Восстановите ваш аккаунт</title>
+  <link rel="icon" type="img/png" href="/mobile/img/logo.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+    <link rel="stylesheet" href="/mobile/css/authorization.css?ver=<%=version%>">
+    <%include ./../parts/metrica%>
+</head>
+<body>
+  <div class="backdrop">
+    <div class="module form-module">
+      <div class="form show-form" id="restoring">
+        <h2>Восствновление аккаунта</h2>
+        <form>
+          <label class="alert" id = 'alert-err' style="display: none;"></label>
+          <div class="wrapper" id="tel__label">
+	          <div class='tel'>
+	            <div class="tel__label"><span>+7</span></div>
+	            <input class="tel__input" type="number" placeholder="Телефон" onkeydown ="keyUpTel(event)" id ='restoring-tel'/>
+	          </div>
+	          <button class="btn_submit" onclick="sendUserTel(event)">Отправить</button>
+      		  <div class="cta" id="cta"></div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+<script src='/mobile/js/functions.js?ver=<%=version%>' type="text/javascript"></script>
+<script type="text/javascript" src="/js/detector.js?ver=<%=version%>"></script>
+<script src='/mobile/js/account.js?ver=<%=version%>' type="text/javascript"></script>
+<script type="text/javascript">
+let layout 			= document.getElementById('tel__label');
+let tel     		= document.getElementById('restoring-tel');
+let err    			= document.getElementById('alert-err');
+let code;
+let valTel;
+function sendUserTel(e) 
+{
+	e.preventDefault();
+
+	if(tel.value.length < 10) { showErr(err, 'Неккоректные данные');  return;}
+	else { hideErr(err); tel.parentNode.style.background = 'white'; }
+
+	POST('/account', `method=SMS&&phone=${tel.value}`, (res, stat)=>
+		{
+			valTel = tel.value;
+			switch (stat) 
+			{
+				case 200: showFormContainmentCode(); break;
+				case 403: showErr(err, 'Данный номер не зарегестрирован!');  break;
+				case 405: showErr(err, 'Введенный номер не существует'); break;
+				default: console.log('Error: ', res); break;
+			}
+		}); 
+}
+
+function sendConfirmCode(e) 
+{
+	e.preventDefault();
+
+	if(!code.value.length) { showErr(err, 'Введите код активации');  return;}
+	else { hideErr(err); code.style.background = 'white'; }
+
+	POST('/account', `method=VERIFY&&code=${code.value}&&phone=${valTel}`, (res, stat)=>
+    {
+    	switch(stat)
+    	{
+    		case 200: showFormNewPass(); break;
+    		case 400: showErr(err, 'Неверный код'); break;
+    		case 401: showErr(err, 'Данного номера не существует'); break;
+    		default: console.log('error', res); break;
+    	}
+    });
+}
+
+function sendNewPass(e) 
+{
+
+	let firstPass    	= document.getElementById('first-pass');
+	let secondPass 		= document.getElementById('second-pass');
+	e.preventDefault();
+
+	if(firstPass.value.length < 5) { showErr(err, 'Слишком короткий пароль!'); return; }
+	else { hideErr(err);  firstPass.style.background = 'white'; }
+
+	if(!secondPass.value.length) { showErr(err, 'Повторите пароль!'); return; }
+	else { hideErr(err);  secondPass.style.background = 'white'; }
+
+	if(secondPass.value != firstPass.value) { showErr(err, 'Пароли не совпадают!');  return; }
+	else { hideErr(err);  secondPass.style.background = 'white'; }
+
+	POST('/account', `method=PASSWORD&&code=${code.value}&&phone=${valTel}&&password=${firstPass.value}`, (res, stat)=>
+		{
+			if(stat == 200) showErr(err, 'Пароль успешно обновлен! <a href = "/sign">Войти</a>','green'); 
+			else console.log(res);
+		});
+}	
+
+
+
+
+
+//***************layouts*****************//
+function repeatSMS(e)
+{
+	layout.innerHTML = `
+		<input class="tel__input" type="number" placeholder="Код активации" onkeydown ="keyUpTel(event)" id ='confirm-code'/>
+		<button class="btn_submit" onclick="sendConfirmCode(event)">Отправить</button>
+	`;
+}
+
+
+function showFormContainmentCode() 
+{
+	layout.innerHTML = `
+		<input class="tel__input" type="number" placeholder="Код активации" onkeydown ="keyUpTel(event)" id ='confirm-code'/>
+		<button class="btn_submit" onclick="sendConfirmCode(event)">Отправить</button>
+	`;
+	code = document.getElementById('confirm-code')
+	printNumbersTimeout60_1000();
+}
+
+function showFormNewPass() 
+{
+	layout.innerHTML = `
+		<input class="tel__input" id="first-pass" type="password" placeholder="Новый пароль" onkeydown ="keyUpTel(event)" id ='confirm-code'/>
+		<input class="tel__input" id="second-pass" type="password" placeholder="Повторите пароль" onkeydown ="keyUpTel(event)" id ='confirm-code'/>
+		<button class="btn_submit" onclick="sendNewPass(event)">Изменить пароль</button>
+	`;
+	document.getElementById('cta').innerHTML = '';
+}
+
+function printNumbersTimeout60_1000() {
+	let i = 10;
+	let timerId = setTimeout(function go() {
+		if (i==60) {
+			document.getElementById('cta').innerHTML = '<span>Отправить код повторно через 60 сек</span>';
+		} else {
+			if (i<10) {
+				document.getElementById('cta').innerHTML = '<span>Отправить код повторно через '+i+' cек</span>';
+			} else {
+				document.getElementById('cta').innerHTML = '<span>Отправить код повторно через '+i+' cек</span>';
+			}
+		}
+		if (i > 0) {
+			setTimeout(go, 1000);
+		} else {
+	      let a = document.createElement('a');
+	      a.innerHTML = 'Отправить код повторно';
+	      a.classList.add('active');
+	      a.style.cursor = 'pointer';
+	      a.addEventListener('click', repeatSMS)
+	      document.getElementById('cta').innerHTML = '';
+	      document.getElementById('cta').appendChild(a);
+		}
+		i--;
+	}, 0);
+}
+
+function keyUpTel(e)
+{
+	if(e.key < 10 && e.key != ' ')
+	{
+		tel.value = tel.value.substring(0, 9);
+	}
+}
+</script>
+</body>
+</html>

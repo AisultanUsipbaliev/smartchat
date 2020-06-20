@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" href="/static/img/topLogo.png" type="image/x-icon">
+	<link rel="stylesheet" href="account/styles/sign.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title><%=strings.title%></title>
+</head>
+<body>
+	<div class="noscrollingbody" id="codeBlock">
+		<div class="login">
+			<div class="form">
+				<p class="title_login"><%=strings.title%></p>
+				<form>
+					<div class="body_form">
+						<p class="confirm_code" id = 'error'><%=strings.wrong%></p>
+						<div class="main_inputs">
+							<!-- <label for="republic" class="label">Код</label> -->
+							<input class="input code_input" id="code" type="text" maxlength="4" onfocus="makeblue(this)" onfocusout="validateCode()">
+							<img src="account/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="code_right">
+							<span class="mistake" id="code_mistake"></span>
+						</div>
+
+						<button class="fsend" onclick="activate(event)"><%=strings.input_code%></button>
+						<p class="repeat" id="repeat"></p>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="noscrollingbody" id="activatedBlock" style="display: none">
+		<div class="activatedNumber">
+			<div>
+				<p class="activatedNumberTitle"><%=strings.activated%></p>
+			</div>
+			<div>
+				<img class="activatedNumberImg" src="account/img/number_Activated.png">
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
+<script type="text/javascript" src="/account/script/functions.js"></script>
+<script>
+
+	POST('/account', `method=STRINGS&&page=activate`, (res)=>{
+		window.strings = res.strings;
+	})	
+
+	if(!getCookie('SAU')) top.location.href = '/login'
+
+	let phone 			= getCookie('SAU')
+	let code    		= document.getElementById('code')
+	let mistake 		= document.getElementById('code_mistake')
+	let error 			= document.getElementById('error')
+	let rep 			= /[-\.;":'a-zA-Zа-яА-Я]/ 
+	
+	let repeat 			= document.getElementById('repeat')
+	let timer 			= setInterval( repeatInterval, 1000)
+	let count 			= 5
+
+	let activatedBlock 	= document.getElementById('activatedBlock')
+	let codeBlock 		= document.getElementById('codeBlock')
+
+	function activate(e) {
+		e.preventDefault()
+
+		let text = validateCode()
+		if(!text) return
+
+		POST('/account', `method=verify&&code=${text}&&phone=${phone}`, res => {
+			switch(res.status) {
+				case 200: 	showActivated(); 								break;
+				case 417: 	showErr(error, strings.err_417);				break;
+				case 404: 	showErr(error, strings,err_404); 				break;
+				default: 	console.log(res);								break;
+			}
+		})
+	}
+
+	function makeblue(el) {
+		el.classList.add('input_focus')
+		el.classList.remove('input_error')
+
+		error.innerHTML = strings.code_mistake
+		error.style.color = 'black'
+		mistake.style.display = "none"
+	}
+
+	function validateCode() {
+		let text = code.value
+
+		if(text.length < 4 || rep.test(text)) {
+			mistake.innerHTML = strings.code_mistake
+			mistake.style.display = 'block'
+			code.classList.add('input_error')
+			return false
+		}
+		else return code.value
+	}
+
+	function repeatInterval() {
+		count--
+		console.log(count)
+		if(count > 0) {
+
+			repeat.innerHTML = `<%=strings.again%> ${count} <%=strings.again_sec%>`
+		} else {
+			repeat.innerHTML = strings.again_send
+			repeat.classList.add('active')
+			
+			repeat.addEventListener('click', sendSMS )
+			clearInterval(timer)
+		}
+	}
+
+	function sendSMS() {
+		POST('/account', `method=SMS&&phone=${phone}`, res => {
+			repeat.classList.remove('active')
+			repeat.classList.add('success')
+			repeat.removeEventListener('click', sendSMS)
+
+			repeat.innerHTML = strings.success_send
+		})
+	}
+
+	function showActivated() {
+		activatedBlock.style.display 	= 'block'
+		codeBlock.style.display 		= 'none'
+		setTimeout(()=> {top.location.href = '/'; } , 3000)
+	}
+
+// let right_input = document.getElementsByClassName('right_input');
+// function activate() {
+// 	if(isCode) {
+// 		if(!code.value.length) {
+// 			right_input[1].style.display = "none"
+// 			code_mistake.style.display = "block";
+// 			return;
+// 		} else {
+// 			right_input[1].style.display = "none"
+// 			code_mistake.style.display = "none";
+		
+// 			telVal = convertPlus(getCookie('SAU'));
+// 			POST('/account', `method=VERIFY&&phone=${telVal}&&code=${code.value}&&active=1`, (res, stat)=>
+// 			{
+// 				if (stat == 200) { 
+// 					localStorage.removeItem('tel');
+// 					document.getElementById('blockPhone').style.display = 'none';
+// 					document.getElementById('blockCode').style.display = 'none';
+// 					document.getElementById('wasActivated').style.display = "block";
+// 					setTimeout(()=>{top.location.href = '/'}, 3000)
+// 				}
+// 				if (stat == 417) { showErr(second_wrong, 'Неверный код'); }
+// 				if (stat == 404) { showErr(second_wrong, 'Данного номера не существует'); }
+// 			});
+
+// 		}
+// 	} else {
+// 		let tel = phone.value.replace(/\s/g, '');
+// 		let firstSym = 0;
+// 		let place = place_phone.innerHTML;
+// 		for(let i = 0; i < place.length; i++)
+// 			if(isFinite(Number(place[i]))) firstSym++
+// 		if(tel.length + firstSym < 11){
+// 			phone_mistake.style.display = "block";
+// 			right_input[0].style.display = "none"
+// 			return false;
+// 		}else{
+// 			phone_mistake.style.display = "none";
+// 			right_input[0].style.display = "unset"
+// 			telVal = convertPlus(place_phone.innerHTML);
+// 			telVal += tel.trim();
+// 		}
+
+// 		POST('/account', `method=SMS&&phone=${telVal}`, (res, stat)=>
+// 		{
+// 			if(stat == 200)
+// 			{
+// 				showCode(true);
+// 				localStorage.setItem("tel", place_phone.innerHTML + '' + tel.trim());
+// 			}
+// 			else if (stat == 404)
+// 			{
+// 				showErr(first_wrong, 'Данный номер не зарегестрирован!');
+// 			}
+// 			else if(stat == 403)
+// 			{
+// 				showErr(first_wrong, 'Введенный номер не существует');
+// 			}
+// 		});
+// 	}
+// }
+
+// function printNumbersTimeout60_1000() 
+// {
+// 	let i = 60;
+// 	let cta = document.getElementById('cta');
+// 	let timerId = setTimeout(function go() 
+// 	{
+// 		if (i==60) 
+// 		{
+// 			cta.innerHTML = '<span>Повторно отправить код через 60 сек</span>';
+// 		} 
+// 		else 
+// 		{
+// 			if (i<10) 
+// 			{
+// 				cta.innerHTML = '<span>Повторно отправить код через '+i+' cек</span>';
+// 			} 
+// 			else 
+// 			{
+// 				cta.innerHTML = '<span>Повторно отправить код через '+i+' cек</span>';
+// 			}
+// 		}
+// 		if (i > 0) 
+// 		{
+// 			setTimeout(go, 1000);
+// 		} 
+// 		else 
+// 		{
+// 			let a = document.createElement('a');
+// 			a.innerHTML = 'Отправить код повторно';
+// 			a.classList.add('active');
+// 			a.addEventListener('click', (e)=>{e.preventDefault(); showCode(false)});
+// 			a.style.cursor = 'pointer';
+// 			document.getElementById('cta').innerHTML = '';
+// 			document.getElementById('cta').appendChild(a);
+// 		}
+// 		i--;
+// 	}, 0);
+// }
+
+// function showCode(flag) {
+// 	if(flag){
+// 		document.getElementById('blockPhone').style.display = 'none';
+// 		document.getElementById('blockCode').style.display = 'block';
+// 		isCode = true;
+// 		printNumbersTimeout60_1000();
+	
+// 	}else{
+// 		document.getElementById('blockPhone').style.display = 'block';
+// 		document.getElementById('blockCode').style.display = 'none';
+// 		isCode = false;
+// 	}
+// }
+
+// let rep = /[-\.;":'a-zA-Zа-яА-Я]/; 
+// function validateCode(){
+// 		if(code.value.length == 4 && !rep.test(code.value)){
+// 				document.getElementById('code_right').style.display = 'block';
+// 				code.style.borderBottom = '2px solid lightgray';
+// 				second_wrong.style.color = 'black';
+// 				second_wrong.innerHTML = 'Введите код,который пришел на ваш номер';
+// 		}else if(code.value.length != 4){
+// 				second_wrong.style.color = 'black';
+// 				document.getElementById('code_right').style.display = 'none';
+// 				second_wrong.innerHTML = 'Введите код,который пришел на ваш номер';
+// 				code.style.borderBottom = "2px solid red";
+// 	}
+// }
+
+</script>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Восстановление профиля</title>
+  <link rel="icon" type="img/png" href="/img/logo.png">
+    <link rel="stylesheet" href="css/vendor/reset.min.css?ver=<%=version%>">
+    <link rel='stylesheet' href="css/vendor/font-awesome.min.css?ver=<%=version%>">
+    <link rel="stylesheet" href="css/authorization.css?ver=<%=version%>">
+</head>
+
+<body>
+
+  <div class="backdrop">
+    <div class="module form-module">
+       <div class="form show-form" id="send_data">
+        <h2>Восстановление профиля</h2>
+        <form>
+          <label class="alert" id = 'send_data-err' style="display: none;"></label>
+          <div class='tel'>
+            <label class="tel__label">+7</label>
+            <input class="tel__input" type="number" placeholder="Введите ваш номер" onkeydown="keyUpTel(event)" id ='restoring-tel'/>
+          </div><br><br>
+          <button class="btn" onclick="sendUserTel(event)">Отправить</button>
+        </form>
+      </div>
+      <div class="form" id="confirm">
+        <h2>Восстановление профиля</h2>
+        <form>
+          <label class="alert" id='confirm-err' style="display: none;"></label>
+            <input type="text" placeholder="Введите код подтверждения" id="confirm-code" /><br>
+          <button class="btn" onclick="sendConfirmCode(event)">Отправить</button>
+        </form>
+      </div>
+      <div class="form" id="rebuilding">
+        <h2>Восстановление пароля</h2>
+        <form>
+          <label class="alert" id='rebuilding-err' style="display: none;"></label>
+          <input type="password" placeholder="Пароль" id="first-pass" />
+          <input type="password" placeholder="Повторите пароль" id="second-pass" />
+          <button class="btn" onclick="sendNewPass(event)">Восстановить</button>
+        </form>
+      </div>
+      <div class="cta cta-hidden" id="cta"></div>
+    </div>
+  </div>
+  <script type="text/javascript" src="js/functions.js?ver=<%=version%>"></script>
+  <script type="text/javascript" src="/js/detector.js?ver=<%=version%>"></script>
+  <script  src="js/pages/account/restore.js?ver=<%=version%>"></script>
+</body>
+</html>
+

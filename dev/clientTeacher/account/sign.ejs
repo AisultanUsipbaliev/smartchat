@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="public/styles/sign.css">
+	<link rel="shortcut icon" href="/static/img/topLogo.png" type="image/x-icon">
+	<title>Вход</title>
+</head>
+<body>
+	<div class="noscrollingbody">
+		<div class="login">
+			<div class="form">
+				<p class="title_login">Вход</p>
+				<form class="needPadding" >	
+					<span class="wrong" id="mistake" style="font-size: 16px"></span>
+
+					<div class="main_inputs">
+						<label for="phone">Телефон или email</label>
+						<input class="input" id="phone" type="text" onfocus="makeblue(this)" onfocusout="validateLogin(this)" >
+						<img src="public/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="phone_right">
+						<span class="mistake" id="phone_mistake">*Неверный номер телефона</span>
+					</div>
+
+					<div class="main_inputs">
+						<label for="password">Пароль</label>
+						<input class="input" type="password" id="password" onfocus="makeblue(this)" onfocusout="validatePass()">
+						<img src="public/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="password_right">
+						<span class="mistake" id="password_mistake">*Неверный палоль</span>
+					</div>
+					
+					<span class="forget"><a href="/restore">Забыли пароль?</a></span>
+					<button class="sign" id="sign" onclick="login(event)">Вход</button>
+					<span class="not_reg">Впервые в SmartChat? <br>	<a href="/registration">Регистрация</a></span>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="public/script/functions.js"></script>
+<script>
+	const production = true;
+	let phone = document.getElementById('phone')
+	let password = document.getElementById('password')
+	let phone_mistake = document.getElementById('phone_mistake')
+	let password_mistake = document.getElementById('password_mistake')
+	let mistake = document.getElementById('mistake')
+
+	phone.onkeypress = SearchListEnter;
+	password.onkeypress = SearchListEnter;
+	function SearchListEnter( event ) { if (event.which === 13) login(event) }
+
+	function login(e){
+		e.preventDefault()
+
+		let login = validateLogin(phone)
+
+		validatePass()
+
+		if(!login || !validatePass()) return
+
+		POST('/account', 
+			`method=LOGIN&&${login.type === 1 ? 'email=' + login.content : 'phone=' + login.content.replace('+', '%2B')}&&password=${password.value.trim()}`, 
+			(res, stat) => {
+			switch(stat){
+				case 200: 
+					if (production) top.location.href = '/'
+					else window.location.href = 'http://185.146.2.146:3333/'
+				break;
+				case 303: 	top.location.href = '/activate'; 								break;
+				case 401: 	showErr(mistake, 'Неверный логин или пароль!'); break;
+				case 423: 	showErr(mistake, 'Ваш аккаунт заблокирован!'); 	break;
+				default:  	console.log(res);																break;
+			}
+		})
+	}
+	function makeblue(el) {
+		el.classList.add('input_focus')
+		el.classList.remove('input_error')
+		switch(el) {
+			case phone: 	phone_mistake.style.display = "none";		break;
+			case password: 	password_mistake.style.display = "none";	break;
+			case document.getElementById('eMail'): 	eMail_mistake.style.display = "none";	break;
+		}
+	}
+	function validateLogin(el){
+		if (el.value.length === 0) {
+			phone_mistake.innerHTML = 'Поле обязательно для заполнения';
+			document.getElementById('phone_right').style.display = 'none';
+			phone.classList.add('input_error')
+			phone_mistake.style.display = "block";
+			return false
+		} else {
+			let _email = validEmail(el.value);
+			let _phone = validPhone(el.value);
+			if (_email) {
+				document.getElementById('phone_right').style.display = 'block';
+				phone_mistake.style.display = "none";
+				return { type: 1, content: _email };
+			} else if(_phone) {
+				document.getElementById('phone_right').style.display = 'block';
+				phone_mistake.style.display = "none";
+				return { type: 2, content: _phone };
+			} else {
+				phone_mistake.innerHTML = 'Некорректные данные';
+				document.getElementById('phone_right').style.display = 'none';
+				phone.classList.add('input_error')
+				phone_mistake.style.display = "block";
+				return false
+			}
+		}
+	}
+	function validatePass(){
+		if(password.value.length){
+			document.getElementById('password_right').style.display = 'block';
+			password_mistake.style.display = 'none';
+			return true
+		} else if(password.value.length == 0) password_mistake.innerHTML = 'Введите пароль'
+		document.getElementById('password_right').style.display = 'none';
+		password_mistake.style.display = 'block';
+		password.classList.add('input_error')
+		return false
+	}
+	function validEmail(email) {
+    var r = /^[\w\.\d-_]+@[\w\.\d-_]+\.\w{2,4}$/i
+    return r.test(email)? email : false
+  }
+	function validPhone(phone) {
+    if(phone[0] == '+') {
+      let part = phone.substring(2)
+      for(i=0; i<part.length; i++) if(!Number(part[i]) && Number(part[i]) != 0) return false
+      if(part.length != 10) return false
+      return phone
+    }
+    else {
+      let part = phone.substring(1)
+      for(i=0; i<part.length; i++) if(!Number(part[i]) && Number(part[i]) != 0) return false
+      if(part.length != 10) return false
+      phone = '+' + phone[1] + part
+      return phone
+    }
+    return false
+  }
+
+</script>

@@ -1,0 +1,35 @@
+.badge-info {
+  background: #fff;
+  border-color: #3C89DA;
+  color: #3C89DA;
+}
+.badge-danger {
+  background: #fff;
+  border-color: #de4848;
+  color: #de4848;
+}
+.badge-success {
+  background: #fff;
+  border-color: #22af46;
+  color: #22af46;
+}
+.badge-warning {
+  background: #fff;
+  border-color: #f3ad06;
+  color: #f3ad06;
+}
+.badge {
+  border: 1px solid;
+  margin-right: 5px;
+  margin-left: 5px;
+  display: inline-block;
+  padding: .5em 1em;
+  font-size: 80%;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25rem;
+  cursor: pointer;
+}

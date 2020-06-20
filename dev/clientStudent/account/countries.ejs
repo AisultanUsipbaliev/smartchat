@@ -1,0 +1,68 @@
+<!doctype html>
+<script type="text/javascript" src="account/script/functions.js"></script>
+<div id="background">
+	<div id="modal_country" class = 'modal_country'>
+		<div class="head_country">
+			<span><%=strings.bg_title%></span>
+			<img src="/account/img/x-men.png" onclick="closeSelectCountry()" title="Закрыть">
+		</div>
+		<div class="search_country">
+			<input type="text" class="input" id="search_country" onkeyup="searchCountry()" placeholder="<%=strings.search%>">
+		</div>
+		<div class="body_country" id="body_country"></div>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+	let search_country_input = document.getElementById('search_country')
+
+	POST('/account', 'method=COUNTRIES',(res,stat)=>{
+		generateCountries(res.codes)
+		if(getCookie('COUNTRY')) 	document.getElementsByClassName('country_row')[getCookie('COUNTRY')].click();
+		else 						document.getElementsByClassName('country_row')[0].click();
+	})	
+
+	function generateCountries(codes) {
+		document.getElementById('body_country').innerHTML = ''
+
+		for (let i = 0; i < codes.length; i++) {
+			document.getElementById('body_country').innerHTML += `
+			<div class="country_row" onclick="changeCountry(this, \'${codes[i].code}\', ${i})">
+				<span>${codes[i].name}</span>
+				<span class="number_country">${codes[i].code}</span>
+			</div>`
+		}
+	}
+	
+	function searchCountry(){
+		console.log('searchCountry')
+		if(search_country_input.value.length == 0){
+			POST('/account', 'method=countries', (res)=>{
+				generateCountries(res.codes)
+			})
+		} else {
+			POST('/account', `method=find&&part=${convertPlus(search_country_input.value.trim())}`, (res)=> {
+				generateCountries(res.codes)
+			})
+		}
+	}
+
+	function selectCountry(){
+		let background = document.getElementById('background');
+		background.style.display = 'flex';
+	}
+
+	function changeCountry(block, code, id){
+		setCookie('COUNTRY', id)
+		let changedCountry = block.children[0].textContent;
+		document.getElementById('countryName').innerHTML = changedCountry;
+		document.querySelector('.place_phone').innerHTML = code;
+		closeSelectCountry();
+	}
+
+	function closeSelectCountry(){
+		let background = document.getElementById('background');
+		background.style.display = 'none';
+	}
+</script>

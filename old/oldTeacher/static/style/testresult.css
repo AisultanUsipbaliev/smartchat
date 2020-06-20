@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+.contentTest{
+	margin: 5vh 0 0 17.5vw;
+	width: 80%;
+	height: 80vh;
+	position: relative;
+	border: .1vh solid #dadada;
+}
+.testBlock
+{ 
+	width: 100%;
+	margin: 0 auto;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+    font-family: 'Montserrat', sans-serif;
+}
+ 
+.testTitle
+{
+	background: linear-gradient(135deg, #7db9e8 0%,#2989d8 33%,#1e5799 100%);
+	display: flex;
+	align-items: center;
+	text-align: left;
+	padding-bottom: 1.5%;
+	padding-top: 0.5%;
+	border-bottom: 0;
+	font-weight: bold;
+	font-size: 150%;
+	height: 8%;
+}
+.testTitle>span{
+	padding-left: 2vh;
+	min-width: 40vw;
+}
+.scrollBody{
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: 40vh;
+}
+.testBody
+{
+	border-top: 0;
+	background: white;	
+	overflow-y:  scroll;
+	overflow-x: hidden; 
+	height: 92%;
+	font-size: 1.5em;
+	border-bottom-right-radius: 0.1vw;
+	border-bottom-left-radius: 0.1vw;
+
+}
+.test_question
+{
+	display: block;
+	width: 100%;
+}
+
+.test_question>span
+{
+	font-size: 1rem;
+}
+.questTitle{
+	padding: 1vh 1vw;
+	padding-left: 3%;
+	background-color: #E5ECF4;
+}
+.test_control
+{
+	width: calc(100% - 4vh);
+	height: 4vh;
+	position: relative;
+	float: right; 
+}
+
+button.test_button
+{
+	min-width: 15%;
+	border-radius: 1vh; 
+	float: right;
+	cursor: pointer;
+	right: 1vw;
+	margin: 0 auto;
+    background: #E5ECF4	;
+    padding: 1vh 2vw;
+    outline: none;
+}
+
+/*Result*/
+.containerRes{
+	border: 0.3vh solid #dadada;
+	border-radius: 2vh;
+	width: 15%;
+	height: 100%;
+	display: flex;
+	text-align: center;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	float: right;
+	transition: 0.3s;
+	margin: 0 1.5%;
+}
+.containerRes>h6{
+	font-size: 50%;
+	padding: 0;
+	margin: 0 auto;
+}
+.boxColor{
+	width: 1vh;
+	height: 1vh;
+	border-radius: 50%;
+}
+.boxColor.red{
+	background-color: #ce1f1f;
+}
+.boxColor.green{
+	background-color: #489934;
+}
+.boxColor.blue{
+	background-color: #87ceeb;
+}
+.home-work__button {
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    display: inline-block;
+    padding: 1.5vh 1.5vw;
+    position: relative;
+    background-color: transparent;
+    overflow: hidden;
+    border: 0.2vh solid #85a4af;
+    border-radius: 2vh;
+    font-family: 'Montserrat', sans-serif;
+    color: #4b717d;
+    transition: .2s ease-in-out;
+    /*width: 120%;*/
+}
+.home-work__button:before {
+  content: "";
+  background: linear-gradient(90deg, rgba(255,255,255,.1), rgba(255,255,255,.5));
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top: -8px;
+  left: -75px;
+  transform: skewX(-45deg);
+}
+.home-work__button:hover {
+    background: #5ba3ea;
+    color: #fff;
+}
+.home-work__button:hover:before {
+  left: 150px;
+  transition: .5s ease-in-out;
+}

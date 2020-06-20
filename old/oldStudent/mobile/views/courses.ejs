@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="icon" type="img/png" href="/mobile/img/logo.png">
+	<link rel="stylesheet" type="text/css" href="/mobile/css/courses.css?ver=<%=version%>">
+	<meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+	<%include ./parts/metrica%>
+</head>
+<body>
+<%include ./parts/header%>
+<div class="contentBlock" id="contentCourse"> 
+</div>	
+<script type="text/javascript">
+	let quickTeacher = 10
+	let contentCourse = document.getElementById('contentCourse');
+	POST('/course', 'method=GETALL',(res,status)=>{
+		console.log(res)
+		contentCourse.innerHTML=`
+		<div class="courseState" id="courseState">
+			<h1 class="courses">Тарифы</h1>
+		</div>
+		`;
+		for (var i = 0; i < res.rateList.length; i++) {
+			painCourses(res.rateList[i], res.userRate, res.accept)
+		}
+	});
+	function painCourses(data, userRate, accept){
+		document.getElementById('courseState').innerHTML +=`
+		<div class="courseBlock"title='${data.rate_title}' onclick="${userRate != data.rate_id && accept ? 'checkLevel(' + data.rate_id +')' : ''}">
+			<div class="courseHead">
+				<h1>${data.rate_name}</h1>
+			</div>
+			<div class="courseBody">
+				<p class="courseTitle">${data.rate_content}</p>
+				<h3 class="courseTime">${getHours(data.lessons, data.unlim)}</h3>
+				<h3 class="group_type">${data.group_type ? 'Индивидуально':'Групповые занятия'}</h3>
+				<h3 class="group_type">${data.unlim ? 'Безлимит':''}</h3>
+				<p class="prev_cost">${data.oldCost}kzt</p>
+				<p class="cost">${data.rate_cost != '0' ? data.rate_cost + 'kzt' : 'Бесплатно'}</p>
+			</div>
+			<div class="buttons" id="buttons${data.rate_id}">
+			</div>
+		</div>`;
+ 		
+ 		let but = document.getElementById('buttons'+ data.rate_id);
+ 		if (userRate == data.rate_id){
+			but.innerHTML = '<a class="courseBtn" onclick="deleteREQ()">Удалить заявку</a>';
+ 		}else if(!accept){
+			if (userRate != null) {
+				but.innerHTML = '<a class="courseBtn">Вы уже подали заявку на другой курс</a>';
+			}
+			else{
+				but.innerHTML = '<a class="courseBtn">У вас уже есть курс</a>';	
+			}
+		}
+		else {
+			but.innerHTML = `<a class="courseBtn" onclick=checkLevel(${data.rate_id})>Записаться</a>`;	
+		}
+	}
+	
+	function checkLevel(rate_id){
+		POST('/course', 'method=CHECK-LEVEL', function(req, res) {
+			let date = new Date()
+			let weekday = date.getDay()
+			let hour 	= date.getHours()
+			let minutes = date.getMinutes()
+
+			POST('/request', 'method=NEAR', (response) => {								
+				let date = new Date(response.date)
+				quickTeacher = response.teacherId
+
+				let answer = {day: date.getDay(), time: date.getHours(), minutes: date.getMinutes()}
+
+				if (!req.accept) getLevelTest()
+				if(rate_id == 1)
+					showPopup(`
+					<div class="haveCourse">
+						<h3>Вы можете записаться на ближайшее время, либо выбрать удобное для вас в любой день недели! 
+						Ближайшее занятие: ${getWeekDay(answer.day)} c ${answer.time}:${answer.minutes==0?'00':'30'} до ${answer.time+1}:${answer.minutes==0?'00':'30'}</h3>
+						<div class="button-container">
+							<button onclick="nearTime(${answer.day}, ${answer.time}, ${answer.minutes})" class="btnProfile">Ближайшее время</button>
+							<button onclick="setTime()" class="btnProfile">Выбрать самому</button>
+						</div>
+					</div>`, { width: '80%', height: 'auto', top: '50%', background: '#fff'});	
+				else top.location.href =`request/${rate_id}`;
+
+			})
+
+			
+
+			// if (!req.accept) 
+			// {
+			// 	if (Number(rate_id) == 1 && false) top.location.href = '/request/' + rate_id;	
+			// 	else 
+			// 	{
+			// 		showPopup(`<div class="welcome">
+			// 		              <div class="welcome__body">
+			// 		                <div class="welcome__text">Для того чтобы урок был более интересным для вас, необоходимо пройти тест и узнать ваш уровень. Это займет от 3 минут вашего времени. Если вы ранее не изучали английский и хотите начать с азов нажмите "Начать с нуля"
+			// 		                </div>
+			// 		              </div>
+			// 		              <a class="btnProfile" style="border-radius:0" onclick="goWithoutLevel(${rate_id})">Начать с нуля</a>
+			// 		              <a class="btnProfile" style="border-radius:0" href="/leveltest">Пройти тест</a>
+			// 		            </div>
+			// `,{width:'80%', height: 'auto', top: "200px"});;
+					
+			// 	}
+			// }
+			// else{
+			// 	top.location.href = '/request/' + rate_id;	
+			// }
+		})
+	}
+	function setTime(){
+		top.location.href = 'request/1'
+	}
+	function nearTime(day, time, minutes){
+		POST('/request', `method=QUICKLY&&teacher=`+quickTeacher, (res, status)=>{
+			if(status == 200) {
+				notifSet('Уведомление',`Заявка принята. Ваше занятие начнется в ${time}:${minutes==0?'00':'30'}`)
+				top.location.href = '/courses';
+			}
+			else notifSet('Уведомление', 'В данный момент мы не можем принять вашу заявку! Попробуйте выбрать время самостоятельно!');
+		})
+		closePopup()
+	}
+	function gotoLevel(){
+		closePopup();
+		top.location.href = '/leveltest';	
+	}
+	function goWithoutLevel(rate_id){
+		POST('/course', 'method=ADD-LEVEL', function(res, status){
+			if(status === 200){
+				closePopup();
+				top.location.href = '/request/' + rate_id;
+			}
+		})
+	}
+	function deleteREQ(){
+		showPopup(`
+				<span class="delete">В случае удаления заявки возврат средств не производится!</span><br>
+				<span class="delete">Вы хотите удалить заявку?</span><br>
+				<button class="deleteBtn" onclick="closePopup()">Нет</button>
+				<button class="deleteBtn" onclick="sendDelete()">Да</button>
+			`,{width:'80%', height: 'auto', top: "200px"});
+	}
+	function sendDelete(){
+		closePopup();
+		POST('request', 'method=DELETE',function(res, stat){
+			if(stat === 200)
+				top.location.href = '/courses'
+		})
+	}
+	function getHours(les, u)
+	{
+		if(u) return '';
+
+		let h = les % 10;
+
+		if(les > 20)
+
+		{
+			if(h == 0) return les + ' часов';
+			else if(h == 1) return les + ' час';
+			else if(h < 5) return les + ' часа';
+			else return les + ' часов';
+		}
+		else if(les > 4) return les + ' часов';
+		else 
+		{
+			if(les == 1) 		return '1 час';
+			else if(les > 1) 	return les + ' часа';
+		}
+	}
+function getNearTime(hour, weekday, minutes) {
+	if(minutes < 30) minutes = 30;
+	else{minutes = 0; hour++} 
+
+	while(true){
+		if(minutes == 60) {minutes = 0; hour++}
+		if(weekday > 5 || weekday == 0) {weekday = 1; hour = 9; minutes = 0}
+		if(hour >= 9){
+			if(hour < 20){
+				if(hour == 19 && minutes == 30){}
+				else break;
+			}else {hour = 9; weekday++;}	
+		}else {hour = 9; minutes = -30;}
+		minutes += 30;
+	}
+	return {day: weekday, time: hour, minutes};
+}
+
+function getWeekDay(i) {
+	switch(i) {
+		case 0: return "Воскресенье"
+		case 1: return "Понедельник"
+		case 2: return "Вторник"
+		case 3: return "Среда"
+		case 4: return "Четверг"
+		case 5: return "Пятница"
+		case 6: return "Суббота"
+	}
+}
+</script>
+</body>
+</html>

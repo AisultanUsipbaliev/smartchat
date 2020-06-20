@@ -1,0 +1,156 @@
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Лист</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#1e83d4">
+  <link rel="stylesheet" href="public/style/list.css">
+  <link rel="stylesheet" href="public/style/chat.css">
+  <link rel="shortcut icon" href="/public/images/topLogo.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+	<div id="app">
+		<!-- <p class="list-title">Список</p> -->
+		<div class="head-row">
+			<p class="name">Имя</p>
+			<p class="name">Контакты</p>
+			<p class="name">Аудио</p>
+			<p class="name">Резюме</p>
+			<p class="testResult">Тест</p>
+			<p class="w50"><i class="fas fa-check"></i></p>
+		</div>
+		<div class="teacher-list">
+			<div v-for="(teach, i) in lists" :key="i" :class="teach.class" class = 'teacher-row'>
+			{{teach.checked}} 
+				<p class="name" :title="teach.login + ' ' + teach.lastname">{{teach.login + ' ' + teach.lastname}}</p>		
+				<p class="phone" :title="teach.phone">{{teach.phone}}<br>{{teach.email}}</p>		
+				<!-- <p class="phone" :title="teach.email">{{teach.email}}</p>				 -->
+				<p class="audioResume" v-if="!teach.audioResume || teach.audioResume == 'blank' ">Отсутствует</p>
+				<div class="audioPlayer" v-if="teach.audioResume && teach.audioResume != 'blank'">
+					<div class="play-pause" @click="playAudio(i)">
+						<img :src="teach.isplaying ? 'public/images/pause.png' :  'public/images/play.png'" :class="teach.isplaying ? 'pauseAudio' : 'playAudio'">
+						<audio :src="'/common/files/' + teach.audioResume" ref="audio" style="display: none;"></audio>
+					</div>
+					<span class="timeToDie">{{getAudioTime(teach.currentTime)}}</span>
+					<div class="audio-length" @click="(event)=>{progress(event, i)}" :id="'progress' + i">
+						<div class="audio-progress" :style="{width: + teach.progress + '%' }"></div>
+					</div>
+				</div>
+				<p class="resume" v-if="!teach.resume || teach.resume == 'blank'">Отсутствует</p> 
+				<a v-if="teach.resume && teach.resume != 'blank'" target="_blank" :href="'/common/files/' + teach.resume" class="downloadBlank">Посмотреть</a>		
+				<p class="testResult">{{teach.testResult ? teach.testResult + '/50' : '-'}}</p>
+				<p class="checkTeach" @click="(event)=>{sendTeach(event, teach.teacher_id)}"><i class="fas fa-check"></i></p>
+			</div>
+		</div>
+	</div>
+</body>	
+</html>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+	let app = new Vue({
+		el: '#app',
+		data:{
+			lists: [],
+			audio: '',
+			duration: '',
+		},
+		async created(){
+			let mas = (await axios.post('/list', {})).data
+			for(i=0; i<mas.length; i++) { 
+				mas[i].checked = ''
+				mas[i].player = new Audio()
+				mas[i].player.src = '/common/files/' + mas[i].audioResume
+				mas[i].isplaying = false
+				mas[i].progress = 0
+				mas[i].currentTime = 0
+			}
+			this.lists = mas
+		},
+		methods:{
+			async sendTeach(e, id) {
+				let changed = false
+				for(i=0; i<e.path.length-1; i++) 
+					if(e.path[i].classList.contains('teacher-row') && !e.path[i].classList.contains('checked')) {
+						e.path[i].classList.add('checked')
+						changed = true
+						break
+					}
+				if(changed) await axios.post('/check', {teacher_id: id})
+			},
+			progress(event, index) {
+				this.audio = this.lists[index];
+				let progress = document.getElementById('progress' + index);
+				if(this.audio.isplaying)
+					this.audio.player.currentTime = Math.ceil(this.audio.player.duration) / (progress.clientWidth / event.offsetX);
+			},
+			playAudio(index) {
+
+				this.audio = this.lists[index].player;
+				this.duration = this.lists[index].player.duration;
+				if(this.lists[index].isplaying) {
+
+					this.lists[index].isplaying = false
+					this.lists[index].player.pause();
+				} else {
+					
+					for(i=0; i<this.lists.length; i++) {
+
+						this.lists[i].isplaying = false
+						this.lists[i].player.pause()
+						
+					} 
+
+					this.lists[index].isplaying = true
+					this.lists[index].player.play()
+
+					this.audio.addEventListener('timeupdate', () => {
+						this.lists[index].currentTime = Math.ceil(this.lists[index].player.currentTime);
+					    if(this.lists[index].player.currentTime == this.lists[index].player.duration)
+					    	this.lists[index].isplaying = false
+					    
+					    this.lists[index].progress = this.lists[index].currentTime / this.duration * 100;
+				    })
+				}
+			},
+			getAudioTime(audio) {
+				let seconds = audio;
+				let hours = 0;
+				let minuts = 0;
+				if(seconds >= 3600)
+					while(seconds >= 3600){
+					  hours++;
+					  seconds -= 3600;
+					}
+				if(seconds >= 60)
+					while(seconds >= 60){
+					  minuts++;
+					  seconds -= 60;
+					}
+				if(hours == 0) hours = '';
+				else {
+					if(hours < 10) hours = '0' + hours;
+					hours += ':';
+				}
+				if(minuts < 10) minuts = '0' + minuts;
+				if(seconds < 10) seconds = '0' + seconds;
+				return hours + minuts + ':' + seconds;
+			}
+
+		}
+	})
+</script>

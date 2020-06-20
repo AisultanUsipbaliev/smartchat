@@ -1,0 +1,595 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+/*-----------------------------container--------------------------*/
+    .chat_container
+    {
+        background: #fff;
+        border-radius: 0.5vh;
+        border: .1vh solid #dadada;
+        position: relative;
+        width: 100%;
+        height: 100%; 
+        font-size: 3vh;
+        text-align: center;
+        display: inline-block;
+        overflow: hidden;
+    }
+
+/*------------------------------chat------------------------------*/
+    .chat
+    {
+        padding: 0 5%;
+        width: 100%;
+        height: 100%;
+        display: inline-block;
+        position: relative;
+        font-family: 'Montserrat', sans-serif;
+    }
+    .sms
+    {
+        margin: 0;
+        z-index: 99;
+        white-space: pre-wrap;
+    }
+    .logotip
+    {
+        width: 90%;
+        left: 10%;;
+        top: 10vh;
+    }
+    .msgs
+    {
+        /*overflow-y: auto;*/
+        /*max-width: 90%;*/
+        /*height: 89%;*/
+        padding: 1vh 21% 1vh 0; 
+        overflow: hidden;
+        transition: .3s ease-in;
+    }
+    #preBox
+    {
+    overflow-x: hidden;
+    margin: -45vh 10vw;
+    border-bottom: 0.33vh solid #e6edf4;
+    border-radius: 2vh;
+    text-align: center;
+    font-weight: bold;
+    font-size: 4vh;
+    }
+    .box
+    {
+        width: 90%;
+        text-align: initial;
+    }
+
+    .msg_div
+    {
+        width: 100%;
+        margin-top: 0.5%;
+        position: relative;
+    }
+
+    .text
+    {
+        border: 1px solid lightgray;
+        width: 100%;
+        padding: 1.5vh 2vh;
+        box-sizing: border-box;
+        height: 6.5vh;
+        display: block;
+        font-family: 'Montserrat', sans-serif; 
+        resize: none;
+        outline: none;
+        border-radius: 20px;
+        font-size: 14px;   
+    }
+
+    .screpka
+    {
+        height: 4vh;
+        cursor: pointer;
+        position: absolute;
+        left: -6vh;
+        bottom: 1.5vh;
+    }
+
+    .microfon
+    {
+        height: 3vh;
+        cursor: pointer;
+        position: absolute;
+        right: 1vh;
+        bottom: 2vh;
+    }
+    .animateMic{
+        animation: animateMic 2s infinite;
+    }
+    @keyframes animateMic{
+        0%{transform: scale(1.0);}
+        50%{transform: scale(1.2);}
+        100%{transform: scale(1.0);}
+    }
+
+/*    .send
+    {
+        border: none;
+        background: #0088b8;
+        padding: 1vh 1.75vw;
+        display: block;
+        color: #fff;
+        font-size: 2vh;
+        border-radius: 5vh;
+        float: right;
+        position: absolute;
+        right: 15%;
+        bottom: 5%;
+        outline: none;
+        cursor: pointer;
+    }*/
+    
+    .send {
+    background: #fff;
+    float: right;
+    position: absolute;
+    right: 15%;
+    bottom: 5%;
+    font-size: 2vh;
+    padding: 1vh 1.75vw;
+    outline: none;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    display: inline-block;
+    overflow: hidden;
+    border: 2px solid #85a4af;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    color: #4b717d;
+    transition: .2s ease-in-out;
+    }
+    .send:before {
+      content: "";
+      background: linear-gradient(90deg, rgba(255,255,255,.1), rgba(255,255,255,.5));
+      height: 50px;
+      width: 50px;
+      position: absolute;
+      top: -8px;
+      left: -75px;
+      transform: skewX(-45deg);
+    }
+    .send:hover {
+        background: #5ba3ea;
+        color: #fff;
+    }
+    .send:hover:before {
+      left: 150px;
+      transition: .5s ease-in-out;
+    }
+
+
+
+    .fullMessage{
+        width: 100%;
+        height: auto;
+        float: left;
+    }
+    .messageChees{
+        height: inherit;
+        width: auto;
+        min-width: 5vw;
+        max-width: 60%;
+        z-index: 10;
+    }
+    div.right_message{
+        float: right;
+        background-color: #92a7d0;
+        color: #fff;
+        border-radius: 1vh;
+        margin-right: 1vh;
+        margin-top: -5vh 
+    }
+    .left_message, .right_message{
+        width: inherit;
+        max-width: 92%;
+        word-wrap: break-word;
+        display: block;
+        border: 0.1vw solid #92a7d0;
+        clear: both;
+        font-size: 12px;
+        text-align: left;
+        z-index: 999;
+        margin-top: 2vh;
+        position: relative;
+        min-width: 6em;
+        padding-bottom: 2vh; 
+        overflow: hidden;
+    }
+    .left_message{
+        padding: 1vh;
+        position: relative;
+        float: left;
+        clear: both;
+        color: #0277bd;
+        border-radius: 1vh;
+        margin-top: 1vh;
+    }
+    .sms_date{
+        position: absolute;
+        float: right;
+        color: #cccccc;
+        right: 0.1vw;
+        bottom: 0.05vh;
+        font-size: 1em;
+    }
+    .left_message.sms_date{
+        left: 0.1vw;
+    }
+    .text_message{
+        padding: 1vh 2vh 2.25vh;
+        border-radius: 1vh;
+    }
+    .aseessment_message{
+        position: relative;
+        text-align: center;
+        width: 70%;
+        margin-top: 2vh;
+        font-size: 2.5vh;
+        background-color: #fff;
+        border-radius: 5vh;
+        padding: 1.5vh 2vw;
+        border: 0.1vw solid #5F9EA0;
+        margin-left: 15%;
+        clear:both;
+    }
+    .student_name
+    {
+        position: relative;
+        float: left;
+        top: 1vh;
+        margin: 0;
+        display: block;
+        color: #92a7d0;
+        font-size: 2.5vh;
+        font-weight: bold;
+    }
+    .teacher{
+        font-weight: bold;
+        color:  #0088b8;
+        /* color: rgba(255, 185, 56, 0.8); */
+    }
+    .complete{
+        width: 0;
+        height: 7vh;
+        display: inherit;
+        position: relative;
+        margin: 0 auto;
+        margin-right: 0.5vw;
+    }
+    .complete>img{
+        bottom: 0vh;
+        height: 100%;
+    }
+    img::selection{
+        background-color: transparent;
+    }
+    .chat_picture
+    {
+        /*max-height: 100%;*/
+        max-width: 100%;
+        cursor: pointer;
+        height: 30vh;
+    }
+    .play_btn
+    {
+        height: 4vh;
+        cursor: pointer;
+        display: inline-grid;
+    }
+    .chat_audio
+    {
+        display: none;
+    }
+    .audio_line
+    {
+        display: inline-grid;
+        height: 1vh;
+        background: #b7b4b4;
+        width: 30vh;
+        position: relative;
+    }
+    .audio_progress
+    {
+        background: black;
+        width: 1vh;
+        height: 2vh;
+        position: absolute;
+        top: -.5vh;
+        cursor: pointer;
+    }
+   .file_href
+    {
+        background: transparent;
+        vertical-align: center;
+        border-radius: 1vh;
+        text-decoration: none;
+        font-size: 4vh;
+        color: black;
+        padding: 1vh 2vh;
+        position: relative;
+    }
+    .download_file
+    {
+        width: 3vh;
+        position: absolute;
+        top: 2vh;
+    }
+    .filename
+    {
+        margin-left: 4vh;
+        font-size: 2.5vh;   
+        position: relative; 
+        top: -3px;  
+        color: black
+    }
+
+    .files
+    {
+        margin-top: .5vh;
+        width: 100%;
+        height: 12vh;
+        overflow-y: auto;
+    }
+
+    .file_block
+    {
+        overflow-x: hidden;
+        border: 1px solid lightgray;
+        width: inherit;
+        height: 5vh;
+        position: relative;
+        border-radius: 1vh;
+        width: 32%;
+        margin: 0 5px;
+        display: inline-block;
+        transition: .3s;
+    }
+
+    .file_img
+    {
+        height: 4vh;
+        top: .5vh;
+        left: 0;
+        position: absolute;
+    }
+
+    .fname
+    {
+        text-align: left;
+        display: inline-block;
+        left: 5vh;
+        top: 1vh;
+        font-size: 2.5vh;
+        position: absolute;
+        overflow: hidden;    }
+
+    .rem_img
+    {
+        height: 4vh;
+        right: .5vh;
+        top: .3vh;
+        position: absolute;
+        cursor: pointer;
+        border-left: 1px solid lightgray;
+    }
+
+    .chat_video
+    {
+        height: 30vh;
+        width: 30vw;
+        border-radius: 1vh;
+    }
+
+    .fileTitle
+    {
+        margin: .5vh 0 .5vh 1vh;
+        font-size: 2.4vh;
+        /*background-color: #92a7d0;*/
+        padding: 5px 10px;
+        min-height: 3vh;
+        text-align: center;
+        /*border-radius: 20px;*/
+    }
+
+    .startTask{
+        font-size: 90%;
+        border-radius: 1vh;
+        width: 6.8vw;
+        height: 3.4vh;
+        outline: none;
+        border: 0;
+        color: #fff;
+        background-color: #40a6f9;
+        transition: 0.2s;
+        margin-bottom: 2vh;
+        margin-top: 1vh;
+        padding: 0.5vh 0.5vw;
+        text-decoration: none;
+    }
+    
+    .startTask:hover{
+        background-color: #0088b8;
+    }
+    
+    .messageTask{
+        color: #0277bd;
+        font-size: 2vh;
+        border-radius: 0.2vh;
+    }
+
+    .taskBlock{
+        text-align: center;
+        min-width:5vw;
+        width: 95%;
+        border-radius: 2vh;
+        overflow-x: hidden;
+        border: 0.2vh solid #0277bd;
+        background-color: #fff;
+        margin-left: 2.5%;
+        color: #000; 
+        padding-bottom: 1vh;
+    }
+    .nochat
+    {
+        font-size: 30px;
+        
+    }
+    /*Tests*/
+    
+    .testHref{
+        background-color: #fff;
+        border: 0.1vw solid #e0e0e0;
+        color:  black;
+        padding: 1vh 2vh;
+        border-radius: 1vh;
+    }
+    .testHref>a{
+        width: 7.5vw;
+        float: left;
+        height: auto;
+        padding: 0.5vh 0;
+        text-transform: none;
+        text-align: center;
+        color: rgba(3, 0, 89, 1);
+    }
+    .testHref>a>span{
+        display: block;
+    }
+    .testHref>a>img{
+        position: relative;
+        display: block;
+        width: 60%;
+        margin-left: 20%;
+    }
+    .send_message{
+        position: absolute; 
+        top: .5vh; 
+        height: 5vh;    
+        right: -8vh;   
+        cursor: pointer;
+    }
+    .img_message{
+        /*height: 25vh;*/
+        max-width: 30vw;    
+        padding: 1vh;   
+        padding-bottom: 2vh;
+        border-radius: 1vh !important;
+        background-color: #fff;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .bottom_arrow {
+    -webkit-transition: bottom .5s, opacity .5s, visibility 0.5s;
+    -webkit-transition-property: bottom, opacity, visibility;
+    -webkit-transition-duration: 0.5s;
+    visibility: hidden;
+    opacity: 0;
+    bottom: 15%;
+    position: absolute;
+    right: 14%;
+    width: 5vh;
+    height: 5vh;
+    border-radius: 50%;
+    background: #fff;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.62);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.62);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.62);
+    padding-top: 1.2vh;
+    padding-right: 1.2vh;
+    padding-bottom: 1.2vh;
+    padding-left: 1.2vh;
+    z-index: 1000;
+    cursor: pointer;
+}
+.bottom_arrow img {
+    width: 100%;
+    height: 100%;
+}
+
+.answerMesBlock{
+    height: 2vh;
+    margin: 1vh;
+    margin-top: 2vh; 
+    position: relative;
+    cursor: pointer;
+}
+.left_ans{
+    float: left;
+    margin-left: -2vw;
+}
+.right_ans{
+    float: right;
+    margin-right: -2vw;
+    top: 4vh;
+    margin-top: 0;
+}
+.refer{
+    background: rgba(0,0,0,0.1);
+    width: calc(100% + 4vh);
+    margin-left: 0;
+    cursor: pointer;
+    padding: 0 0.5vw;
+    border-left: 5px solid dodgerblue;
+    padding-left: 5px;
+    margin-bottom: 1vh;
+}
+
+.select_name{
+    top: 0;
+    color: #0088b8;
+    margin-bottom: 1vh;
+    float: none;
+    position: relative;
+}
+
+div.selectMes{
+    background-color: rgb(59, 170, 224) !important;
+    border: none !important;
+}
+
+.refMesInBlock{
+    position: absolute;
+    background-color: #fff;
+    bottom: 0%;
+    left: 0;
+    width: 93.75%;
+    border-left: 0.5vw solid rgb(59, 170, 224);
+    border-top: 0.5vh solid rgba(0,0,0,0.25);
+    z-index: 1000;
+    font-size: 1em;
+    overflow-wrap: break-word;
+    padding: 1.25em 0; 
+}
+
+.refMesInBlock>div>.refer, .refMesInBlock>div>.sms_date{
+    display: none;
+}
+.refMesInBlock>div>.chat_picture{
+    height: 8.5vh;
+    float: left;
+}
+.refMesInBlock>div>.chat_video{
+    float:left;
+}
+.refMesInBlock>div>.fileTitle{
+    float: left;
+}
+.refer>video{
+    height: 20vh;
+}
+.closeAns{
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    height: 1.25em;
+}

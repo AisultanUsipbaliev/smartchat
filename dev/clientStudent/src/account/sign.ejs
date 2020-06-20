@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="account/styles/sign.css">
+	<title><%=strings.title%></title>
+  <!-- google auth -->
+<!--   <meta name='google-signin-client_id' content = '560601805027-1rbukc25d0h5kjpa56vdm6mjc30e8sc9.apps.googleusercontent.com'>
+  <script type="text/javascript" src="https://apis.google.com/js/platform.js" async defer></script>
+ --></head>
+<body>
+	<div class="noscrollingbody">
+		<div class="login">
+			<div class="form">
+				<p class="title_login"><%=strings.title%></p>
+				<span class="another_service"><%=strings.logWithIcons%></span>
+				<div class="imgs">
+
+				<!-- google-huinya -->
+				<!-- <div style="display: none" id='fuckin-google' class = 'g-signin2' data-onsuccess = 'authG'></div>
+          <div style="height:36px;width:120px;" id="googleButton" class="abcRioButton abcRioButtonLightBlue" onclick="reallyAuth()">
+            <div class="abcRioButtonContentWrapper">
+              <div class="abcRioButtonIcon" style="padding:8px">
+                <div style="width:18px;height:18px;" class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18">
+                  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 48 48" class="abcRioButtonSvg"><g><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path><path fill="none" d="M0 0h48v48H0z"></path></g>
+                  </svg>
+                </div>
+              </div>
+              <span style="font-size:13px;line-height:34px;" class="abcRioButtonContents">
+                <span id="not_signed_in2prlyiggck33"><%=strings.input%></span>
+                <span id="connected2prlyiggck33" style="display:none">Signed in</span>
+              </span>
+            </div>
+          </div>-->
+					<img src="account/img/vk.png" onclick="authVk()" class="logos">
+					<img src="account/img/facebook.png" onclick="authFb()" class="logos">
+					<img src="account/img/mail.png" onclick="authMail()" class="logos">
+				</div> 
+				<span class="wrong" id="mistake"></span>
+				<label for="country"><%=strings.country%></label>
+				<div class="input" onclick="selectCountry()"><span id="countryName"></span></div>
+
+				<label for="phone"><%=strings.phone%></label>
+				<span class="place_phone">+7</span><input class="input" id="phone" type="text" maxlength="10">
+				<img src="account/img/iconfinder_handyArtboard_13_3044149.png" class="right_input">
+				<span class="mistake" id="phone_mistake">* <%=strings.phone_misstake%></span>
+
+				<label for="password"><%=strings.password%></label>
+				<input class="input" type="password" id="password">
+				<img src="account/img/iconfinder_handyArtboard_13_3044149.png" class="right_input">
+				<span class="mistake" id="password_mistake">*<%=strings.password_misstake%></span>
+				
+				<span class="forget"><a href="forget_pass.html"><%=strings.forgout%></a></span>
+				<button class="sign" id="sign" onclick="loginSC()"><%=strings.input%></button>
+				<span class="not_reg"><%=strings.pre_registration%><a href="/registration"><%=strings.registration%></a></span>
+			</div>
+		</div>
+
+		<div id="background">
+			<div id="modal_country">
+				<div class="head_country">
+					<span><%=strings.bg_title%></span>
+					<img src="account/img/x-men.png" onclick="closeSelectCountry()" title="Закрыть">
+				</div>
+				<div class="search_country">
+					<input type="text" class="input" id="search_country" placeholder="Поиск">
+				</div>
+				<div class="body_country" id="body_country">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="account/script/functions.js"></script>
+<script>
+
+	const production = false;
+
+	POST('/account', 'method=COUNTRIES', (res,stat)=> {
+		let codes = res.codes;
+		for (let i = 0; i < codes.length; i++) {
+			document.getElementById('body_country').innerHTML += `
+			<div class="country_row" onclick="changeCountry(this, \'${codes[i].code}\', ${i})">
+				<span>${codes[i].name}</span>
+				<span class="number_country">${codes[i].code}</span>
+			</div>
+		`
+		}
+		if(getCookie('COUNTRY'))
+			document.getElementsByClassName('country_row')[getCookie('COUNTRY')].click();
+		else document.getElementsByClassName('country_row')[0].click();
+	})
+
+	let changedCountry;
+	let countrySpan = document.getElementById('countryName');
+	let place_phone = document.getElementsByClassName('place_phone')[0];
+	function changeCountry(block, code, id){
+		document.cookie = 'COUNTRY=' + id;
+		changedCountry = block.children[0].textContent;
+		countrySpan.innerHTML = changedCountry;
+		place_phone.innerHTML = code;
+		closeSelectCountry();
+	}
+
+	let phone = document.getElementById('phone'); 
+	let password = document.getElementById('password');
+	let phone_mistake = document.getElementById('phone_mistake'); 
+	let password_mistake = document.getElementById('password_mistake'); 
+	let mistake = document.getElementById('mistake'); 
+	let btn = document.getElementById('sign');
+
+	function loginSC(){
+		let tel = phone.value.replace(/\s/g, '');
+		let countryCode = convertPlus(place_phone.innerHTML);
+		if(validateIn()) {
+			POST('/account', `method=LOGIN&&phone=${countryCode + '' + tel.trim()}&&password=${password.value.trim()}`, (res, stat) => {
+					switch(stat) {
+						case 200: {
+							if (production) {
+								top.location.href = '/'; 		
+							}	else {
+								setCookie('SAI', res.id);	
+								setCookie('SAP', res.password);	
+								setCookie('SAU', res.phone);	
+								window.location.href = 'http://185.146.2.146:2020/';
+							}																				
+						}
+						break;
+						case 303: 	{
+							showErr(
+								mistake,
+								'<a href="/activate" style="text-decoration:underline; color:#33b5e6">Активируйте ваш аккаунт!</a>', 
+								'green'
+							);
+								POST('/account', `method=SMS&&phone=${countryCode + '' + tel.trim()}`, (res, stat)=> {
+									if(stat == 200) {
+										top.location.href = '/activate';
+										localStorage.setItem("tel", place_phone.innerHTML + '' + tel.trim());
+									}
+						      else if (stat == 404)
+						      {
+						        showErr(mistake,'Данный номер не зарегестрирован!');
+						      }
+						      else if(stat == 403)
+						      {
+						        showErr(mistake,'Введенный номер не существует');
+						      }
+									else console.log('Error: ', res);
+								});
+						  }
+						break;
+						case 401: 	showErr(mistake,'Неверный логин или пароль!'); 			break;
+						case 423: 	showErr(mistake,'Аккаунт заблокирован!'); 				break;
+						default:  	console.log(res); 										break;
+					}
+				});
+		}
+	}
+
+
+function validateIn() {
+	let tel = phone.value.replace(/\s/g, '');
+	let mas = tel.split('');
+
+	let firstSym = 0;
+	let place = place_phone.innerHTML;
+	for(let i = 0; i < place.length; i++)
+		if(isFinite(Number(place[i]))) firstSym++
+
+	let right_input = document.getElementsByClassName('right_input');
+	if(tel.length + firstSym < 11){
+		phone_mistake.style.display = "block";
+		right_input[0].style.display = "none"
+		return false;
+	}else {
+		phone_mistake.style.display = "none";
+		right_input[0].style.display = "unset" 		
+	}
+	for(let i = 0; i<mas.length; i++)
+	{
+		if(!Number.isInteger(Number(mas[i])) || tel.length + firstSym > 11)
+		{
+			showErr(mistake,'Некорректный номер телефона!')
+			return false;
+		}
+	}
+	if(password.value.length <= 0){
+		password_mistake.style.display = "block";
+		right_input[1].style.display = "none"
+		return false;
+	}else {
+		password_mistake.style.display = "none";
+		right_input[1].style.display = "unset" 		
+	}
+	return true;
+}
+
+
+phone.addEventListener('change', function(){
+	phone_mistake.style.display = 'none';
+	phone.style.borderBottom = '1px solid lightgray';
+})
+
+password.addEventListener('change', function(){
+	password_mistake.style.display = 'none';
+	password.style.borderBottom = '1px solid lightgray';
+})
+</script>

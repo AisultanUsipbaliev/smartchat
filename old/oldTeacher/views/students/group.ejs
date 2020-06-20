@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SmartChat</title>
+	<meta charset="utf-8">
+	<link rel="icon" type="img/png" href="static/img/logo.png">
+	<link rel="stylesheet" type="text/css" href="static/style/students.css?ver=<%=version%>">
+	<link rel="stylesheet" type="text/css" href="static/style/profile.css?ver=<%=version%>">
+</head>
+<body>
+	<% include ../partial/header %>
+	<div class="wrapper">
+		<% include ../partial/menu %>
+		<div class="students-list">
+			<div class="students-list__header">Список групп</div>
+			<div class="students-list__names" id ='groupNames'></div>
+		</div>
+		<div class="students-list students-list-style_left" id="groupStudents">
+			<div class="students-list__header">Список учеников</div>
+			<div class="students-list__names" id ='studentNames'></div>
+		</div>
+		<div class="list list-display_none list-style_left" id="studentData">
+			<div class="list__header">Информация</div>
+			<div class="list__body">
+				<div class="list__avatar">
+					<img src="/static/img/avatar.jpg" alt=""  id = 'studentPhoto'>
+				</div>
+				<div class="list__name" id = 'studentName'></div>
+				<div class="list__email" id="studentEmail"></div>
+				<div class="list__tel" id = 'studentTel'></div>
+				<div class="list__lvl-block">
+					<div class="list__lvl-title">Уровень:</div>
+					<div class="list__lvl-description" id = 'studentLvl'></div>
+					<div class="list__lvl-title" id="studentRateTitle">Тариф:</div>
+					<div class="list__lvl-description" id="studentRate"></div>
+				</div>
+				<div class="training">
+					<a href="#" class="training__title disabled_link" id = 'studentGroup'></a>
+					<div id="training"></div>
+				</div>
+			</div>
+		</div>
+		<div class="modal" id="modal" style="display: none;">
+			<div class="modal__backdrop" onclick="closeModal()"></div>
+			<div class="modal__inner">
+				<div class="modal__body">
+					<div class="modal__close" onclick="closeModal()" ><img src="/static/img/close.svg" alt="#"></div>
+					<div class="modal__title">Новое название</div>
+					<div class="modal__block">
+						<input type="hidden" id="inputGroupId">
+						<input class="modal__input" id="inputGroupName" type="text">
+						<button onclick="editGroup()" class="modal__button">Изменить</button>
+						<div class="alert_modal" id="alertModal"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="static/js/students/group.js?ver=<%=version%>" type="text/javascript"></script>
+</html>

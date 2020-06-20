@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SmartChat</title>
+	<meta charset="utf-8">
+	<link rel="icon" type="img/png" href="static/img/logo.png">
+</head>
+<body>
+
+	<audio id = 'aud' controls></audio>
+	<button id='start' style="width: 100px; height: 30px;">START</button>
+	<button id='stop' style="width: 100px; height: 30px;">STOP</button>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="static/js/partial/header.js?ver=<%=version%>" type="text/javascript"></script>
+<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+
+<script type="text/javascript">
+
+		let aud = document.getElementById('aud')
+
+
+		// Глобальный stream
+		var gumStream; 
+		// Глобальный recorder
+		var rec; //Recorder.js object
+
+		var recordButton = document.getElementById("start");
+		var stopButton = document.getElementById("stop");
+		 
+		recordButton.addEventListener("click", startRecording);
+		stopButton.addEventListener("click", stopRecording);
+
+		var AudioContext = window.AudioContext || window.webkitAudioContext;
+
+		function startRecording() {
+			// recordButton.style.display = 'none'
+	
+			navigator.mediaDevices.getUserMedia({ audio: true, video:false }).then(function(stream) {
+
+				gumStream = stream;
+				var audioContext = new AudioContext;
+				let input = audioContext.createMediaStreamSource(stream);
+				rec = new Recorder(input,{numChannels:1})
+				rec.record()
+
+			})
+		}
+
+		function stopRecording() {
+
+			// stopButton.style.display = 'none'
+		 
+		 	/**/
+			rec.stop();
+			gumStream.getAudioTracks()[0].stop();
+			rec.exportWAV(createDownloadLink);
+			/**/
+		}
+
+		// Результат тут
+		function createDownloadLink(blob) {
+			
+			console.log(blob)
+
+			sendFile('/sendFile', blob, (e)=>{
+				aud.src = 'https://web.smartchat.kz/common/files/' + e
+				console.log(e)
+			}, new Date().valueOf()+'.ogg')
+
+		}
+
+</script> 

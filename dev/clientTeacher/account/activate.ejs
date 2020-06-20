@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" href="/static/img/topLogo.png" type="image/x-icon">
+	<link rel="stylesheet" href="public/styles/sign.css">
+	<link rel="stylesheet" href="public/styles/oops.css">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<title>Активация</title>
+</head>
+<body>
+	<div class="noscrollingbody" id="codeBlock">
+		<div class="login">
+			<div class="form">
+				<p class="title_login">Активация</p>
+				<form>
+					<div class="body_form">
+						<h3 class="activate_title">На ваш номер было отправлено СМС с кодом</h3>
+						<span class="wrong" id = 'error'></span>
+						<div class="main_inputs">
+							<label for="republic" class="label">Введите код</label>
+							<input class="input code_input" id="code" type="text" maxlength="4" onfocus="makeblue(this)" onfocusout="validateCode()">
+							<img src="public/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="code_right">
+							<span class="mistake" id="code_mistake"></span>
+						</div>
+
+						<button class="fsend" onclick="activate(event)">Отправить</button>
+						<p class="repeat" id="repeat"></p>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div class="noscrollingbody" id="activatedBlock" style="display: none">
+		<div class="activatedNumber">
+			<div>
+				<p class="activatedNumberTitle">Ваш номер активирован! <br> Добро пожаловать в SmartChat!</p>
+			</div>
+			<div>
+				<img class="activatedNumberImg" src="public/img/activated.png">
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
+<script type="text/javascript" src="public/script/functions.js"></script>
+<script>
+
+	if(!getCookie('SAA')) top.location.href = '/login'
+
+	let phone 			= getCookie('SAA')
+	let code    		= document.getElementById('code')
+	let mistake 		= document.getElementById('code_mistake')
+	let error 			= document.getElementById('error')
+	let rep 				= /[-\.;":'a-zA-Zа-яА-Я]/ 
+	
+	let repeat 			= document.getElementById('repeat')
+	let timer 			= setInterval(repeatInterval, 1000)
+	let count 			= 30
+
+	let activatedBlock 	= document.getElementById('activatedBlock')
+	let codeBlock 		= document.getElementById('codeBlock')
+
+	function activate(e) {
+		e.preventDefault()
+
+		let text = validateCode()
+		if(!text) return
+
+		POST('/account', `method=verify&&code=${text}&&phone=${phone}`, res => {
+			switch(res.status) {
+				case 200: 	showActivated(); 															break;
+				case 417: 	showErr(error, 'Неверный код');								break;
+				case 404: 	showErr(error, 'Номер не существует'); 				break;
+				default: 	console.log(res);																break;
+			}
+		})
+	}
+
+	function makeblue(el) {
+		el.classList.add('input_focus');
+		el.classList.remove('input_error');
+		mistake.style.display = "none";
+	}
+
+	function validateCode() {
+		let text = code.value;
+		if(text.length < 4 || rep.test(text)) {
+			mistake.innerHTML = 'Некорректный код';
+			mistake.style.display = 'block';
+			code.classList.add('input_error');
+			return false;
+		}
+		else return code.value;
+	}
+
+	function repeatInterval() {
+		if(count > 0){
+			repeat.innerHTML = `Получить код повторно через ${count} сек.`;
+			count--;
+		}else{
+			repeat.innerHTML = 'Получить новый код';
+			repeat.classList.add('active');
+			repeat.addEventListener('click', sendSMS );
+			clearInterval(timer);
+		}
+	}
+
+	function sendSMS() {
+		POST('/account', `method=SMS&&phone=${phone}`, res => {
+			repeat.classList.remove('active');
+			repeat.classList.add('success');
+			repeat.removeEventListener('click', sendSMS);
+			repeat.innerHTML = 'Сообщение успешно отправлено';
+			// timer = setInterval(repeatInterval, 1000);
+			count = 30;
+		})
+	}
+
+	function showActivated() {
+		activatedBlock.style.display 	= 'block'
+		codeBlock.style.display 		= 'none'
+		setTimeout(()=> {top.location.href = '/profile'; } , 3000)
+	}
+</script>

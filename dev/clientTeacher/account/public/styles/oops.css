@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+body{
+	height: 100vh;
+	width: 100vw;
+	margin: 0;
+	padding: 0;
+}
+.main_oops{
+	height: 100%;
+	width: 100%;
+	display: flex;
+	font-family: 'Roboto', sans-serif;
+	align-items: center;
+	justify-content: center;
+}
+.text_oops{
+	width: 35%;
+    text-align: center;
+}
+.btn_oops{
+	border: none;
+    padding: 8px 20px;
+    border-radius: 50px;
+    outline: none;
+    font-size: 18px;
+    color: white;
+	font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    background: #1e83d4;
+}@media screen and (min-width: 320px) and (max-width: 560px){
+	.main_oops{
+		display: flex;
+		flex-direction: column-reverse;
+	}
+	.link_oops{
+		width: 70%;
+	}
+	.img_oops{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.text_oops{
+		width: 90%;
+	}
+	.btn_oops{
+		cursor: default;
+	}
+	.h_oops{
+		font-size: 20px;
+	}
+}
+
+.main_mactive{
+	height: 100%;
+	width: 100%;
+	display: flex;
+	font-family: 'Roboto', sans-serif;
+	align-items: center;
+	justify-content: center;
+}
+.text_mactive{
+	width: 35%;
+    text-align: center;
+}
+.h_mactive{
+	color: #1e83d4;
+	font-size: 32px;
+}
+.btn_mactive{
+	border: none;
+    padding: 8px 20px;
+    border-radius: 10px;
+    outline: none;
+    color: white;
+	font-family: 'Roboto', sans-serif;
+    cursor: pointer;
+    background: #1e83d4;
+}@media screen and (min-width: 320px) and (max-width: 560px){
+	.main_mactive{
+		display: flex;
+		flex-direction: column-reverse;
+	}
+	.link_mactive{
+		width: 70%;
+	}
+	.img_mactive{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.text_mactive{
+		width: 90%;
+	}
+	.btn_mactive{
+		cursor: default;
+	}
+	.h_mactive{
+		font-size: 20px;
+	}
+}

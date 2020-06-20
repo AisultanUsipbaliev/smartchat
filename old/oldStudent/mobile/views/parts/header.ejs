@@ -1,0 +1,104 @@
+<!Doctype html>
+<header class="header" id="header">
+<link rel="icon" type="img/png" href="/mobile/img/logo.png">
+
+	<div class="logo" onclick = 'reload(event)'>
+		<a><img src="/mobile/img/logo.png"></a>
+		<span id = 'iAmWriting' style="
+			visibility: hidden; 
+			font-size: 13px;
+			color: skyblue;
+			margin: 4% 0 0 9%">
+		</span>
+	</div>
+	<title>SmartChat</title>
+	<button class="sbtn" onclick="showNaw(true, 2)">Mеню</button>
+	<link rel="stylesheet" type="text/css" href="/mobile/css/header.css?ver=<%=version%>">
+	<link rel="stylesheet" type="text/css" href="/mobile/css/feedback.css?ver=<%=version%>">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css?ver=<%=version%>" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+	<meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+	<meta name="theme-color" content="#207cca">
+</header>
+<body>
+<div class="bgForNaw" id="bgForNaw" onclick='showNaw(false)'></div>
+	<div class="naw" id="naw">
+		<ul>
+			<li><a href="/profile">Профиль</a></li>
+			<li><a href="/courses">Тарифы</a></li>
+			<li><a href="/schedule">Расписание</a></li>
+			<li><a href="/group">Группа</a></li>
+			<li><a href="/chat" id="chater">Чат</a></li>
+			<li><a href="/tests">Тесты</a></li>
+			<li><a href="/homeworks">Задачи</a></li>
+			<li><a href="/feedback">Отзыв</a></li>
+			<li><a href="" onclick="deleteCookies()">Выход</a></li>
+		</ul>
+	</div>
+	<%include ./popup%>
+</body>
+
+<script src='/mobile/js/functions.js?ver=<%=version%>' 	type="text/javascript"></script>
+<script src='/mobile/js/feedback.js?ver=<%=version%>' 	type="text/javascript"></script>
+<script src='/mobile/js/socket.js?ver=<%=version%>' 	type="text/javascript"></script>
+<script src='/mobile/js/common.js?ver=<%=version%>.01' 	type="text/javascript"></script>
+<script src="/js/detector.js?ver=<%=version%>" 	type="text/javascript" ></script>
+
+<script type="text/javascript">
+let naw = document.getElementById('naw');
+let bgForNaw = document.getElementById('bgForNaw');
+let header = document.getElementById('header');;
+let menuStat = 1;
+
+	function reload(e)
+	{
+		top.location.href = '/profile';
+		// window.history.pushState({page_id: 0, page: 'page'}, '', domen);
+	}
+	function showNaw(tata, stat){
+		if(tata === true && menuStat === 1){
+			naw.style.display = 'block';
+			if(stat) menuStat = 2;
+				bgForNaw.style.display = 'block';
+				naw.style.right = '0vw';
+			
+		}else{
+			menuStat = 1;
+			naw.style.right = '-150%';
+			bgForNaw.style.display = 'none';
+			setTimeout(function(){
+				naw.style.display = 'none';
+			},300);
+		}
+	}
+	function deleteCookies(){
+		top.location.href = '/sign';
+		deleteCookie('SAI');
+		deleteCookie('SAP');
+		deleteCookie('SAU');
+	}
+	window.start = 0;
+	window.finish = 0;
+	document.body.addEventListener('touchstart',function(ev){
+		if(bgForNaw.style.display != 'block'){
+			start = ev.changedTouches[0].screenX;
+			finish = ev.changedTouches[0].screenX;	
+		}
+	})
+	document.body.addEventListener('touchmove',function(ev){
+		finish = ev.changedTouches[0].screenX;	
+		naw.style.display = 'block';
+		if(bgForNaw.style.display != 'block'){
+			if((start - finish) - naw.clientWidth < 0)naw.style.right = (start - finish) - naw.clientWidth + 'px';
+			else naw.style.right = '0px';
+		}
+	})
+	document.body.addEventListener('touchend',function(ev){
+		if(bgForNaw.style.display != 'block'){
+			if(finish < start - (naw.clientWidth / 2.5)) showNaw(true);
+			else  naw.style.right = '-150%';
+			start = 0;
+			finish = 0;
+		}
+		else if(finish > start + (naw.clientWidth / 2.5))showNaw(false);
+	})
+</script> 

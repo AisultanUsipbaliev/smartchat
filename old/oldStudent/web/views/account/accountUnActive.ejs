@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru" >
+<head>
+  <meta charset="UTF-8">
+  <title>SmartChat</title>
+  <link rel="icon" type="img/png" href="/img/logo.png">
+    <link rel="stylesheet" href="/css/vendor/reset.min.css?ver=<%=version%>">
+    <link rel='stylesheet' href="/css/vendor/font-awesome.min.css?ver=<%=version%>">
+    <link rel="stylesheet" href="/css/authorization.css?ver=<%=version%>">
+</head>
+
+<body>
+	<div id = 'container' class = 'backdrop'>
+		<div class="module form-module">
+			<div class="form show-form">
+		        <h2>Упс.<br>Данная ссылка устарела. Выполните вход для повторной отправки!</h2>
+		        <a href='sign'><button class="btn" id="repeat">Войти</button></a>
+			</div>
+		</div>
+	</div>
+
+  <script type="text/javascript" src="js/functions.js?ver=<%=version%>"></script>
+  <script type="text/javascript" src="/js/detector.js?ver=<%=version%>"></script>
+<script src="js/pages/account/activ.js"></script>
+<script type="text/javascript">
+	setCookie('SAA', true, 1, { maxAge: 900000, httpOnly: true });
+</script>
+</body>
+</html>

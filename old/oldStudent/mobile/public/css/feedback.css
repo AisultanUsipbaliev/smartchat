@@ -1,0 +1,253 @@
+/*стили странички отзывов*/
+.main_feedback{
+    width: 100%;
+    height: 92vh;   
+    display: flex;
+    padding: 20px;
+    box-sizing: border-box;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+}
+#feedback_input{
+    width: 90%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem;
+    border: 1px solid #73b2e5;
+    resize: none;
+    margin: 50px 0 0;
+    height: 12vh;    
+    border-radius: 10px;
+    padding: 1vh;
+    outline: none;
+    box-sizing: border-box;
+}
+#feedback_input:focus{
+    box-shadow: 0 0 0 transparent!important;
+}
+#file_container{
+    margin: 2vh 5%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    overflow: hidden;
+    height: 50vh;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-family: 'Montserrat', sans-serif;
+}
+.feedback_btn{
+    padding: 10px;
+    outline: none;
+    box-sizing: border-box;
+    border: 1px solid #73b2e5;
+    background-color: transparent;
+    margin: 1vh auto;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 1vh;
+    width: 30%;
+    cursor: pointer;    
+    display: inline-block;
+}
+.feedback_btn:hover{
+    background-color: #73b2e5;
+    color: white;
+    transition: .3s ease-out;
+}
+.load_screen{
+    text-align: center; 
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1rem; 
+    color: #73b2e5;
+    cursor: pointer;    
+    width: 100%; 
+    padding: 10px 0;     
+}
+.load_screen:hover{
+    background-color: #73b2e5;
+    color: white;
+    border-radius: 2vh;
+    transition: .3s ease-out;
+}
+.img_feedback{
+    max-height: 50vh;
+    max-width: 100%;
+}
+#delete_fdbck_img{
+    position: absolute;
+    cursor: pointer;    
+    right: 7%;
+    display: none;
+    top: 18vh;
+    font-size: 5vh;
+}
+/*конец стилей странички отзывов*/
+
+
+
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+.message_rate{
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    text-align: center;
+    padding: 3vh 0 0;
+    font-size: 3vh;
+    font-weight: 400;   
+    margin: 3vh 0 1vh;
+}
+.stars{
+    text-align: center;
+}
+.stars i{
+    font-size: 5vh;
+    cursor: pointer;
+}
+.comments{
+    text-align: center;
+}
+.comments_area{
+    width: 90%;
+    margin-top: 1vh;    
+    resize: none;
+    box-sizing: border-box;
+    height: 5vh;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 1vh;
+    outline: none;
+    padding: 1vh; 
+}
+.comments_area:focus{
+    box-shadow: 0 0 0 transparent!important;
+}
+.starsN{
+    color: #73b2e5;
+}
+.stars::selection, .btn::selection{
+    background-color: transparent;
+}
+.btn{
+    background-color: #73b2e5;
+    display: block;
+    width: 80%;
+    margin-left: 10%;
+    padding: 1vh;
+    margin-top: 3vh;
+    border: 0;
+    color: white;
+    font-size: 12px;
+    border-radius: 1vh;
+    cursor: pointer;
+    outline: none;
+}
+#err{
+    margin: 0;  
+    width: 30vh;    
+    position: absolute;
+    display: flex;
+    right: -50%;
+    top: 11vh;
+    transition: .3s ease;
+}
+.thanks{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    color: #73b2e5;
+    margin-top: 3vh;
+    font-size: 5vh;
+    font-family: 'Montserrat', sans-serif;
+    flex-direction: column;
+}
+.triangle{
+    border: 14px solid transparent;
+    border-right: 14px solid rgba(0,0,0,.5);
+}
+.btn_thanks{
+    background-color: #73b2e5;
+    display: block;
+    padding: 1vh;
+    margin-top: 3vh;
+    border: 0;
+    color: white;
+    font-size: 16px;
+    border-radius: 1vh;
+    cursor: pointer;
+    outline: none;   
+}
+.parent{
+    height: auto;
+    max-height: 50vh;
+    width: 90%;
+    margin: 2vh 5% 0;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.question{
+    display: none;
+}
+.answer{
+    padding: 1vh;   
+    box-sizing: border-box;
+    background-color: #dadada;
+    border-radius: 1vh;
+    width: 90%;     
+    font-family: 'Montserrat', sans-serif;
+    margin: 0 5%;  
+}
+.answer_p{
+    font-family: 'Montserrat', sans-serif;
+    padding: 1vh;   
+    margin: 3px 5%;
+    border-radius: 1vh;
+    width: 90%;    
+    display: block;
+    cursor: pointer;
+    box-sizing: border-box;
+}
+.answer_p:hover{
+    background-color: #73b2e5;
+}
+.answer_p label{
+    margin-left: -25px; 
+}
+.question:checked + label{
+    background-color: #73b2e5!important;
+    transition: .1s ease-out;
+    color: white;
+}
+.need_stars{
+    color: white;
+    margin: 0;
+    padding: 5px;
+    background-color: rgba(0,0,0,.5);
+}
+.input_err{
+    box-shadow: 0 0 5px red;
+}
+.thxbt{
+    border: 1px solid #73b2e5;
+    color: white;
+    background: #73b2e5;
+    padding: 1vh 2vh;
+    margin-top: 5vh;
+    border-radius: 1vh;
+    font-size: 2.5vh;
+    font-family: 'Montserrat', sans-serif;
+    cursor: pointer;   
+    outline: none;      
+}
+
+.animateTitle{
+    animation: animateTitle 3s;
+    color: red
+}
+@keyframes animateTitle{
+    0%{transform: scale(1);}
+    25%{transform: scale(1.1);}
+    50%{transform: scale(1);}
+    75%{transform: scale(1.1);}
+    100%{transform: scale(1);}
+}

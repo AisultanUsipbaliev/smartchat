@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="account/styles/sign.css">
+	<link rel="shortcut icon" href="/static/img/topLogo.png" type="image/x-icon">
+	<title><%=strings.title%></title>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+</head>
+<body>
+	<div class="noscrollingbody">
+		<div class="login">
+			<div class="form">
+				<p class="title_login"><%=strings.title%></p>
+				<div class="needPadding" >	
+					<span class="another_service"><%=strings.logWithIcons%></span>
+					<div class="imgs">
+						<i class="logos fab fa-vk vk" onclick="authVk()"></i>
+						<i class="logos fab fa-facebook-f face" onclick="authFb()"></i>
+						<i class="logos fas fa-at at-at" onclick="authMail()"></i>
+					</div>
+
+					<form>	
+						<span class="wrong" id="mistake" style="font-size: 16px"></span>
+
+						<label for="country"><%=strings.country%></label>
+						<div class="input input_focus" onclick="selectCountry()"><span id="countryName"></span></div>
+						<img src="/account/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" style="display: block;">
+						
+						<div class="main_inputs">
+							<label for="phone"><%=strings.phone%></label>
+							<span class="place_phone">+7</span><input class="input" id="phone" type="text" maxlength="10" onfocus="makeblue(this)" onfocusout="validatePhone()">
+							<img src="account/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="phone_right">
+							<span class="mistake" id="phone_mistake">* <%=strings.phone_misstake%></span>
+						</div>
+						
+						<div class="main_inputs">
+							<label for="password"><%=strings.password%></label>
+							<input class="input" type="password" id="password" onfocus="makeblue(this)" onfocusout="validatePass()">
+							<img src="account/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="password_right">
+							<span class="mistake" id="password_mistake">*<%=strings.password_misstake%></span>
+						</div>
+						
+						<span class="forget"><a href="/restore"><%=strings.forgout%></a></span>
+						<button class="sign" id="sign" onclick="login(event)"><%=strings.input%></button>
+						<span class="not_reg"><%=strings.pre_registration%> <br> <a href="/registration"><%=strings.registration%></a></span>
+					</div>
+				</form>
+			</div>
+		</div>
+
+		<% include ./countries %>
+	</div>
+</body>
+</html>
+<script>
+	const production = true;
+
+	var place_phone = document.getElementsByClassName('place_phone')[0]
+	let phone = document.getElementById('phone')
+	let password = document.getElementById('password')
+	let phone_mistake = document.getElementById('phone_mistake')
+	let password_mistake = document.getElementById('password_mistake')
+	let mistake = document.getElementById('mistake')
+	let btn = document.getElementById('sign')
+
+	POST('/account', `method=STRINGS&&page=login`, (res)=>{
+		window.strings = res.strings;
+	})
+
+	function login(e){
+		e.preventDefault()
+		let tel = phone.value.replace(/\s/g, '')
+		let countryCode = convertPlus(place_phone.innerHTML)
+		
+		if(!validateForm()) return
+		
+		POST('/account', 
+			`method=LOGIN&&phone=${countryCode}${tel.trim()}&&password=${password.value.trim()}`, 
+			(res, stat) => {
+			switch(stat){
+				case 200: 
+					if (production) top.location.href = '/'
+					else window.location.href = 'http://185.146.2.146:2020/'
+				break;
+				case 303: 	top.location.href = '/activate'; 				break;
+				case 401: 	showErr(mistake, strings.err_401); 	break;
+				case 423: 	showErr(mistake, strings.err_423); 		break;
+				default:  	console.log(res);								break;
+			}
+		});
+
+	}
+
+	function makeblue(el) {
+		el.classList.add('input_focus')
+		el.classList.remove('input_error')
+
+		switch(el) {
+			case phone: 	phone_mistake.style.display = "none";		break;
+			case password: 	password_mistake.style.display = "none";	break;
+		}
+	}
+
+	function validateForm() {
+		let ok = true
+		if(!validatePhone()) 	ok = false
+		if(!validatePass()) 	ok = false
+		return ok
+	}
+
+	function validatePhone(){
+		let rep = /[-\.;":'a-zA-Zа-яА-Я]/
+		if(phone.value.length == 10 && !rep.test(phone.value)){
+			document.getElementById('phone_right').style.display = 'block';
+			phone_mistake.style.display = "none";
+			return true
+
+		} else if(phone.value.length = 0)
+			phone_mistake.innerHTML = strings.phone_mistake;
+		else  phone_mistake.innerHTML = strings.phone_err;
+		
+		document.getElementById('phone_right').style.display = 'none';
+		phone.classList.add('input_error')
+		phone_mistake.style.display = "block";
+
+		return false
+	}
+
+	function validatePass(){
+		if(password.value.length > 0){
+			document.getElementById('password_right').style.display = 'block';
+			password_mistake.style.display = 'none';
+			return true
+
+		}else if(password.value.length <= 5)
+			password_mistake.innerHTML = strings.password_short
+		else if(password.value.length == 0)
+			password_mistake.innerHTML = strings.password
+
+		document.getElementById('password_right').style.display = 'none';
+		password_mistake.style.display = 'block';
+		password.classList.add('input_error')
+		return false
+	}
+</script>

@@ -1,0 +1,109 @@
+/*.choose_course{
+	text-align: center;
+	margin: 0;
+	font-size: 18px;
+}
+.content_block{
+    background-color: #eaf2f5;
+    height: calc(100vh - 50px);
+    top: 50px;
+    position: absolute;
+    width: calc(100vw - 60px);
+    left: 60px;
+    z-index: 0;
+    box-sizing: border-box;
+    font-family: 'Arsenal', bold;
+    padding: 15px 50px;
+    box-shadow: inset 20px 20px 50px -30px rgba(0,0,0,.75);
+    display: flex;
+    justify-content: center;
+}
+.blocks{
+	margin-top: 30px;
+	height: 90%;
+	width: 50%;
+  	box-shadow: 0 0 40px -10px;
+  	background-color: #fff;
+  	border-radius: 10px;
+}
+.warning_course{
+	font-size: 16px;
+	text-align: center;
+	margin: 0;
+	color: #b8b8b8;
+}
+.head_choose{
+	height: 12%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-bottom: 1px solid lightgray;
+    align-items: center;
+    width: calc(100% - 40px);
+    margin: 0 auto;    
+}
+.body_choose{
+	height: 76%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    border-bottom: 1px solid lightgray;
+}
+.day_row{
+	display: flex;
+    align-items: center;
+    height: 100%;
+    box-shadow: 0px 1px lightgrey;
+}
+.w-20{
+	height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 1px 0 lightgrey;
+    padding: 0 10px;
+    font-weight: 800;
+    color: #33b5e6;
+    width: 200px;
+}
+.w-80{
+	width: calc(100% - 200px);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+}
+.noborder{
+	border: none; 
+}
+.plus_button{
+	height: 20px;
+	padding: 0 10px;
+	cursor: pointer;
+}
+.foot_choose{
+	height: 12%;
+    display: flex;
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+.lesson_count{
+	border-right: 1px solid #b6b6b6;
+	padding: 0 5px;
+}
+.ready{
+	cursor: pointer;
+	padding: 8px 20px;
+    border-radius: 5px;
+    border: none;
+    background: #33b5e6;
+    font-size: 16px;
+    color: white;
+}*/

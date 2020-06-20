@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<link rel="icon" type="img/png" href="/mobile/img/logo.png">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+	<link rel="stylesheet" href="/mobile/css/test.css?ver=<%=version%>">
+	<%include ./../parts/metrica%>
+</head>
+<body>
+<%include ./../parts/header%>
+<div class = "test_block" id="test_block">
+	<h2 class="test_title">Тесты</h2>
+</div>
+<script>
+POST('/test', `method=GET`, function (res, status) {
+	let test_block = document.getElementById('test_block');
+	if(res.data)
+	for (var i = 0; i < res.data.length; i++) {
+		test_block.innerHTML += 
+		`<div class = 'test'>
+			<div class="test_info">
+				<p class="left">Название теста:</p><p class = 'testName table'> ${res.data[i].test_name}</p><br>
+				<p class="left">Дата:</p><p class = 'testDate table'>${getDateName(res.data[i].dt)}</p><br>
+				<p class="left">Результат: </p><p class = 'actions table'>
+					${!res.data[i].answers ? 'Не выполнен' : res.data[i].count/100}
+				</p>
+			</div>
+			<div class="completeTest">
+				${!res.data[i].answers 
+					? '<a href="test/'+res.data[i].test_id+'">Пройти</a>'
+					: '<a href="testresult/'+res.data[i].test_id+'">Результат</a>'
+				}
+			</div>
+		</div>`
+	}
+	else test_block.innerHTML += `<h2 class="homework_title" style="text-align: center">У вас ещё нет тестов</h2>`
+});
+</script>
+</body>
+</html>

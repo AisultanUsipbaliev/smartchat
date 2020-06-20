@@ -1,0 +1,471 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700');
+body{
+	padding: 0;
+	background: linear-gradient(to top, #1e83d450 0%, #fff);
+	height: 100vh;
+	margin: 0;
+}
+.noscrollingbody{
+	height: 100%;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	overflow-y: scroll;
+}
+.mistake {
+    position: absolute;
+    color: red;
+    bottom: -14px;
+    right: 20px;
+    font-size: 12px;
+    display: none;
+    text-align: right;
+}
+.main_inputs{
+	position: relative;
+}
+.wrong {
+	color: red;
+    font-size: 15px;
+    font-weight: bold;
+    display: none;
+    position: absolute;
+    top: 10px;
+    left: 20px;
+    box-sizing: border-box;
+    width: 100%;
+}
+.active {
+	cursor: pointer;
+}
+
+.active:hover {
+	color: #1e83d4;
+}
+
+.success {
+	color: green;
+}
+
+.new_pass_title{
+	width: calc(100% - 40px);
+	margin: 0 auto 5px;
+	font-size: 18px;
+}
+.login{
+	width: 100%;
+	min-height: 100%;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.title_login{
+	background-color: #1e83d4;
+	margin: 0;
+	font-weight: 600;
+	color: white;
+	font-size: 20px;
+	padding: 15px;
+	border-radius: 10px 10px 0 0;
+}
+.form{
+	width: 90%;
+	max-width: 400px;
+	font-family: 'Roboto', sans-serif;
+	border-radius: 10px;
+	background-color: #fff;
+	margin: 20px 0;
+	position: relative;
+    box-shadow: 0px 5px 40px -15px rgba(0,0,0,.50);
+}
+.another_service{
+	width: calc(100% - 40px);
+	padding: 0px 0 10px;
+	display: block;
+	text-align: center;
+	font-size: 14px;
+	margin: 0 auto;
+}
+.needPadding{
+	padding: 32px 0 15px;
+	position: relative;
+}
+.form label{
+	width: calc(100% - 40px);
+	display: block;
+	font-size: 14px;
+	cursor: pointer;
+	margin: 0 auto;
+	color: #999;
+}
+.place_phone{
+	position: absolute;
+	margin-left: 20px;
+	font-family: 'Roboto', sans-serif;
+	margin-top: 5px;
+	font-size: 16px;
+	color: black;
+}
+.logos{
+	height: 36px;
+	width: 36px;
+	border-radius: 50%;
+	margin: 0 5px;
+	cursor: pointer;
+}
+.logos:before{
+	display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+}
+.vk{
+    color: white;
+	background-color: #4a76a8;
+}
+.at-at{
+	background-color: #2665a9;
+	color: #f69e35;
+}
+.face{
+    color: white;
+	background-color: #3b5998;
+}
+.imgs{
+	display: flex;
+	justify-content: center;
+	padding-bottom: 10px;
+}
+.forget{
+	display: block;
+    width: calc(100% - 40px);
+    margin: 15px auto 0;
+	font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    text-align: right;
+    color: lightgray;
+}
+.forget a{
+	color: #777;
+}
+a{
+	text-decoration: none;
+}
+.input{
+	outline: none;
+	width: calc(100% - 40px);
+	border: none;
+	border-bottom: 2px solid lightgray;
+	background-color: #fff;
+	margin: 0 auto 10px;
+	padding: 5px 25px 5px 5px;
+	box-sizing: border-box;
+	display: block;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+.code_input {
+	text-align: center;
+}
+
+.input_focus {
+	border-bottom: 2px solid #1e83d4;
+}
+
+.input_error {
+	border-bottom: 2px solid red;
+}
+
+#phone{
+	padding: 5px 25px 5px 20px;
+	font-family: 'Roboto', sans-serif;
+}
+.sign{
+	border: none;
+	border-radius: 50px;
+	color: white;
+	font-family: 'Roboto', sans-serif;
+	background-color: #1e83d4;
+	padding: 5px 20px;
+	font-size: 16px;
+	outline: none;
+	margin: 20px auto 5px;
+	cursor: pointer;
+	display: block;
+}
+.not_reg{
+	display: block;
+	width: calc(100% - 40px);
+	text-align: center;
+	font-family: 'Roboto', sans-serif;
+	margin: 8px auto 5px ;
+	font-size: 14px;
+}
+.not_reg a{
+	color: #1e83d4;
+	text-decoration: none;
+}
+.label{
+	display: block;
+	width: calc(100% - 40px);
+	font-size: 14px;
+	margin: 0 auto;
+}
+.body_form{
+	padding: 30px 0 5px;
+}
+.finp{
+	border: none;
+	border-bottom: 1px solid lightgray;
+	width: calc(100% - 40px);
+	margin: 0 auto;
+	display: block;	
+	padding: 5px;
+	box-sizing: border-box;
+	outline: none;
+}
+.fsend{
+	border-radius: 50px;
+	background-color: #1e83d4;
+	border: none;
+	outline: none;
+	padding: 5px 20px;
+	margin: 20px auto 5px;
+	cursor: pointer;
+	display: block;
+	color: white;
+	font-size: 16px;
+}
+.confirm_code{
+	text-align: center;
+	width: calc(100% - 40px);
+	font-size: 15px;
+	margin: 0 auto;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+.select_misstake{
+ border: 1px solid #bbb;
+ border-radius: 4px;
+ color: #f00;
+ background-color: #fff;
+ position: absolute;
+ display: flex;
+ justify-content: left;
+ align-items: center;
+ right: -100px;
+ margin-top: -40px;	
+ width: auto;
+ min-width: 100px;
+ padding: 2.5%;
+ height: 1em;
+ animation: move_misstake 1s linear infinite;
+}
+@keyframes move_misstake{
+0%{margin-left: 20px;}
+50%{margin-right: 20px;}
+100%{margin-left: 20px;}
+}
+.select_misstake_sqr{
+ width: 0.7em;
+ height: 0.7em;
+ transform: rotate(45deg);
+ position: absolute;
+ background-color: #fff;
+ border-left: 1px solid #bbb;
+ border-bottom: 1px solid #bbb;
+ left: calc(-0.4em - 1%);
+}
+#country_mistake{
+	right: -110px;
+	display: none;
+}
+#phone_mistake{
+	display: none;
+}
+#password_mistake{
+	display: none;
+}
+#password_mistake2{
+	display: none;
+	right: -145px;
+}
+
+#background{
+	height: 100%;
+	width: 100%;
+	display: none;
+	justify-content: center;
+	align-items: center;
+	font-family: 'Roboto', sans-serif;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background-color: rgba(0,0,0,.5);
+}
+.modal_country{
+	background-color: #fff;
+	height: 77%;
+	border-radius: 10px;
+	width: 90%;
+	max-width: 400px;
+	overflow: hidden;
+}
+.head_country{
+	width: 100%;
+	height: 50px;
+	background-color: #1e83d4;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-sizing: border-box;
+	color: white;
+	padding: 0 20px;
+}
+.search_country{
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.search_country input{
+	background-image: url(../img/search.png);
+	background-size: 20px;
+	background-position: 5px;
+	background-repeat: no-repeat;
+	padding: 5px 5px 5px 30px;
+}
+.head_country img{
+	height: 15px;
+	cursor: pointer;
+}
+.body_country{
+	height: calc(100% - 100px);
+	overflow: hidden;
+	overflow-y: scroll;
+	padding: 0 20px;
+}
+.country_row{
+	display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    align-items: center;
+    cursor: pointer;
+    border-bottom: 1px solid lightgray;
+}
+.country_row:hover{
+	background-color: lightgray;
+}
+.number_country{
+	color: #777;
+}
+.right_input{
+	height: 10px;
+    position: absolute;
+    margin-top: -30px;
+    display: none;
+    right: 25px;
+}
+.repeat{
+	text-align: right;
+	width: 95%;
+	padding-bottom: 15px;
+	margin: 15px auto -10px;
+	font-size: 14px;
+}
+.activatedNumber{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	height: 100%;
+    align-items: center;
+}
+.activatedNumberImg{
+	width: 80%;
+}
+.activatedNumberTitle{
+	color: #1e83d4;
+	font-size: 30px;
+	text-align: center;
+}
+@media screen and (min-width: 320px) and (max-width: 768px){
+	.activatedNumber{
+		flex-direction: column-reverse;
+	}
+	.activatedNumberImg {
+		width: 70%;
+		margin: 0 15%;
+	}
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #d8d8d8;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c0c0c0;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #c0c0c0;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #eaeaea;
+}
+::-webkit-scrollbar-track:active {
+  background: #eaeaea;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+
+
+/*google*/
+.abcRioButtonLightBlue{
+	height: 29px !important;
+	width: 29px !important;
+	padding: 0 !important;
+	box-shadow: none !important;
+	margin: 0 5px !important;
+}
+.abcRioButtonContentWrapper{
+	height: 100% !important;
+	width: 100% !important;
+	cursor: pointer;
+	overflow: hidden;
+}
+.abcRioButtonIcon{
+	height: 100% !important;
+	width: 100% !important;
+	padding: 0 !important;
+}
+.abcRioButtonSvgImageWithFallback{
+	height: 100% !important;
+	width: 100% !important;
+}
+.abcRioButtonSvg{
+	height: 100% !important;
+	width: 100% !important;	
+}

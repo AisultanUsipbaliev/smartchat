@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700');
+body{
+	background-image: url('../images/11.jpg');
+	font-family: 'Roboto Condensed', sans-serif;
+	margin: 0;
+	padding: 0;
+}
+.list-title{
+	font-size: 48px;
+	margin: 0px;
+	height: 60px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: default;
+}
+.teacher-row{
+	display: flex;
+	border-bottom: 1px solid lightgray;
+	justify-content: flex-start;
+	position: relative;
+	align-items: center;
+}
+.testResult{
+	width: 70px;
+	font-size: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
+	margin: 0;
+}
+.name, .phone, .audioResume, .downloadBlank, .resume{
+	width: calc(100% / 4 - 30px);
+	margin: 0;
+	text-align: center;
+	overflow: hidden;
+	white-space: nowrap;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	height: 50px;
+	font-size: 16px;
+	text-overflow: ellipsis;
+}
+.head-row .name{
+	width: calc(100% / 4 - 30px);
+	margin: 0;
+	height: 100%;
+	text-align: center;
+	overflow: hidden;
+	padding: 14px 0;
+	box-sizing: border-box;
+	white-space: nowrap;
+	font-size: 20px;	
+}
+.head-row i{
+	margin-left: 5px;
+}
+.w50{
+	width: 50px;	
+	display: flex;
+	margin: 0;
+	justify-content: center;
+	align-items: center;
+}
+.checkTeach{
+	cursor: pointer;
+	padding: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50px;
+	box-sizing: border-box;
+	margin: 0;
+	height: 50px;
+}
+.checkTeach:hover{
+	color: green;
+	transform: scale(1.2);
+}
+.head-row{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	z-index: 111;	
+	height: 50px;
+	position: sticky;
+	top: 0;
+	background-color: #1e83d4;
+	color: white;
+}
+.copied{
+	position: fixed;
+	background-color: #00000050;
+	padding: 5px 10px;
+	width: 100px;
+	text-align: center;
+	bottom: 100px;
+	left: calc(50% - 50px);
+	border-radius: 50px;
+}
+.audioPlayer{
+	width: calc(100% / 4 - 30px);
+	height: 50px;
+	display: flex;
+	transition: .2s ease;
+	justify-content: space-between;
+	align-items: center;
+	cursor: pointer;
+
+}
+.playAudio{
+	height: 15px;
+	cursor: pointer;
+	margin-left: 3px;
+}
+.pauseAudio{
+	height: 15px;
+	margin-left: 1px;
+	cursor: pointer;
+}
+.circle{
+	background-color: #1e83d4;
+	height: 30px;
+	width: 30px;
+	border-radius: 50%;
+	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.timeToDie{
+	font-size: 14px;
+}
+.checked{
+	cursor: not-allowed;
+	background-color: #00000030;
+}
+
+.checked>p, .checked>a, .checked>i {
+	cursor: not-allowed;	
+}
+.checked > .checkTeach:hover{
+	transform: scale(1);
+	color: black;
+}
+
+
+
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .2s;
+}
+.fade-enter, .fade-leave-to{
+  opacity: 0;
+}
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-button {
+  width: 0px;
+  height: 0px;
+}
+::-webkit-scrollbar-thumb {
+  background: #d8d8d8;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c0c0c0;
+}
+::-webkit-scrollbar-thumb:active {
+  background: #c0c0c0;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+  border: 0px none #ffffff;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-track:hover {
+  background: #eaeaea;
+}
+::-webkit-scrollbar-track:active {
+  background: #eaeaea;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}

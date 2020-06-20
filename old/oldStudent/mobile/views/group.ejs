@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<link rel="icon" type="img/png" href="/mobile/img/logo.png">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+	<link rel="stylesheet" href="/mobile/css/group.css?ver=<%=version%>">
+	<%include ./parts/metrica%>
+</head>
+<body>
+<%include ./parts/header%>
+<div class="container">
+	<div class="course" id="course_block"></div>
+	<div class="info" id="group_info_block"></div>
+</div>	
+<script type="text/javascript">
+
+POST('/group', 'method=GET', function(res,stat) {
+	let course_block = document.getElementById('course_block');
+	let group_info_block = document.getElementById('group_info_block');
+	if(stat === 200){
+		createCourseBlock(res.body.info.rate_info[0].rate_name, res.body.info.rate_info[0].rate_content, res.body.info.rate_info[0].lessons, course_block);
+
+		createGroupInfoBlock(res.body.info.group_info[0].group_name, res.body.participants.teacher[0].fio, res.body.participants.teacher[0].ava, res.body.participants.student, group_info_block)
+	}else if (stat === 202){
+		course_block.innerHTML =`
+		<div class="nopeGroup">
+			<div class="list_head">У вас нет группы</div>
+			<button class="deleteBtn" style="margin-top:50px" onclick="top.location.href='/courses'">Записаться на курс</buton>
+		</div>
+		`;	
+	}
+})
+
+	let show = true;
+	
+	function closeCourse(){
+		let infoCourse = document.getElementById('infoCourse'); 
+		if(show == true)
+		{
+			infoCourse.style.height = "0";
+			show = false;
+		}
+		else
+		{
+			infoCourse.style.height = "auto";
+			show = true;
+		}
+	}
+
+	function infoPeople(fio, ava, phone){
+		let div = document.getElementById('groupMembersInfo');
+		let info = document.createElement('div');
+		div.style.padding = '10px 10px 30px';
+		info.classList.add('information');
+		div.innerHTML = `
+			<p>${phone ? '' : 'Преподаватель '}${fio}</p>
+			<img src="${ava ? './common/photo/' + ava : '/mobile/img/profile.svg'}">
+		`;
+	}
+
+	function createCourseBlock(rate_name, rate_content, lessons, layout) {
+		let h1 = document.createElement('h1');
+			h1.classList.add('title');
+			h1.addEventListener('click', closeCourse);
+			h1.innerHTML = rate_name;
+
+		let div = document.createElement('div');
+			div.classList.add('infoCourse');
+			div.id = 'infoCourse';
+
+		let p = document.createElement('p');
+			p.classList.add('courseTitle');
+			p.innerHTML = rate_content;
+
+		let h2 = document.createElement('h2');
+			h2.innerHTML = getHours(lessons);
+
+		div.appendChild(p);
+		div.appendChild(h2);
+		layout.appendChild(h1);
+		layout.appendChild(div);
+	}
+
+	function createGroupInfoBlock(group_name, fio, ava, student, layout) {
+		let h1 = document.createElement('h1');
+			h1.classList.add('openCourse');
+			h1.innerHTML = group_name;
+
+		let firstDiv = document.createElement('div');
+			firstDiv.classList.add('groupMembers');
+
+		let ul = document.createElement('ul');
+
+		let li = document.createElement('li');
+			li.classList.add('teacher');
+			li.innerHTML = 'Преподаватель: '+fio;
+			li.addEventListener('click', function (e) {
+				infoPeople(fio, ava, false);
+			})
+
+		let secondDiv = document.createElement('div');
+			secondDiv.classList.add('groupMembersInfo');
+			secondDiv.id = 'groupMembersInfo';
+
+		layout.appendChild(h1);
+		firstDiv.appendChild(ul);
+		ul.appendChild(li);
+		layout.appendChild(firstDiv);
+		layout.appendChild(secondDiv);
+
+		createStudentList(student, ul);
+		infoPeople(fio, ava, false);
+	}
+
+	function createStudentList(student, layout) {
+		for(let i = 0; i < student.length; i++) 
+		{
+			let li = document.createElement('li');
+			li.classList.add('last_student', 'student');
+			li.innerHTML = student[i].fio;
+			li.addEventListener('click', function (e) {
+				infoPeople(student[i].fio, student[i].ava, student[i].phone);
+			});
+
+			layout.appendChild(li);
+		}
+	}
+	function getHours(les, u)
+	{
+		if(u) return '';
+
+		let h = les % 10;
+
+		if(les > 20)
+
+		{
+			if(h == 0) return les + ' часов';
+			else if(h == 1) return les + ' час';
+			else if(h < 5) return les + ' часа';
+			else return les + ' часов';
+		}
+		else if(les > 4) return les + ' часов';
+		else 
+		{
+			if(les == 1) 		return '1 час';
+			else if(les > 1) 	return les + ' часа';
+		}
+	}
+</script>
+</body>
+</html>

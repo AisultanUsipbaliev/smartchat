@@ -1,0 +1,27 @@
+.settings {
+	
+}
+.settings__item {
+	margin-top: 1rem;
+}
+.settings__item label {
+	font-size: 1rem;
+  font-weight: 400;
+  color: #6c757d;
+}
+.settings__item input {
+	margin-top: .25rem;
+}
+.settings__item_pass {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+}
+.settings__item_pass button {
+  background-color: #fff;
+  border: 1px solid #E5E5E5;
+  color:  #777;
+}
+.settings__item_pass button:hover {
+  color: #333333;
+}

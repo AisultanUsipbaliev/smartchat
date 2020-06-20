@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SmartChat</title>
+	<meta charset="utf-8">
+	<meta http-equiv="Cache-Control" content="no-cache">
+	<link rel="icon" type="img/png" href="/img/logo.png">
+	<script type="text/javascript" src="/js/functions.js?ver=<%=version%>"></script>
+	<link rel="stylesheet" type="text/css" href="/css/nav.css?ver=<%=version%>">
+	<link rel="stylesheet" type="text/css" href="/css/notification.css?ver=<%=version%>">
+	<link rel="stylesheet" type="text/css" href="/css/profile.css?ver=<%=version%>">
+	<link rel="stylesheet" type="text/css" href="/css/schedule.css?ver=<%=version%>">
+	<link rel="stylesheet" type="text/css" href="/css/groups.css?ver=<%=version%>">
+	<link rel="stylesheet" type="text/css" href="/css/courses.css?ver=<%=version%>">
+	<link rel="stylesheet" type="text/css" href="/css/request.css?ver=<%=version%>">
+	<link rel="stylesheet" type="text/css" href="/css/chat.css?ver=<%=version%>">
+	<link rel="stylesheet" type="text/css" href="/css/test.css?ver=<%=version%>">
+	<link rel="stylesheet" type="text/css" href="/css/tests.css?ver=<%=version%>">
+	<link rel="stylesheet" type="text/css" href="/css/homework.css?ver=<%=version%>">
+	<link rel="stylesheet" type="text/css" href="/css/feedback.css?ver=<%=version%>">
+
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+	<% include ./part/metrica  %>
+</head>
+<body>
+	<% include ./part/popup  %>
+	<% include ./part/top  %>
+	<div class="wrapper">
+		<% include ./part/nav  %>
+		<% include ./part/content %>
+		<% include ./part/notification %>
+	</div>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/js/common.js?ver=<%=version%>.01"></script>
+  	<script type="text/javascript" src="/js/detector.js?ver=<%=version%>"></script>
+	<script type="text/javascript" src="/js/socket.js?ver=<%=version%>"></script>
+	<script type="text/javascript" src="/js/scroll.js?ver=<%=version%>"></script>
+	<script type="text/javascript" src="/js/feedback.js?ver=<%=version%>"></script>
+	<!-- pages -->
+	<script type="text/javascript" src="/js/pages/profile.js?ver=<%=version%>"></script>
+	<script type="text/javascript" src="/js/pages/data.js?ver=<%=version%>"></script>
+	<script type="text/javascript" src="/js/pages/schedule.js?ver=<%=version%>"></script>
+	<script type="text/javascript" src="/js/pages/groups.js?ver=<%=version%>"></script>
+	<script type="text/javascript" src="/js/pages/courses.js?ver=<%=version%>.2"></script>
+	<script type="text/javascript" src="/js/pages/request.js?ver=<%=version%>.04"></script>
+	<script type="text/javascript" src="/js/pages/chat.js?ver=<%=version%>"></script>
+	<script type="text/javascript" src="/js/pages/tests.js?ver=<%=version%>"></script>
+	<script type="text/javascript" src="/js/pages/test.js?ver=<%=version%>"></script>
+	<script type="text/javascript" src="/js/pages/testResult.js?ver=<%=version%>"></script>
+	<script type="text/javascript" src="/js/pages/levelTest.js?ver=<%=version%>"></script>
+	<script type="text/javascript" src="/js/pages/homework.js?ver=<%=version%>"></script>
+	<script type="text/javascript" src="/js/pages/feedback.js?ver=<%=version%>"></script>
+	<script type="text/javascript" src="/js/pages/bauka.js"></script>
+
+	<!-- pages end -->
+
+	<script type="text/javascript" src="/js/router.js?ver=<%=version%>"></script>
+
+
+	<!-- cloudpay -->
+	<script src="https://widget.cloudpayments.ru/bundles/cloudpayments"></script>
+</body>
+</html>

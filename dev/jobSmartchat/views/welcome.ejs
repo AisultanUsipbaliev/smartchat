@@ -1,0 +1,624 @@
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<title>Приглашаем в команду SMARTCHAT</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#1e83d4">
+    <link rel="stylesheet" href="public/style/chat.css">
+    <link rel="shortcut icon" href="/public/images/topLogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+</head>
+<body>
+	<div id="app">
+		<div class="chat">
+			<div class="m-body" ref="body">
+
+				<div class="message" v-for="(msg, index) in messages" :key="index" :class="!msg.position ? 'left-message' : 'right-message'" >
+					<img :src="msg.position ? 'public/images/avatar.jpg' : 'public/images/smarti.png'" :class="!msg.position ? 'photo' : 'right-photo'" v-if='!msg.button'>
+					
+					<div :class="msg.button ? 'centerM'  : 'msg'">
+						<span :class="!msg.position ? 'name-user' : 'name-user-r'" v-if='!msg.button'>{{msg.name}}</span>
+						<div class="content" v-if='!msg.button'>
+							<span v-if="msg.type == 1 || msg.title" class="text-msg" >{{msg.title ? msg.title : msg.text}}</span>
+						
+							<div v-if="msg.type == 2" class="documents">
+								<div class="doc">
+									<img src="public/images/doc_icon.png" class="doc-icon">
+									<a target="_blank" :href="'/common/files/' + msg.href">
+										<div class="info-doc">	
+											<p class="doc-name">{{msg.file}}</p>
+										</div>
+									</a>
+								</div>
+							</div>
+						
+							<div v-if="msg.type == 3" class="audios">
+								<div class="audio-block">
+									<div class="play-pause" @click='playAudio(index)'>
+										<img :src=" msg.isplaying? '/public/images/pause.png':'/public/images/play.png'" :class="msg.isplaying? 'pauseAudio': 'playAudio'" >
+									</div>
+									<span class="audio-time">{{msg.audio.time}}</span>
+									<div class="audio-length" @click = "e => {changeProgress(e, index)}">
+										<div :style="'width:' + msg.progress + '%'" class="audio-progress"></div>
+									</div>
+								</div>
+							</div>
+
+							<div v-if="msg.type == 10">
+								<span class="msg-question" v-if="msg.title">{{msg.title}}</span>
+								<span class="msg-question">Вопрос: {{msg.question}}</span>
+					
+								<div class="audio-block" v-if="msg.audio"> 	
+									<div class="play-pause" @click='playAudio(index)'>
+										<img :src=" msg.isplaying? '/public/images/pause.png':'/public/images/play.png'" :class="msg.isplaying? 'pauseAudio': 'playAudio'" >
+									</div>
+									<span class="audio-time">{{msg.audio.time}}</span>
+									<div class="audio-length" @click = "e => {changeProgress(e, index)}">
+										<div :style="'width:' + msg.progress + '%'" class="audio-progress"></div>
+									</div>
+								</div>
+
+								<div class="opt" v-for="(option, opt) in msg.answers" :key="opt" @mouseup="answerQuestion(opt, msg)">
+									<input type="radio" :id="msg.index + '' + opt" :name="msg.question" style="display: none;">
+									<label :for="msg.index + '' + opt" :class="" class="option">
+										{{option}}
+									</label>
+								</div>
+							</div>
+
+						</div>
+						<div class="buttons-file" v-if="msg.type == 5 && !msg.hide">
+							<label for="file" class="btn_teacher" @click = 'checkResume'>Загрузить резюме</label>
+							<label class="btn_teacher dontpress" @click = 'noResume'>У меня нет резюме</label>
+							<!-- <img v-if='msg.wait'src="/public/images/prog.gif"> -->
+						</div>
+						<div class="buttons-file" v-if="msg.type == 6" @click="animation = !animation">
+							<button class="voice_teacher" :class="animation ? 'animate' : ''"><i class="fas fa-microphone"></i></button>
+							<span class="vpan" @click='startAudio'>{{animation ? 'Идет запись. Нажмите, чтобы остановить.' : 'Нажмите чтобы записать голосовое сообщение'}}</span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<div class="m-foot">
+				<textarea id = 'textarea' :disabled='counter == 5 && question > -1' class="input-send" v-model="text" @keydown="checkEnter" @focus="scrollDown()" placeholder="Введите сообщение"></textarea>
+				<img src="public/images/send.png" alt="" class="send" @click="sendMessage()">
+			</div>
+			<input type="file" id="file" style="display: none;" accept="*/" @change="addDocument">
+		</div>
+	</div>
+</body>
+</html>
+
+<script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+	let app = new Vue({
+		el: '#app',
+		data:{
+			messages: [],
+			animation: false,
+			counter: 0,
+			text: '',
+			name: '',
+			phone: '',
+			email: '',
+			resume: 'blank',
+			audio: 'blank',
+			test: [],
+			password: '',
+			phone: null,
+
+			stream: null,
+			rec: null,
+
+			answers: [],
+			question: -1,
+
+			waitPasword: false,
+
+			beforeTest: `Условия работы следующие:
+			-График работы свободный, вы определяете сами в личном кабинете
+			-Условия оплаты:
+			*На 1-ый месяц
+			Пробный 150тг 
+			Урок час 300тг
+			Закрытая оплата с пробного урока 300тг
+			*Далее:
+			Пробный 300тг 
+			Урок час 300тг
+			Закрытая оплата с пробного урока 500тг
+			*Так же дальше вас ждет ряд приятных бонусов при активной и качественной отдаче свoему делу!
+
+			Если вас все устраивает, то перейдем к тесту! Не переживайте, вопросов всего 50. Это тестирование необходимо для директора образовательной программы по определению уровня. Вы готовы?`
+
+		},
+		mounted(){
+			this.checkDevice();
+		},
+		async mounted(){
+			document.getElementById('textarea').focus()
+			
+			// window.onbeforeunload = function(e) { e.preventDefault(); return 'Вы уверены что хотите покинуть страницу?' }
+
+			this.test = (await axios.post('/getTest', {})).data
+			this.say(`Здравствуйте! Меня зовут Смарти. 
+				Давайте пройдемся по самым основным пунктам нашей анкеты. 
+				Если захотите вернуться и ответить иначе, напишите "Назад". 
+				Итак, начнем. Назовите ваше имя и фамилию.`)
+			console.log(this.test)
+		},
+		watch: {
+			messages: function() { this.scrollDown() }
+		},
+		methods:{
+			checkDevice(){
+				if(/Android|IPhone|Windows Phone/i.test(navigator.userAgent)) this.phone = true;
+				else this.phone = false;
+				console.log(this.phone)
+			},
+			addDocument(event){
+				if(this.counter == 3) {				
+					let file = event.target.files[0]
+					this.sendFile(file, (res, stat) => {
+						this.resume = res.name
+						this.messages.push({type: 2, position: 1, file: event.target.files[0].name, href: res.name})
+						this.counter++
+						this.botMessage()
+					})
+				}
+			},
+			botMessage(){
+				switch(this.counter) {
+					case -6:
+						this.say('Извините данный email уже используется преподавателем Smartchat. Попробуйте другой.')
+						this.counter = 2
+					break;
+					case -5:
+						this.say('Извините данный номер уже используется преподавателем Smartchat. Попробуйте другой.')
+						this.counter = 1
+					break;
+					case -4: 
+						this.say('Я не понимаю. Вы должны рассказать о себе в аудио формате')
+						this.counter = 4
+					break
+					case -3: 
+						this.say('Я не понимаю. Вы должны загрузить резюме или нажмите "У меня нет резюме"')
+						this.counter = 3
+					break
+					case -2:
+						this.say('Вы ввели неверный email. Попробуйте еще.')					
+						this.counter = 2
+					break
+					case -1: 
+						this.say('Вы ввели неверный телефон. Попробуйте еще.')						
+						this.counter = 1
+					break; 
+					case 0: 	this.say('Как вас зовут?'); 											break;
+					case 1: 	this.say('Какой у вас номер телефона? (87472221144 / +77472221144)'); 	break;
+					case 2: 	this.say('Ваша электронная почта?'); 									break;
+					case 3: 
+						this.say('Если у вас есть резюме - загрузите его.\n') 
+						this.messages.push({ type: 5, button: 1 })
+					break;
+					case 4: 	
+						this.messages.push({ type: 6, title: 'Отлично! Теперь расскажите о себе, используя аудио запись.'})
+					break;
+					case 5: this.askQuestion(); break;
+					case 6: this.say('Спасибо, мы с вами свяжемся!'); break;
+				}
+			},
+			async userMessage() {
+				if(this.waitPasword) {
+					let res = await axios.post('/authorize', {password: this.text})
+					
+					if(res.status == 200) {
+						this.say('Красавчик! Сейчас я редиректну тебя')
+						setTimeout( () => {
+							top.location.href = '/dos'
+						}, 0)
+					}
+					else {
+						this.waitPasword = false
+						setTimeout( () => {
+							this.say('ты ошибся')
+						}, 0)
+					}
+					return
+				}
+				switch(this.counter) {
+					case 0: 
+						this.name = this.text
+						this.text = 'Меня зовут ' + this.text
+						this.counter++ 
+						break
+					case 1:
+						this.phone = this.text
+						let phone = await this.validPhone()
+						if(!phone) this.counter = -1 
+						else this.counter++
+
+						if( ( await axios.post('/checkPhone', {phone: this.phone}) ).status != 200 ) this.counter = -5
+
+					break
+					case 2:
+						this.email = this.text
+						let valid = await this.validEmail()
+						if(!valid) this.counter = -2
+						else this.counter++
+
+						if( ( await axios.post('/checkEmail', {email: this.email}) ).status != 200 ) this.counter = -6
+
+					break
+					case 3:
+						this.counter = -3
+					break
+					case 4: 
+						this.counter = -4
+					break
+					case 5: 
+						if(this.question > -1) this.answers.push(this.text[0])
+						this.question++
+					break;
+
+				}
+			},
+			specialCheck() {
+				switch (this.text.toLowerCase()) {
+					case 'я админ': 
+						this.text = ''
+
+						if(document.cookie.indexOf('DOS')>-1) 
+							top.location.href = '/dos'
+						else {
+							this.say('Привет, админ! Какой пароль?')
+							this.waitPasword = 1
+						}
+
+						return 1
+					case 'я преподаватель':
+						top.location.href = 'https://cabinet.smartchat.su'
+						return 1
+					case 'я студент':
+						top.location.href = 'https://web.smartchat.su'
+						return 1
+					case 'назад':
+						this.text = ''
+						if(this.counter > 0 && this.question == -1) this.counter--
+						if(this.question > -1) this.question--
+						this.botMessage()
+						return 1
+					case 'restart':
+						this.counter = 0
+						this.question = -1
+						this.messages = []
+						this.answers = []
+						this.say('Здравствуйте! Давайте знакомиться. Меня зовут Смарти. Назовите ваше имя и фамилию.')
+						this.text = ''
+						return 1
+					case 'test':
+						this.counter = 5
+						this.question = -1
+						this.messages = []
+						this.say('Начинаем тест?')
+						this.text = ''
+						return 1
+					case 'сначала':
+						this.counter = 0
+						this.question = -1
+						this.messages = []
+						this.answers = []
+						this.say('Здравствуйте! Давайте знакомиться. Меня зовут Смарти. Назовите ваше имя и фамилию.')
+						this.text = ''
+						return 1
+					case 'clear':
+						this.messages = []
+						this.text = ''
+						return 1
+					case 'exit':
+						top.location.href = '/' 
+						return 1
+					case 'list':
+						top.location.href = '/dos' 
+						return 1 
+				}
+				return 0
+			},
+			answerQuestion(answer, question) {
+				if(question.index == this.question) {
+					this.answers.push(this.leterFromNum(answer))
+					this.messages.push({ name: this.name, type: 1, position: 1, text: this.leterFromNum(answer).toUpperCase() })
+					this.question++
+					this.botMessage()
+				}
+			},
+			askQuestion() {
+				if(this.question > -1) {
+					if(this.question == this.test.length) {
+						this.question = -1
+						this.counter++
+						this.finish()
+						return
+					}
+
+					let question = this.test[this.question]
+					let variants = question.variants
+					variants = variants.split('%%')
+					let obj = {
+						index: this.question,
+						type: 10, 
+						question: question.question, 
+						answers: variants,
+						
+						audio: question.audio? {
+							player: new Audio(),
+							time: '00:00'
+						}: null,
+						progress: 0,
+						isplaying: false
+					
+					}
+
+					question.audio ? obj.audio.player.src = '/common/testAudio/' + question.audio : null
+					this.messages.push(obj)
+				}
+			},
+			startAudio(e){
+				if(this.counter == 4) {
+					if(this.animation) 	this.stopRecording()
+					else 				this.startRecording()
+				}
+			},
+			startRecording() {
+				let that = this
+				var AudioContext = window.AudioContext || window.webkitAudioContext
+				let audioContext = new AudioContext()
+				navigator.mediaDevices.getUserMedia({ audio: true, video:false }).then(function(stream) {
+
+					that.stream = stream
+					let input = audioContext.createMediaStreamSource(stream)
+					that.rec = new Recorder(input,{numChannels:1})
+					that.rec.record()
+
+				})
+			},
+			stopRecording() {
+				this.rec.stop()
+				this.stream.getAudioTracks()[0].stop()
+				this.rec.exportWAV((file) => {
+					this.sendFile(file, (res, stat) => {
+
+						this.audio = res.name
+						this.messages.push({type: 3, isplaying: false, progress: 0, position: 1, audio: {href: res.name, time: '00:00', blob: file}})
+						this.counter++
+						this.say(this.beforeTest)
+						this.botMessage()
+					
+					})
+				})
+			},
+			checkResume(e) {
+				if(this.counter != 3) 
+					e.preventDefault()
+			},
+			noResume() {
+				if(this.counter == 3) {
+					this.resume = 'blank'
+					this.counter++
+					this.botMessage()
+				}
+			},
+			validPhone() {
+
+				if(this.phone[0] == '8' ) {
+					let part = this.phone.substring(1)
+
+					for(i=0; i<part.length; i++) 
+						if(!Number(part[i]) && Number(part[i]) != 0) return false
+
+					if(part.length != 10) return false
+					this.phone = '+7' + part
+				
+					return true
+				}
+
+				if(this.phone[0] == '+' && this.phone[1] == '7') {
+					let part = this.phone.substring(2)
+
+
+					for(i=0; i<part.length; i++) 
+						if(!Number(part[i]) && Number(part[i]) != 0) return false
+						
+					if(part.length != 10) return false
+				
+					return true
+				}
+				
+				return false
+			},
+			validEmail() {
+				var r = /^[\w\.\d-_]+@[\w\.\d-_]+\.\w{2,4}$/i
+				return r.test(this.email)
+			},
+			say(text, type) {
+				if(!type) type = 1
+				this.messages.push({name: 'Смарти', position: 0, type, text})
+			},
+			async sendMessage() {
+				if(!this.text.length) return
+				if(await this.specialCheck()) return
+
+				await this.userMessage()
+				this.messages.push({ name: this.name, type: 1, position: 1, text: this.text })
+				this.text = ''
+				setTimeout(() => {
+					this.botMessage()
+				}, 0)
+			},
+			checkEnter(event){	
+
+				if(this.waitPasword) {
+					this.password += this.text[this.text.length-1]
+					this.text[this.text.length-1] = '*'
+					console.log(this.text[this.text.length-1])
+				}
+
+				if(!event.ctrlKey && event.keyCode == 13)  {
+					event.preventDefault()
+					this.text = this.text.trim()
+				}
+				if(event.keyCode == 13){
+					if(event.ctrlKey) this.text += '\n'
+					else this.sendMessage()
+				}
+
+			},
+			getAudioTime(seconds){
+				let hours = 0
+				let minuts = 0
+				if(seconds >= 3600)
+					while(seconds >= 3600){
+					  hours++
+					  seconds -= 3600
+					}
+				if(seconds >= 60)
+					while(seconds >= 60){
+					  minuts++
+					  seconds -= 60
+					}
+				if(hours == 0) hours = ''
+				else {
+				if(hours < 10) hours = '0' + hours
+					hours += ':'
+				}
+				if(minuts < 10) minuts = '0' + minuts
+				if(seconds < 10) seconds = '0' + seconds
+				return hours + minuts + ':' + seconds
+			},
+			sendFile(file, callback) {
+				let formData = new FormData()
+				formData.append("uploadFile", file)
+				
+				let req = new XMLHttpRequest()
+
+				req.onreadystatechange = function(){
+					if(req.readyState == 4 ){
+						let res = {}
+						try {
+							res = JSON.parse(req.response)
+						} catch(err) {
+							// console.log(err)
+						}
+						callback(res, req.status)					
+					}
+				}
+
+				req.open('POST', '/sendFile')
+				req.send(formData)
+			},
+			scrollDown(){
+				setTimeout(()=>{
+					this.$refs.body.scrollTo({top: this.$refs.body.scrollHeight})
+				}, 200)
+			},
+			playAudio(i) {
+				if(!this.messages[i].isplaying) {
+			
+					for(j=0; j<this.messages.length; j++)
+						if(this.messages[j].type == 3 || (this.messages[j].type == 10 && this.messages[j].audio)) {
+							console.log(this.messages[j])
+							if(this.messages[j].audio.player) {
+								this.messages[j].isplaying = false
+								this.messages[j].audio.player.pause()
+							}
+					}
+					if(this.messages[i].audio.blob && this.messages[i].type == 3){
+						let url = URL.createObjectURL(this.messages[i].audio.blob)
+						this.messages[i].audio.player = new Audio()
+						this.messages[i].audio.player.src = url
+						this.messages[i].isplaying = true
+					} else if (this.messages[i].type == 10) {
+						this.messages[i].isplaying = true
+					}
+
+					this.messages[i].audio.player.ontimeupdate = (e) => {
+
+						this.messages[i].progress = Math.ceil(this.messages[i].audio.player.currentTime/this.messages[i].audio.player.duration * 100)
+
+						this.messages[i].audio.time = this.getAudioTime(Math.ceil(this.messages[i].audio.player.currentTime))
+
+						if(this.messages[i].audio.player.currentTime == this.messages[i].audio.player.duration)
+							this.messages[i].isplaying = false
+					}
+
+					this.messages[i].audio.player.play()
+				} 
+				else 
+					for(j=0; j<this.messages.length; j++)
+						if(this.messages[j].type == 3 || (this.messages[j].type == 10 && this.messages[j].audio)) 
+							if(this.messages[j].audio.player && this.messages[j].isplaying == true) {
+								this.messages[j].isplaying = false
+								this.messages[j].audio.player.pause()
+							}
+			},
+			changeProgress(event, i) {
+				if(this.messages[i].isplaying) {
+					let progress
+					for(j=0; j<event.path.length; j++) 
+						if(event.path[j].classList.contains('audio-length')) {
+							progress = event.path[j]
+							break
+						}
+					this.messages[i].audio.player.currentTime = Math.ceil(this.messages[i].audio.player.duration) / (progress.clientWidth / event.offsetX)
+				}
+			},
+			async finish() {
+				let firstname 	= this.name.split(' ')[0] || ' '
+				let lastname 	= this.name.split(' ')[1] || ' '
+				let res = await axios.post('/sendData', {
+					firstname,
+					lastname,
+					email: this.email,
+					phone: this.phone,
+					answers: this.answers,
+					resume: this.resume,
+					audioResume: this.audio
+				})
+
+				this.say(`Поздравляю вы, наконец, закончили тест! Вы ответили верно на ${res.data.count} вопросов из ${this.test.length}! Мы вам позвоним.`)
+			},
+			leterFromNum(i) {
+				switch(i) {
+					case 0: return 'a'
+					case 1: return 'b'
+					case 2: return 'c'
+					case 3: return 'd'
+					case 4: return 'e'
+					case 5: return 'f'
+					case 6: return 'g'
+					case 7: return 'h'
+					case 8: return 'i'
+					case 9: return 'j'
+					case 10: return 'k'
+					case 11: return 'l'
+					case 12: return 'm'
+					case 13: return 'n'
+					case 14: return 'o'
+					case 15: return 'p'
+				}
+			}
+		}
+	}) 
+</script>

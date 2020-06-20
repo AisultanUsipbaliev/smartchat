@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<link rel="icon" type="img/png" href="/mobile/img/logo.png">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="/mobile/css/test.css?ver=<%=version%>">
+	<%include ./../parts/metrica%>
+</head>
+<body>
+<%include ./../parts/header%>
+	<div class = 'testBlock'>
+		<div class="testTitle"><span>Тест: </span>
+			<button class = 'send_result home-work__button' onclick="sendTester()">Отправить</button>
+			<a class = 'test_button home-work__button' href="/tests">Отмена</a>
+		</div>
+		<div class="testBody" id="testBody"></div>
+	</div>
+<script>	
+window.test_id;
+test_id = top.location.href.split('/');
+test_id = test_id[test_id.length-1];
+window.layout = document.getElementById('testBody');
+
+POST('/test', `method=GET-TEST&&test_id=${test_id}`, function(res) {
+	for (var i = 0; i < res.data.length; i++) 
+	{
+		res.data[i].variants = res.data[i].variants.split('%%');
+		let answers = createAnswer(res.data[i].variants, res.data[i].quest_id);
+		window.layout.innerHTML +=
+			`<div class="test_question" id="${res.data[i].quest_id}">
+			 <div class = 'questTitle'>${res.data[i].quest_title}</div>${answers}</div>`
+	}
+});
+
+function createAnswer(variants, quest_id) {
+	let result = '';
+	for(var j = 0; j < variants.length-1; j++) {
+		result += `<label class="test_answer" for="${quest_id}${j}">
+						<input type = 'radio' class = 'active' name = '${quest_id}' id = '${quest_id}${j}'>
+						<span>${variants[j]}</span>
+					</label>`
+	}
+	return result;
+}
+
+//Функция проверяет тест и отпровляет на сервер
+function sendTester()
+{
+	if(validateTester())
+	{
+		let question = [];
+		let answers = [];
+		let correct = 0;
+		let resultbody = [];
+		let obj = {};
+
+		for (var i = 0; i < layout.children.length; i++) 
+		{
+			for (var j = 1; j < layout.children[i].children.length; j++) 
+			{
+				answers[j-1] = layout.children[i].children[j].children[1].innerHTML;
+				if(layout.children[i].children[j].children[0].checked) correct = getChar(j);
+	 		}
+
+			obj = 
+			{
+				quest_id: layout.children[i].id,
+				correct: correct
+			}
+
+			resultbody[i] = obj;
+			correct = [];
+	 	}
+	 	
+	 	resultbody = JSON.stringify(resultbody);
+		POST('/test', `method=RESULT&&test_id=${test_id}&&result=${resultbody}`, (res, status)=>
+		{
+			if(status === 200){
+				top.location.href = `/testresult/${test_id}`;
+			}else{
+				console.log(res);
+			}
+		});
+
+	}
+	else
+	{
+		let testBody = document.getElementById('testBody');
+		for (var i = 0; i < testBody.children.length; i++) 
+			if (testBody.children[i].children[1].style.backgroundColor == 'linen') 
+			{
+				document.getElementById(`${testBody.children[i].id}`).scrollIntoView();
+				break;
+			}
+	}
+}
+
+//Функция проверяет отвечены ли все вопросы
+function validateTester()
+{
+	let layout1 = layout.children;
+	let answers = [];
+	let check = true;
+
+	for (var i = 0; i < layout1.length; i++) {
+		for (var j = 1; j < layout1[i].children.length; j++) {
+			if(layout1[i].children[j].children[0].checked){	
+				for (var q = 1; q < layout1[i].children.length; q++) {
+					if(layout1[i].children[q].children[0].checked)
+					layout1[i].children[q].style.background = '#E5ECF4';
+					else layout1[i].children[q].style.background = 'white';	
+				}			
+				answers[i] = layout1[i].children[j].children[0];
+				j = layout1[i].children.length;
+				check = true;
+			}else{
+				for (var q = 1; q < layout1[i].children.length; q++) {
+					layout1[i].children[q].style.background = 'linen';	
+					check = false;
+				}
+			}
+		}
+	}
+	for (var i = 0; i < layout1.length; i++) {
+		for (var q = 1; q < layout1[i].children.length; q++) {
+			if(layout1[i].children[q].style.background == 'linen'){
+				check = false;
+			}
+		}
+	}
+	return check;
+};  
+
+// Функция возвращает символ 
+	function getChar(i) 
+	{
+		switch(i)
+		{
+			case 1: return 'a';
+			case 2: return 'b';
+			case 3: return 'c';
+			case 4: return 'd';
+			case 5: return 'e';
+			case 6: return 'f';
+			case 7: return 'g';
+			case 8: return 'h';
+			case 9: return 'i';
+			case 10: return 'j';
+			case 11: return 'k';
+			case 12: return 'l';
+			case 13: return 'm';
+			case 14: return 'n';
+			case 15: return 'o';
+			case 16: return 'p';
+			case 17: return 'q';
+			case 18: return 'r';
+			case 19: return 's';
+			case 20: return 't';
+			case 21: return 'u';
+			case 22: return 'v';
+			case 23: return 'w';
+			case 24: return 'x';
+			case 25: return 'y';
+			default: return 'z';
+		}
+	}
+</script>
+</body>
+</html>

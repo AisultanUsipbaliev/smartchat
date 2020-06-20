@@ -1,0 +1,209 @@
+.res_result_block{
+    margin-top: 15px;
+	width: 100%;
+    display: flex;
+    justify-content: space-between;
+    height: calc(100% - 70px);
+}
+.res_all_tests{
+    width: 300px;
+    background-color: #fff;
+    height: 100%;
+    box-shadow: 0 0 20px -2px lightgray;
+    overflow: hidden;
+    border-radius: 10px;
+}
+.res_all_tests_head{
+    display: flex;
+    height: 50px;
+    font-weight: 500;
+    color: #1e83d4;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid lightgray;
+}
+.res_all_tests_head p{
+    margin: 0;
+}
+.current{
+    background-color: #e6e6e6;
+}
+.res_test_name{
+    text-align: center;
+    border-bottom: 1px solid lightgray;
+    font-size: 14px;
+    margin: 0;
+    margin-left: 5px;
+    padding: 10px;
+    cursor: pointer;
+}
+.res_test_name:hover{
+    background-color: #e6e6e6;
+}
+.res_all_tests_body{
+    overflow: hidden;
+    height: calc(100% - 50px);
+    overflow-y: scroll;
+}
+.res_test_content{
+    box-shadow: 0 0 20px -2px lightgray;
+    width: calc(100% - 320px);
+    height: 100%;
+    margin-left: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+.res_test_name_head{
+    height: 50px;
+    width: 100%;
+    margin: 0 auto;
+    border-bottom: 1px solid lightgray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.res_answer_block{
+    border-bottom: 1px solid lightgray;
+    padding: 10px 5%;
+    box-sizing: border-box;
+}
+.res_test_check_body{
+    height: calc(100% - 150px);
+    overflow: hidden;
+    overflow-y: scroll;
+    margin: 0 auto;
+    width: 100%;
+}
+.res_footer_check_test{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+.res_answer_send{
+    background: #1e83d4;
+    cursor: pointer;
+    border: none;
+    border-radius: 50px;
+    padding: 5px 10px;
+    font-size: 16px;
+    color: white;
+}
+.res_question_row{
+    padding: 5px;
+    font-size: 14px;
+    position: relative;
+}
+.res_question_row label{
+    display: block;
+}
+.res_question_row input{
+    position: absolute;
+}
+.res_wrong_answer{
+    color: rgb(255,0,0);
+    border-bottom: 1px solid  rgb(255,0,0);
+    font-weight: 600;
+}
+.res_right_answer{
+    color: rgb(71, 177, 71);
+    border-bottom: 1px solid  rgb(71, 177, 71);
+    font-weight: 600;
+}
+.res_wt_answer{
+    color: rgb(71, 177, 71);
+    border-bottom: 1px solid  rgb(71, 177, 71);
+    font-weight: 600;
+}
+.res_wt_answer label, .wrong_answer label, .right_answer label{
+    width: calc(100% - 120px);
+    display: block;
+}
+.res_wrong_answer:before{
+    font-weight: 600;
+    content: 'Неправильно!';
+    position: absolute;
+    right: 10px;
+    font-size: 12px;
+    top: 7px;
+}
+.res_right_answer:before{
+    font-weight: 600;
+    content: 'Правильно!';
+    position: absolute;
+    right: 10px;
+    font-size: 12px;
+    top: 7px;
+}
+.res_wt_answer:before{
+    font-weight: 600;
+    content: 'Правильный ответ!';
+    position: absolute;
+    right: 10px;
+    font-size: 12px;
+    top: 7px;
+}
+.res_test_result{
+    height: 50px;
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 0 auto;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+}
+.res_result_text{
+    font-size: 14px;
+}
+.res_blue_result{
+    color: #1e83d4;
+    font-weight: 600;
+}
+.res_answer_name{
+    font-weight: 600;
+    color: #1e83d4;
+    font-size: 18px;
+}
+.res_confirm{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,.5);
+}
+.res_modal_confirm{
+    padding: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+    text-align: center;
+}
+.res_modal_confirm p{
+    margin: 0 0 10px;
+}
+.res_btn{
+	background-color: #1e83d4;
+	border-radius: 10px;
+    padding: 5px 12px;
+    cursor: pointer;
+	margin: 0 5px;
+	font-size: 16px;
+    color: white;
+    border: none;
+}
+.res_current {
+    background: #d3d3d39c;
+}
+.res_question{
+    position: relative;
+    display: flex;
+    font-size: 18px;
+    margin-bottom: 5px;
+    padding-top: 2px;
+    padding-bottom: 5px;
+}

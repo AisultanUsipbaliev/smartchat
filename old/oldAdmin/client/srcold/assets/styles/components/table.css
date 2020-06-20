@@ -1,0 +1,124 @@
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+.table th,
+.table td {
+  padding: 0.75rem;
+  vertical-align: top;
+  border-top: 1px solid #dee2e6;
+}
+.table thead th {
+  vertical-align: bottom;
+  border-bottom: 2px solid #dee2e6;
+  font-weight: 600;
+}
+.table tbody + tbody {
+  border-top: 2px solid #dee2e6;
+}
+.table .table {
+  background-color: #FFF;
+}
+.table-sm th,
+.table-sm td {
+  padding: 0.3rem;
+}
+.table-bordered {
+  border: 1px solid #dee2e6;
+}
+.table-bordered th,
+.table-bordered td {
+  border: 1px solid #dee2e6;
+}
+.table-bordered thead th,
+.table-bordered thead td {
+  border-bottom-width: 2px;
+}
+.table-borderless th,
+.table-borderless td,
+.table-borderless thead th,
+.table-borderless tbody + tbody {
+  border: 0;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+.table-hover tbody tr:hover {
+  background-color: rgba(0, 0, 0, 0.075);
+}
+.table tbody tr td, .table tbody th td {
+    vertical-align: middle;
+    white-space: nowrap;
+}
+.table-responsive {
+  display: block;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+.table-responsive > .table-bordered {
+  border: 0;
+}
+.table-filter-block {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 20px;
+}
+.table-filter-block .row {
+  margin: 0;
+  width: 100%;
+}
+.table-filter-block .row div {
+  padding: 0;
+}
+.table__btn-container button {
+  background-color: #fff;
+  color: #777;
+  border-color: #eee;
+}
+.table__sort-icons{
+  width: 23px;
+  height: 19px;
+  padding: 2px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  position: relative;
+}
+.table__sort-icons svg{
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+.table__link {
+  color: teal;
+  text-decoration: underline;
+}
+.table-footer-btn-block {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  /*height: 100%;*/
+}
+.table-footer-btn-block button {
+  background-color: #fff;
+  color: #777;
+  border-color: #dee2e6;
+  font-weight: 500;
+  height: 2.25rem;
+}
+.table__sort {
+  width: 100%;
+  white-space: nowrap;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.table_select {
+  min-width: 65px;
+}

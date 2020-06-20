@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SmartChat</title>
+	<meta charset="utf-8">
+	<link rel="icon" type="img/png" href="static/img/logo.png">
+	<link rel="stylesheet" type="text/css" href="static/style/graph&reqs.css?ver=<%=version%>">
+</head>
+<body>
+	<% include ../partial/header %>
+	<div class="wrapper">
+		<% include ../partial/menu %>
+		<div class="profile">
+			<div class="container gr_container">
+				<h2>Рабочее время</h2>
+				<table class="table_grafik">
+					<tr id = 'tr1'>
+						<td>
+							<span class="day_in_line">
+								Понедельник
+							</span>
+						</td>
+						<td>
+							<select class="jm_select">
+								<option>нет</option>
+							</select>
+						</td>
+						<td>
+							<select class="jm_select">
+								<option>нет</option>
+							</select>
+						</td>
+					</tr>
+					<tr id = 'tr2'>
+						<td>
+							<span class="day_in_line">
+								Вторник
+							</span>
+						</td>
+						<td>
+							<select class="jm_select">
+								<option>нет</option>
+							</select>
+						</td>
+						<td>
+							<select class="jm_select">
+								<option>нет</option>
+							</select>
+						</td>
+					</tr>
+					<tr id = 'tr3'>
+						<td>
+							<span class="day_in_line">
+								Среда
+							</span>
+						</td>
+						<td>
+							<select class="jm_select">
+								<option>нет</option>
+							</select>
+						</td>
+						<td>
+							<select class="jm_select">
+								<option>нет</option>
+							</select>
+						</td>
+					</tr>
+					<tr id = 'tr4'>
+						<td>
+							<span class="day_in_line">
+								Четверг
+							</span>
+						</td>
+						<td>
+							<select class="jm_select">
+								<option>нет</option>
+							</select>
+						</td>
+						<td>
+							<select class="jm_select">
+								<option>нет</option>
+							</select>
+						</td>
+					</tr>
+					<tr id = 'tr5'>
+						<td>
+							<span class="day_in_line">
+								Пятница
+							</span>
+						</td>
+						<td>
+							<select class="jm_select">
+								<option>нет</option>
+							</select>
+						</td>
+						<td>
+							<select class="jm_select">
+								<option>нет</option>
+							</select>
+						</td>
+					</tr>
+					<tr id = 'tr6'>
+						<td>
+							<span class="day_in_line">
+								Суббота
+							</span>
+						</td>
+						<td>
+							<select class="jm_select">
+								<option>нет</option>
+							</select>
+						</td>
+						<td>
+							<select class="jm_select">
+								<option>нет</option>
+							</select>
+						</td>
+					</tr>
+					<tr id = 'tr7'>
+						<td>
+							<span class="day_in_line">
+								Воскресенье
+							</span>
+						</td>
+						<td>
+							<select class="jm_select">
+								<option>нет</option>
+							</select>
+						</td>
+						<td>
+							<select class="jm_select">
+								<option>нет</option>
+							</select>
+						</td>
+					</tr>
+				</table>
+				<button class="edit_btn" id = 'save' onclick="saveGraph()">Сохранить</button>
+			</div>
+		</div>
+	</div>
+</body>
+<script src="static/js/functions.js?ver=<%=version%>" type="text/javascript"></script>
+<script src="static/js/cabinet/graph.js?ver=<%=version%>" type="text/javascript"></script>
+</html>

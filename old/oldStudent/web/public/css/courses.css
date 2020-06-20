@@ -1,0 +1,264 @@
+/***************layout*******************/
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+.CourseState
+{
+	margin: 4vh 0.5vw;
+	position: relative;
+	/*height: 90vh;*/
+	overflow: hidden;
+	font-family: 'Montserrat', sans-serif;
+	/*z-index: 998;*/
+}
+/************sceleton**************/
+.CourseBlock{
+	margin: 1vh 3vh 3vh .3vh; 
+	float: left;
+	text-align: center;
+	width: 260px;
+	background: transparent;
+	border-radius: 5px;
+	position: relative;
+	overflow-x: hidden;
+	overflow-y: hidden;
+}
+.CourseBlock:hover{
+	transition: .3s;
+	-webkit-box-shadow: 3px 3px 12px 0px rgba(50, 50, 50, 0.75);
+	-moz-box-shadow:    3px 3px 12px 0px rgba(50, 50, 50, 0.75);
+	box-shadow:         3px 3px 12px 0px rgba(50, 50, 50, 0.75);
+}
+.CourseHead{
+	padding: 20px 0!important;
+	font-size: 16px;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	background-color: #e6edf4;
+    border-bottom: 1px solid #dadada;
+}
+.CourseBody
+{
+	background-color: white;
+	text-align: center;
+	height: 275px;
+	border-bottom-right-radius: 5px!important;
+	border-bottom-left-radius: 5px!important;
+}
+
+.owerflow
+{
+	overflow-y: auto;
+	height: calc(100% - 50px);
+	padding: 0 5px 0 5px;
+}
+
+.owerflow div
+{
+	margin-top: 10px;
+}
+
+
+/***********scroll***********/
+.owerflow::-webkit-scrollbar{
+width: 0vh;
+}
+
+.owerflow::-webkit-scrollbar-track {
+background-color: transparent;
+}
+
+.owerflow::-webkit-scrollbar-thumb {
+-webkit-border-radius: 1vh;
+-webkit-height: 0vh;
+border-radius: 0vh;
+}
+/************head************/
+.NameCourse
+{
+	font-size:1.6rem;
+	font-weight: bold;
+}
+
+/*************body***********/
+
+.CostCourse
+{
+	font-size: .8rem;
+	color: rgba(5,120,30,0.8);
+	font-weight: bold;
+}
+.TitleCourse
+{
+	word-wrap: break-word;
+	color: rgba(72,72,72,1);
+	font-size: 2.2vh;
+}
+.LessonCourse
+{
+	font-size: 1rem;
+}
+.TypeCourse
+{
+	font-weight: bold;
+	font-size: 1.5rem;
+}
+
+.UnlimCourse
+{
+	text-transform: lowercase;
+	color: rgba(180, 60, 60, 1);
+}
+.PerehodCourse
+{	
+	margin-bottom: 0;
+	border:  none;
+	transition: 0.4s;
+	width: 100%;
+	font-size: inherit;
+	cursor: pointer;
+	margin-top: 1vh;
+	height: 5.5vh;
+    outline: none;
+    cursor: pointer;
+    color: black;
+	background: #E5ECF4;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+.PerehodCourse:hover
+{
+    transition: .3s ease;
+    background-color: #BED7F3;
+}
+.disabled{
+	opacity: .9!important;
+}
+
+.haveCourse{
+	width: 100%; 
+	height: 100%;
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	flex-flow: column nowrap;
+	justify-content: space-around;
+	text-align: center;
+	overflow: hidden;
+	box-sizing: border-box;
+	padding: 0 5%;
+}
+.haveCourse h3{
+	display: block;
+	font-size:  100%;
+	font-size: 2.2vh;
+}
+.haveCourse h2{
+	display: block;
+	font-size:  100%;
+	font-size: 2.35vh;
+}
+
+
+
+
+.nopeCourse{
+	text-align: center;
+	width: 50%;
+	font-size: 2.5rem;
+	border-bottom: 0.5vh solid#a1c0e0;
+	margin-left: 25%;
+	color: rgba(72,72,72,1);
+	border-radius: 2vh;
+	margin-top:15%;
+	background-color: transparent;
+	padding: 2.5vh 2vw;
+}
+
+.twoButton__container {
+	display: flex;
+	width: 100%;
+	height: 100%;
+}
+.twoButton {
+display: flex;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    /* display: inline-block; */
+    padding: 1vh 3vw;
+    margin: 2.5vh 1vw;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #85a4af;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    color: #4b717d;
+    transition: .2s ease-in-out;
+    background: #fff;
+    font-size: 2vh;
+}
+.twoButton:before {
+  content: "";
+  background: linear-gradient(90deg, rgba(255,255,255,.1), rgba(255,255,255,.5));
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top: -8px;
+  left: -75px;
+  transform: skewX(-45deg);
+}
+.twoButton:hover {
+    background: #5ba3ea;
+    color: #fff;
+}
+.twoButton:hover:before {
+  left: 150px;
+  transition: .5s ease-in-out;
+}
+.sale{
+	width: 35%;
+	position: absolute;
+	bottom: 5.5vh;
+	right: 0;
+}
+
+.button-container {
+	display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.haveCourse-h2 {
+	margin: 0;
+	margin-top: 4%;
+}
+
+.haveCourse-h3 {
+	margin: 0;
+}
+
+.twoButton-delete {
+	width: 35%;
+	display: flex;
+	text-align: center;
+	justify-content: center;
+}
+
+@media screen and (max-width: 800px) {
+  .haveCourse h3 {
+    font-size: 1.6vh;
+  }  
+  .haveCourse h2 {
+    font-size: 1.7vh;
+  }
+  .twoButton {
+    font-size: 1vh;
+   	margin: .5vh 1vw;
+  }
+}
+
+.prevCostCourse{
+	color: red;
+	font-family: 'Montserrat', sans-serif;
+	font-size: .8rem;
+}

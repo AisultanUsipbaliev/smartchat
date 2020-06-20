@@ -1,0 +1,390 @@
+/*.blocks{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 89%;
+}
+.blocks2{
+  display: flex;
+  justify-content: left;
+  width: 100%;
+  height: 89%;
+}
+.blocks_first_visit{
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+}
+.info_profile{
+  width: 65%;
+  height: 100%;
+  background: white;
+  display: flex;
+  border-radius: 10px;
+  box-shadow: 0 0 40px -10px;
+  padding: 10px 0;
+  box-sizing: border-box;
+}
+.info_profile_first{
+  height: auto;
+  width: auto;
+  background-color: #fff;
+  display: flex;
+  border-radius: 10px;
+  padding: 10px 0;
+  box-sizing: border-box;
+  box-shadow: 0 0 40px -10px;
+}
+.about_user{
+  width: 40%;
+  height: 100%;
+}
+.about_user_first{
+  width: auto;
+  height: auto;
+  padding: 0 10px;
+  border: none;
+}
+.level_title{
+  margin: 0;
+    text-align: center;
+    color: #1e83d4;
+    font-weight: 600;
+    font-size: 20px;
+    border-bottom: 1px solid lightgray;
+    padding: 0 0 10px;
+    width: 90%;
+    margin: 0 auto;
+}
+.about_user_block{
+  text-align: center;
+  padding: 20px 0;
+  border-right: 1px solid lightgray;
+  height: 80%;
+}
+.about_user_block_first{
+  text-align: center;
+  padding: 20px 0; 
+}
+.profile{
+  background-color: #fff;
+}
+.profile_avatar{
+  height: 120px;
+  border-radius: 50%;
+}
+.profile_name, .age, .number{
+  margin: 10px 0;
+}
+.end_courses{
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  color: #1e83d4;
+  padding: 5px 0;
+  width: 90%;
+  margin: 10px auto;
+}
+.end_course_title{
+  background-color: #8ec1e9;
+  width: 80%;
+  margin: 5px auto;
+  border-radius: 10px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+}
+.end_course_title:hover{
+  color: #fff;
+  transition: .2s;
+}
+.downloadIcon{
+  margin: 10px auto;
+}
+.downloadType{
+  margin: 10px auto;
+}
+.scroll_downloads{
+  height: 100px;
+  overflow-x: scroll;
+}
+.sign_up{
+  border-radius: 10px;
+  border: 1px solid #1e83d4;
+  width: 90%;
+  padding: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  box-sizing: border-box;
+  color: #333;
+  font-family: 'Arsenal', bold;
+  background-color: #fff;
+}
+.sign_up:hover{
+  border: 1px solid #1e83d4;
+  background-color: #1e83d4;
+  color: #fff;
+  transition: .2s;
+}
+.about_process{
+  width: 60%;
+  height: 100%;
+}
+.schedule{
+  width: 30%;
+  height: 100%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 40px -10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+.faq{
+  width: 30%;
+  height: 100%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 40px -10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  margin-left: 70px;
+}
+
+.faq_w65{
+  width: 55%;
+  height: 100%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 40px -10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden; 
+}
+.first_visit_faq{
+  width: 65%;
+  height: 100%;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 40px -10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden; 
+}
+.info_process{
+  border-radius: 10px;
+    border: 1px solid #1e83d4;
+    width: 90%;
+    margin: 10px auto 5px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.course_name{
+  font-size: 16px;
+    margin: 0;
+    color: #7a8d95;
+    font-weight: 800;
+}
+.lessons_out{
+  font-weight: 600;
+    margin: 8px 0;
+}
+.teacher_name{
+  color: #333;
+  margin: 8px 0;
+}
+.about_course_inprocess{
+  margin: 8px 0 0;
+  color: #333;
+}
+.in_process{
+  height: 80%;
+}
+.feedback_process{
+  display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+.checkbox {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+  margin: 10px 0 0 20px;
+}
+.checkbox + label {
+  position: relative;
+  padding: 0 0 0 60px;
+  cursor: pointer;
+}
+.checkbox + label:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 45px;
+  height: 20px;
+  border-radius: 13px;
+  background: #fff;
+  box-shadow: 0 0 5px 1px gray;
+  transition: .2s;
+}
+.checkbox + label:after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  width: 15px;
+  height: 15px;
+  border-radius: 10px;
+  background: lightgray;
+  transition: .2s;
+}
+.checkbox:checked + label:before {
+  background: transparent;
+  box-shadow: 0 0 5px 1px green;
+}
+.checkbox:checked + label:after {
+  left: 26px;
+  background: #52c552;
+}
+.feedback{
+  padding: 0 5%;
+}
+.schedule_title{
+  padding: 12px 12px 12px 18px;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+}
+.schedule_title span{
+  font-size: 20px;
+  width: 100%;
+  text-align: center;
+}
+.schedule_body{
+  height: 100%;
+  overflow: hidden;
+}
+.first_visit_faq_body{
+ height: 100%;
+  overflow: hidden; 
+}
+.schedule_footer{
+  padding: 15px;
+    text-align: center;
+    border-top: 1px solid lightgray;
+    cursor: pointer;
+}
+.btn{
+  padding: 5px 20px;
+  background: transparent;
+  border-radius: 10px;
+  font-size: 16px;
+  border: 1px solid #1e83d4;
+  cursor: pointer;
+}
+.btn:hover{
+  background: #1e83d4;
+  color: white;
+}
+.homework_schedule{
+  border-top: 1px solid lightgray;
+  height: calc(20% - 1px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.faq_row_f{
+  border-top: 1px solid lightgray;
+  height: calc(20% - 1px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.task_title{
+  margin: 0;
+  padding: 8px 5px;
+  text-align: center;
+  font-size: 14px;  
+}
+.task_time{
+  margin: 0;
+  padding: 3px 12px;
+  color: #1e83d4;
+  font-size: 12px;
+}
+.save{
+  padding: 10px;
+  background-color: #b5b5b5;
+  margin: 0 auto;
+  border-radius: 10px;
+  border: 1px solid #b5b5b5;
+  box-sizing: border-box;
+  font-family: 'Arsenal', bold;
+}
+.saveCenter{
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+
+.info_profile1{
+  width: 25%;
+  height: 100%;
+  background: white;
+  display: flex;
+  border-radius: 10px;
+  box-shadow: 0 0 40px -10px;
+  padding: 10px 0;
+  box-sizing: border-box;
+}
+.about_user1{
+  width: 100%;
+  height: 100%;
+}
+.about_user_block1{
+  text-align: center;
+  padding: 20px 0;
+  height: 80%;
+}
+.about_process1{
+  width: 60%;
+  height: 100%;
+  display: none;
+}
+.info_profile2{
+  width: 25%;
+  height: 350px;
+  background: white;
+  display: flex;
+  border-radius: 10px;
+  box-shadow: 0 0 40px -10px;
+  padding: 10px 0;
+  box-sizing: border-box;
+}
+.about_user2{
+  width: 100%;
+  height: 100%;
+}
+.about_user_block2{
+  text-align: center;
+  padding: 20px 0;
+  height: 80%;
+}
+.end_courses2{
+  display: none;
+}
+.scroll_downloads2{
+  display: none;
+}*/

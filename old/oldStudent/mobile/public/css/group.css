@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+body{
+	width: 100%;
+	font-family: 'Montserrat', sans-serif;
+	margin: 0;
+	padding: 0;
+}
+.container{
+	margin-top: 60px;
+	width: 100%;
+	padding: 3vh 0;
+}	
+hr{
+	margin: 1vh 0;
+	width: 97%;
+}
+.course, .info{
+	text-align: center;
+}
+.infoCourse{
+	transition: .3s ease-out;
+	overflow: hidden;
+	border-bottom: 1px solid #dadada;
+	box-sizing: border-box;
+	padding: 1vh 0;
+}
+.infoCourse h2{
+	font-size: 2.5vh;
+}
+.title{
+	font-size: 20px;
+	margin: 0;
+	padding: 0;
+}
+.title::selection{
+	background-color: transparent;
+}
+.courseTitle{
+	font-size: 16px;
+	width: 90%;
+	margin: 3vh auto 1vh;
+}
+.openCourse{
+	font-size: 20px;
+}
+.groupMembers ul{
+	display: block;
+	padding: 0;
+	width: 90%;
+	margin: 0 auto;
+}
+.groupMembers ul li{
+	list-style-type: none;
+	padding: 8px 0;
+	font-size: 14px;
+}
+.teacher{
+	background-color: #fff800;
+	border-radius: 1vh 1vh 0 0;
+}
+.student{
+	background-color: #fff;
+	margin: 0 auto;
+	border-bottom: 1px solid #dadada;
+	border-right: 1px solid #dadada;
+	border-left: 1px solid #dadada;
+}
+.last_student{
+	border-radius: 0 0 1vh 1vh; 
+}
+.groupMembersInfo{
+	width: 90%;
+	margin: 20px auto;
+	background-color: #dadada;
+	box-sizing: border-box;
+	border-radius: 1vh;
+}
+.groupMembersInfo p{
+	font-size: 16px;
+}
+.groupMembersInfo img{
+	border-radius: 50%;
+	width: 200px;
+	height: 200px;
+}

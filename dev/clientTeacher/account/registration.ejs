@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="public/styles/sign.css">
+	<link rel="shortcut icon" href="public/img/topLogo.png" type="image/x-icon">
+	<title>Регистрация</title>
+</head>
+<body>
+	<div class="noscrollingbody">
+		<div class="login">
+			<div class="form">
+				<p class="title_login">Регистрация</p>
+				<span class="another_service"></span>
+				<form class="needRegistr">
+					<span class="wrong registration_title" id="mistake"></span>
+					
+					<div class="main_inputs">
+						<label for="country" onclick="selectCountry()">Выберите страну</label>
+						<div class="input input_focus" onclick="selectCountry()"><span id="countryName"></span></div>
+						<img src="public/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" style="display: block;">
+					</div>
+					
+					<div class="main_inputs">
+						<label for="registr_phone">Номер телефона</label>
+						<span class="place_phone">+7</span><input class="input" onfocus="makeblue(this)" onfocusout="validatePhone()"  id="registr_phone" type="phone" maxlength="10">
+						<img src="public/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="phone_right">
+						<span class="mistake" id="phone_mistake"></span>
+					</div>
+
+					<div class="main_inputs">
+						<label for="eMail">Ваш e-mail</label>
+						</span><input autocomplete="off" class="input" onfocus="makeblue(this)" onfocusout="validateMail()"  id="eMail" type="email">
+						<img src="public/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="eMail_right">
+						<span class="mistake" id="eMail_mistake"></span>
+					</div>
+
+					<div class="main_inputs">
+						<label for="name">Введите ваше имя</label>
+						<input class="input" id="name" type="text" onfocusout="validateName()" onfocus="makeblue(this)" autocomplete="off">
+						<img src="public/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="name_right">
+						<span class="mistake" id="name_mistake"></span>
+					</div>
+					
+					<div class="main_inputs">
+						<label for="lastname">Введите свою фамилию</label>
+						<input class="input" id="lastname" type="text" onfocusout="validateLastname()" onfocus="makeblue(this)" autocomplete="off">
+						<img src="public/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="lastname_right">
+						<span class="mistake" id="lastname_mistake"></span>
+					</div>
+						
+					<div class="main_inputs">				
+						<label for="password">Введите пароль</label>
+						<input class="input" type="password" id="password" autocomplete="off" onfocus="makeblue(this)" onfocusout="validatePass()">
+						<img src="public/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="password_right">
+						<span class="mistake" id="password_mistake"></span>
+					</div>
+
+					<div class="main_inputs">
+						<label for="repeat">Повторите пароль</label>
+						<input class="input" type="password" id="repeat" autocomplete="off" onfocus="makeblue(this)" onfocusout="validatePass2()">
+						<img src="public/img/iconfinder_handyArtboard_13_3044149.png" class="right_input" id="password2_right">
+						<span class="mistake" id="repeat_mistake"></span>
+					</div>
+					
+					<button class="sign" id="sign" onclick="registrate(event)">Зарегистрироваться</button>
+					<span class="not_reg">Уже есть аккаунт? <br> <a href="/login">Войти</a></span>
+				</form>
+			</div>
+		</div>
+		<% include ./countries %>
+	</div>
+</body>
+</html>
+<script type="text/javascript">
+
+let phone =								document.getElementById('registr_phone'); 
+let eMail =								document.getElementById('eMail'); 
+let name = 								document.getElementById('name'); 
+let lastname = 						document.getElementById('lastname'); 
+let password = 						document.getElementById('password');
+let repeat = 							document.getElementById('repeat'); 
+let phone_mistake = 			document.getElementById('phone_mistake');
+let eMail_mistake = 			document.getElementById('eMail_mistake');
+let name_mistake = 				document.getElementById('name_mistake');
+let lastname_mistake = 		document.getElementById('lastname_mistake');
+let password_mistake = 		document.getElementById('password_mistake');
+let repeat_mistake = 			document.getElementById('repeat_mistake');
+let mistake = 						document.getElementById('mistake'); 
+let rep = 								/[-\.;":'a-zA-Zа-яА-Я]/
+let place_phone = 				document.getElementsByClassName('place_phone')[0];
+
+function makeblue(el) {
+	el.classList.add('input_focus')
+	el.classList.remove('input_error')
+
+	switch(el) {
+		case phone: 	phone_mistake.style.display = "none";		break;
+		case eMail: 	eMail_mistake.style.display = "none";		break;
+		case name: 		name_mistake.style.display = "none";		break;
+		case lastname: 		lastname_mistake.style.display = "none";		break;
+		case password: 	password_mistake.style.display = "none";	break;
+		case repeat: 	repeat_mistake.style.display = "none"; 		break;
+	}
+}
+
+function registrate(e) {
+	e.preventDefault()
+	if(validateForm()) {
+		let tel = phone.value.replace(/\s/g, '');
+		let countryCode = convertPlus(place_phone.innerHTML);
+		POST('/account', 
+			`method=REGISTRATION&&password=${password.value.trim()}&&phone=${countryCode + '' + tel.trim()}&&login=${name.value}&&lastname="${lastname.value.trim()}&&email=${eMail.value.trim()}`, 
+			(res, stat)=> {
+				if(stat == 200) {
+					POST('/account', `method=SMS&&phone=${countryCode + '' + tel.trim()}`, (res, stat)=> {
+						if(stat == 200) {
+							localStorage.setItem("tel", place_phone.innerHTML + '' + tel.trim());
+							top.location.href = '/activate';
+						}
+				      	else if (stat == 404)			        showErr(mistake, 'Телефон не зарегестрирован');
+				      	else if(stat == 403)					showErr(mistake, 'Некорректный телефон');
+						else console.log('Error: ', res);
+						});
+					} else if(stat == 409)						showErr(mistake, 'Такой аккаунт уже существует <a href="/sign">Войти</a>', '#1e83d4');
+					else console.log(res);		
+			});
+	}
+}
+
+function validateForm(){
+	let ok = true
+	if(!validatePhone()) 	ok = false
+	if(!validateMail()) 	ok = false
+	if(!validateName()) 	ok = false
+	if(!validateLastname()) 	ok = false
+	if(!validatePass()) 	ok = false
+	if(!validatePass2()) 	ok = false
+	return ok
+}
+
+function validatePhone() {
+	if(phone.value.trim().length == 10){ 
+		if (phone.value.trim().match(/\d/g) && phone.value.trim().match(/\d/g).length===10) {
+			document.getElementById('phone_right').style.display = 'block';
+			phone_mistake.style.display = "none";
+			return true
+		} else {
+			phone_mistake.innerHTML = 'Неверный номер';
+		}
+	}
+	else if(phone.value.trim().length == 0) phone_mistake.innerHTML = 'Введите телефон';
+	else phone_mistake.innerHTML = 'Неверный номер';
+	
+	document.getElementById('phone_right').style.display = 'none';
+	phone_mistake.style.display = "block";
+	phone.classList.add('input_error')
+
+	return false
+}
+
+
+function validEmail(email) {
+  var r = /^[\w\.\d-_]+@[\w\.\d-_]+\.\w{2,4}$/i
+  return r.test(email)? email : false
+}
+
+function validateMail() {
+	let validate = validEmail(eMail.value)
+	if(!validate){
+		eMail_mistake.innerHTML = 'Некоректный e-mail';
+		document.getElementById('eMail_right').style.display = 'none';
+		eMail_mistake.style.display = "block";
+		eMail.classList.add('input_error')
+		return false;
+	}
+	document.getElementById('eMail_right').style.display = 'block';
+	eMail_mistake.style.display = "none";
+	return true;
+}
+
+
+function validateName() {
+	let rep = /[-\.;":'a-zA-Zа-яА-Я]/; 
+     
+    if (!rep.test(name.value)){ 
+			name.classList.add('input_error')
+			name_mistake.style.display = 'block'
+			name_mistake.innerHTML = 'Некорректное имя';		
+			document.getElementById('name_right').style.display = 'none';
+			return false
+    }else{
+			document.getElementById('name_right').style.display = 'block';				
+			name_mistake.style.display = 'none';				
+			return true
+	}
+}
+
+function validateLastname() {
+	let rep = /[-\.;":'a-zA-Zа-яА-Я]/; 
+    
+    if (!rep.test(lastname.value)){ 
+			lastname.classList.add('input_error')
+			lastname_mistake.style.display = 'block'
+			lastname_mistake.innerHTML = 'Некорректная фамилия';		
+			document.getElementById('lastname_right').style.display = 'none';
+			return false
+    }else{
+			document.getElementById('lastname_right').style.display = 'block';				
+			lastname_mistake.style.display = 'none';				
+			return true
+	}
+}
+function validatePass() {
+	if(password.value.length >= 6){
+		document.getElementById('password_right').style.display = 'block';
+		password_mistake.style.display = 'none';
+		return true		
+	}
+	else if(password.value.length == 0) password_mistake.innerHTML = 'Введите пароль';
+	else if(password.value.length < 6) 	password_mistake.innerHTML = 'Cлишком короткий пароль';
+
+	document.getElementById('password_right').style.display = 'none';
+	password.classList.add('input_error')
+	password_mistake.style.display= 'block';
+	return false
+}
+
+function validatePass2() {
+	if(repeat.value.length >= 6 && repeat.value == password.value && password.value.length> 0){
+		document.getElementById('password2_right').style.display = 'block';
+		repeat_mistake.style.display = 'none';				
+		return true
+	}
+	else {
+		repeat_mistake.innerHTML = 'Пароли не совпадают'
+		document.getElementById('password2_right').style.display = 'none';
+		repeat_mistake.style.display = 'block';				
+		repeat.classList.add('input_error')
+		return false
+	}
+}
+</script>

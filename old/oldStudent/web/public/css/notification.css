@@ -1,0 +1,30 @@
+ .notice{
+ 	margin: 0.25vh 0;
+ 	padding: 10px 10px;
+ 	position: absolute;
+ 	display: flex;
+ 	justify-content: center;
+ 	align-items: center;
+ 	width: 15%;
+ 	text-align: center;
+ 	font-size: 2.5vh;
+ 	right: 2vh;
+ 	bottom: 2.5vh;
+ 	background: #00BCD4;
+ 	cursor: pointer;
+ 	transition: 0.2s;
+ 	animation: newNotice 0.3s linear 1 running;
+ 	color: #d5f5fb;
+	border-top-left-radius: 10vh;
+	border-bottom-left-radius: 10vh;
+	border-top-right-radius: 10vh;
+ }
+ .notice:hover{
+ 	background: #4DD0E1;
+ 	transform: scale(1.05);
+ 	color:  #192123;
+ }
+ @keyframes newNotice{
+ 	from{right: -25vw}
+ 	to{right: 0}
+ }

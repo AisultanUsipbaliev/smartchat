@@ -1,0 +1,89 @@
+<!Doctype html> 
+<div class="left_menu">
+	<div class="nav_menu">
+		<div class="menu_item">Личный кабинет</div>
+		<a href="/profile">
+			<div class="menu_item--desc">
+				<img src="static/img/avatar.svg">
+				<span>Профиль</span>
+			</div>
+		</a>
+		<a href='/graph'>
+			<div class="menu_item--desc">
+				<img src="static/img/calendar.svg">
+				<span>График</span>
+			</div>
+		</a>
+		<a href='/template'>
+			<div class="menu_item--desc">
+				<img src="static/img/layout.svg">
+				<span>Методика</span>
+			</div>
+		</a>
+		<a href='/schedule'>
+			<div class="menu_item--desc">
+				<img src="static/img/schedule.svg">
+				<span>Расписание</span>
+			</div>
+		</a>
+	</div>
+
+	<div class="nav_menu">
+		<div class="menu_item">Ученики</div>
+		<a href="/student">
+		<div class="menu_item--desc">
+			<img src="static/img/stud.svg">
+			<span>Студенты</span>
+		</div>
+		</a>
+		<a href="/group">
+		<div class="menu_item--desc">
+			<img src="static/img/users.svg">
+			<span>Группы</span>
+		</div>
+		</a>
+		<a href='chat'>
+			<div class="menu_item--desc">
+				<img src="static/img/speech-bubble.svg">
+				<span>Чат</span>
+			</div>
+		</a>
+		<a href="/requests">
+			<div class="menu_item--desc">
+				<img src="static/img/plus.png">
+				<span>Заявки</span>
+			</div>
+		</a>
+	</div>
+	<div class="nav_menu">
+		<div class="menu_item">Задания</div>
+		<a href="/test">
+			<div class="menu_item--desc">
+				<img src="static/img/briefcase.svg">
+				<span>Список тестов</span>
+			</div>
+		</a>
+		<a href="/result">
+			<div class="menu_item--desc">
+				<img src="static/img/users.svg">
+				<span>Результаты тестов</span>
+			</div>
+		</a>
+		<a href="/homeworks">
+			<div class="menu_item--desc">
+				<img src="static/img/users.svg">
+				<span>ДЗ студентов</span>
+			</div>
+		</a>
+	</div>
+	<div class="nav_menu">
+		<div class="menu_item"></div>
+		<div id = 'exit' class="menu_item--desc">
+			<img src="static/img/exit.svg">
+			<span>Выйти</span>
+		</div>
+	</div>
+</div>
+<link rel="stylesheet" type="text/css" href="static/style/scroll.css?ver=<%=version%>">
+<script src="static/js/partial/menu.js?ver=<%=version%>"></script>
+<script src="static/js/partial/scroll.js?ver=<%=version%>"></script>

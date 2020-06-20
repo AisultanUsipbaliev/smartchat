@@ -1,0 +1,113 @@
+.blocks_feedback{
+	width: 90%;	
+	margin: 20px auto;
+	background-color: #fff;
+    box-shadow: 0 0 20px -2px lightgray;
+	border-radius: 10px;
+	padding-bottom: 10px;		
+}
+.text_feed{
+    width: calc(100% - 40px);
+	margin: 15px auto;
+    line-height: 120%;
+    text-align: center;		
+}
+.feed_head{
+    height: 10%; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1e83d4;
+    border-bottom: 1px solid #eaeaea;
+    width: 60%;
+    margin: 0 auto;
+}
+.feed_body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+#text_feed{
+    box-sizing: border-box;
+    resize: none;
+    height: 80px;
+    display: flex;
+    margin: 0 auto;
+    border: 1px solid #1e83d4;
+    background: transparent;
+    width: calc(100% - 40px);
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 14px;
+}
+#div_for_img{
+    border: 1px solid #1e83d4;
+    overflow: hidden;
+    width: calc(100% - 40px);
+    display: flex;
+    position: relative;
+    border-radius: 10px;
+    flex-direction: column;
+    min-height: 150px;
+    align-items: center;
+    margin-top: 20px;
+    justify-content: center;
+    box-sizing: border-box;
+}
+.input_load{
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    position: absolute;
+}
+.img_div{
+    max-height: 90%;
+    max-width: 90%;
+}
+#delete_img{
+    position: absolute;
+    height: 20px;
+    right: 5px;
+    top: 5px;
+}
+.feed_foot{
+    display: flex;
+    height: 50px;
+    align-items: center;
+    justify-content: center;
+}
+.btn_feed{
+    border: none; 
+    padding: 5px 25px;
+    background: #1e83d4;
+    color: white;
+    font-size: 16px;
+    border-radius: 50px;   
+    font-weight: 600;
+    margin: 25px 0 15px;
+}
+#img_load{
+    max-height: 350px;
+    position: relative;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+.load_screen{
+    font-size: 20px;
+    font-weight: 600;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.cam_load{
+    height: 25px;
+    padding: 2px;
+    margin-top: 10px;
+}

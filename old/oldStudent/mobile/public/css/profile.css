@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+body{
+	font-family: 'Montserrat', sans-serif;
+}
+.container{
+	margin-top: 40px;
+	width: 100%;
+}
+.profile{
+	text-align: center;
+	padding: 25px 25px 0;
+	overflow: hidden;
+}
+.photo{
+	border-right: 3px solid #4487c3;
+    border-radius: 50%;
+    border-left: 3px solid #4487c3;
+    border-bottom: 5px solid #4487c3;
+    border-top: none;
+    height: 165px;
+    width: 165px;
+    margin: 0 auto;
+    text-align: center;
+}
+.profile img{
+	padding: 6px;
+	margin: 5px 0;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    animation: animate 3s infinite;
+    overflow: hidden;
+    margin-top: 2px;
+    margin-left: 2px;	
+}
+@keyframes animate{
+	0%{transform: scale(1.0);}
+	50%{transform: scale(1.1);}
+	100%{transform: scale(1.0);}
+}
+.profile h1{
+	font-size: 18px;
+	font-weight: 400;
+	font-family: 'Montserrat', sans-serif;
+}
+div#err.profile_err{
+	width: 100%;
+	color:red;
+	position: relative;
+	right: 0;
+	top: 0;
+}
+.btnProfile{
+	text-align: center;
+	padding: 10px 0px;
+	font-size: 16px;
+	background-color: #4487c3;
+	border-radius: 5px;
+	color: white;
+	outline: none;
+	font-family: 'Montserrat', sans-serif;
+	margin-top: 15px;
+	width: 100%;
+	display: block;
+	text-decoration: none;
+}
+.redactInput{
+	padding: 5px;
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid #4486c3;
+    font-size: 16px;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box;
+    margin-top: 15px;
+    outline: none;
+}
+.btnRedact{
+	padding: 5px 5px;
+    font-size: 18px;
+    background-color: #4487c3;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    margin: 5px 0;
+    width: 100%;
+	font-family: 'Montserrat', sans-serif;
+	outline: none;
+}
+.saveBtn{
+	float: left;
+	text-decoration: none;
+}
+.passBtn{
+	float: right;
+}
+.redactInfo{
+	font-family: 'Montserrat', sans-serif;
+}
+.buttons{
+	margin-top: 20px;
+}

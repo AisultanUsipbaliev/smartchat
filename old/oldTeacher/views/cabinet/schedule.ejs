@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SmartChat</title>
+	<meta charset="utf-8">
+	<link rel="icon" type="img/png" href="static/img/logo.png">
+	<link rel="stylesheet" type="text/css" href="static/style/schedule.css?ver=<%=version%>">
+</head>
+<body>
+	<% include ../partial/header %>
+	<div class="wrapper">
+		<% include ../partial/menu %>
+		<div class="calendar_div container">
+			<img id = 'refresh' title="Обновить" src="static/img/fresh.png">
+			<h2 class='navi'>
+	            <a id = 'goleft' class="change_month" style='margin-right: 4vh;'>
+	            	<img src='static/img/left.svg'>
+	            </a>
+	            <div class = 'top_title'>
+		           <span id ='current_month_name'></span>
+		           <span> </span>
+		           <span id = 'current_year'></span>
+		       </div>
+	            <a id = 'goright' class="change_month" style='margin-left: 4vh;'>
+	            	<img src='static/img/right.svg'>
+	            </a>
+	        </h2>
+			<table class="calendar_top">
+			    <tr>
+			        <td class='datehead'>Пн</td>
+			        <td class='datehead'>Вт</td>
+			        <td class='datehead'>Ср</td>
+			        <td class='datehead'>Чт</td>
+			        <td class='datehead'>Пт</td>
+			        <td class='datehead'>Сб</td>
+			        <td class='datehead'>Вс</td>
+			    </tr>
+			</table>
+			<table id = 'calendar' class="calendar_mob">
+			   
+			</table>
+			<div class='all_colors'>
+				<div class='ac_color'><div class='color_blue_ac'></div> Занятие</div>
+				<div class='ac_color'><div class='color_red_ac'></div> Занято</div>
+				<div class='ac_color'><div class='color_green_ac'></div> Свободен</div>
+				<div class='ac_color'><div class='color_black_ac'></div> Выходной</div>
+			</div>
+		</div>
+		<div class="day_div container" id = 'day_chart'>
+		</div>
+	</div>
+</body>
+<script src="static/js/cabinet/schedule.js?ver=<%=version%>" type="text/javascript"></script>
+</html>

@@ -1,0 +1,193 @@
+/*.block_homeworks{
+    width: 100%;
+    background: white;
+    position: relative;
+    height: 80%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    box-shadow: 0 0 15px -2px rgba(0,0,0,.75);
+    overflow: hidden;
+}
+.green{
+    color: green;
+}
+.red{
+    color: red;
+}
+.head_homework{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    height: 50px;
+    font-weight: 600;
+    padding: 0 1%;
+    box-sizing: border-box;
+    align-items: center;
+    border-bottom: 1px solid lightgray;
+    color: #33b5e6;
+}
+.head_homework div{
+    width: 20%;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.body_homework{
+    height: 88%;
+    height: 88%;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding: 0 1%;
+}
+.homework_row{
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid lightgray;
+    height: 12%;
+    justify-content: space-between;
+}
+.homework_row_unit{
+    width: 20%;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 0 5px;
+    font-size: 14px;
+}
+.result_show{
+    width: 70%;
+    border: 1px solid #33b5e6;
+    background: white;
+    padding: 5px;
+    border-radius: 5px;
+    color: black;
+    cursor: pointer;
+}
+.result_show:hover{
+    background-color: #33b5e6;
+    color: white;
+}
+.home_title{
+    font-size: 20px;
+    color: #33b5e6;
+    font-weight: 600;
+}
+.home_head{
+    width: 90%;
+    margin: 0 auto;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.home_body{
+    height: calc(100% - 102px);
+    width: 90%;
+    margin: 0 auto;
+    overflow: hidden;
+    overflow-y: scroll;
+    border-bottom: 1px lightgray solid;
+    border-top: 1px lightgray solid;
+}
+.img_video{
+    display: flex;
+    padding: 0 0 10px;
+    overflow-x: scroll;
+    width: calc(100% - 10px);
+}
+.home_img{
+    height: 150px;
+    width: auto;
+    margin: 0 2px;
+}
+.text_home{
+    width: 97%;
+    line-height: 120%;
+    font-size: 14px;
+    font-weight: 200;
+    font-family: 'Arsenal', bold;
+    margin: 15px 0;
+}
+.audio_home{
+    display: flex;
+    align-items: center;
+    background: #dbe8ed;
+    width: 290px;
+    padding: 10px;
+    margin: 0 5px;
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+#audio_eq{
+    margin: 0 5px;
+}
+.document{
+    display: flex;
+    align-items: center;
+    background: #dbe8ed;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+}
+.doc_icon{
+    height: 20px;
+    margin-right: 10px;
+}
+.btn_send_home{
+    padding: 5px 15px;
+    border: none;
+    background: #33b5e6;
+    color: white;
+    font-size: 18px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.home_foot{
+    height: 50px;
+    width: 90%;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.bals{
+    font-size: 18px;
+    font-weight: 600;    
+}
+.voicePlay{
+    height: 32px;
+    width: 32px;
+    display: flex;
+    justify-content: center;
+    background-color: #1e83d4;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.playPause{
+    height: 16px;
+}
+.audio_time{
+    font-size: 12px;    
+    margin: 0 5px;
+}
+.lengthAudio{
+    width: 200px;
+    height: 3px;
+    background-color: #1e83d4;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.duration{
+    background: white;
+    height: 100%;
+    width: 0;
+}
+.audio_row, .document_row{
+    display: flex;
+    flex-wrap: wrap;
+}*/

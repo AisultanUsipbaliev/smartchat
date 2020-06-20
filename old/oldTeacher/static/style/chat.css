@@ -1,0 +1,968 @@
+/*-----------------------------container--------------------------*/
+@import url('https://fonts.googleapis.com/css?family=PT+Serif');
+    .chat_container
+    {
+        background: #fff;
+        border-radius: 0.5vh;
+        border: .1vh solid #E0FFFF;
+        text-align: center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: 12vh 0 0 10vh;
+        width: 140vh;
+        height: 82vh; 
+        font-size: 3vh;
+        overflow-y: auto;
+        text-align: center;
+        display: inline-block;
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+ 
+/*------------------------------chat------------------------------*/
+    .chat
+    {
+        width: 110vh;
+        height: 82vh;
+        position: absolute;
+        left: 30vh;
+        border-right: .5vh solid #e0e0e0;
+        font-family: 'PT Serif', serif;
+        transition: .4s ease-out;
+    }
+
+    .logotip
+    {
+        position: relative;
+        width: 70vh;
+        left: 4vh;
+        top: 4vh;
+    }
+    .msgs
+    {
+        position: relative;
+        /*overflow-y: auto;*/
+        width: inherit;
+        /*height: 82%;*/
+        width: 100%;
+        padding: 3vh; 
+        overflow: hidden;
+        transition: .3s ease;
+    }
+    #scroll{
+        position:absolute;
+        display: none;
+        top: 0;
+        right:0%; 
+        width: 0.5vw; 
+        min-height:2vh;
+        background: #0088b8;
+        cursor:pointer;
+        border-radius: 0.5vh;
+    }
+    .box
+    {
+        display: none;
+        width: inherit;
+        height: 33%;
+    }
+
+    .msg_div
+    {
+        width: 90%;
+        height: 5vh;
+        margin: auto;
+    }
+
+    .text
+    {
+        border: 1px solid lightgray;
+        width: 95%;
+        padding: 1vh;
+        box-sizing: border-box;
+        display: block;
+        height: 13vh;
+        resize: none;
+        outline: none;
+        border-radius: 1vh;
+        font-size: 16px; 
+        transition: .3s ease;
+        margin-left: 20px;   
+    }
+
+    .screpka
+    {
+        height: 3.5vh;
+        cursor: pointer; 
+        display: block;  
+    } 
+    .test_screpka{
+        height: 3.5vh;   
+        cursor: pointer; 
+        display: block;
+        margin: 0;  
+    }
+
+    .microfon
+    {
+        height: 3.5vh;
+        cursor: pointer;
+        display: block;
+        border-radius: 50%;
+    }
+    .animateMic{
+        animation: animateMic 2s infinite;
+    }
+    @keyframes animateMic{
+        0%{transform: scale(1.0);}
+        50%{transform: scale(1.2);}
+        100%{transform: scale(1.0);}
+    }
+
+    @keyframes zoom {
+        from {transform:scale(0)} 
+        to {transform:scale(1)}
+    }
+    .send
+    {
+        border: none;
+        background: #0088b8;
+        padding: 1vh 5vh;
+        display: block;
+        color: #fff;
+        font-size: 2vh;
+        border-radius: 5vh;
+        float: right;
+        position: absolute;
+        left: 50vh;
+        top: 70vh;
+    }
+    div.right_message{
+        float: right;
+        background-color: #92a7d0;
+        color: #fff;
+    }
+    .left_message, .right_message{
+        word-wrap: break-word;
+        max-width: 70%;
+        display: block;
+        clear: both;
+        border-radius: 1vh;
+        font-size: 2vh;
+        text-align: left;
+        margin-top: 2vh;
+        position: relative;
+        min-width: 7.5em;
+        padding-bottom: 2vh; 
+        cursor: pointer;
+        transition: 0.3s;
+        overflow: hidden;
+    }
+    .left_message:hover{
+        background-color: rgba(240,240,240,0.8);
+    }
+    .right_message:hover{
+        border: 1% solid rgba(146, 167, 208, 1);
+        background-color: rgba(120, 140, 185, 1);
+    }
+    .left_message{
+        position: relative;
+        float: left;
+        clear: both;
+        background-color: #fff;
+        border: 0.2vh solid rgba(59, 103, 158, 1);
+        color: rgba(59, 103, 158, 1);
+        margin-left: 1vh;
+        margin-top: 4vh;
+    }
+    .sms_date{
+        position: absolute;
+        float: right;
+        color: #cccccc;
+        right: 0.1vw;
+        bottom: 0.05vh;
+        font-size: 1em;
+    }
+    .left_message>.sms_date{
+        left: 0.1vw;
+    }
+    .sms{
+        margin: 0; 
+        white-space: pre-wrap; 
+    }
+    .text_message{
+        padding: 1vh 2vh 2.25vh;
+        border-radius: 1vh;
+    }
+    .student_name
+    {
+        position: absolute;
+        left: 0vh;
+        top: -3vh;
+        margin: 0;
+        display: block;
+        color: rgba(59, 103, 158, 1);
+        font-size: 2.5vh;
+        font-weight: bold;
+    }
+    .chat_picture
+    {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 1vh;
+        cursor: pointer;
+    }
+    .play_btn
+    {
+        height: 4vh;
+        cursor: pointer;
+        display: inline-grid;
+    }
+    .chat_audio
+    {
+        display: none;
+    }
+    .audio_line
+    {
+        display: inline-grid;
+        height: 1vh;
+        background: #b7b4b4;
+        width: 30vh;
+        position: relative;
+    }
+    .audio_progress
+    {
+        background: black;
+        width: 1vh;
+        height: 2vh;
+        position: absolute;
+        top: -.5vh;
+        cursor: pointer;
+    }
+   .file_href
+    {
+        padding: 1vh;
+        display: block;
+        vertical-align: center;
+        text-decoration: none;
+        font-size: 2.5vh;
+        color: black;
+        position: relative;
+    }
+    .download_file
+    {
+        width: 3vh;
+        position: absolute;
+    }
+    .filename
+    {
+        margin-left: 4vh;
+    }
+
+    .files
+    {
+        position: absolute;
+        margin-top: 8.5vh;
+        margin-left: 6.5vh;
+        width: 84.7%;
+        height: 11vh;
+        overflow-y: auto;
+    }
+
+    .file_block
+    {
+        overflow-x: hidden;
+        border: 1px solid lightgray;
+        width: 49%;
+        height: 5vh;
+        display: inline-block;
+        border-radius: 1vh;
+        left: 0;
+        margin: 0 0.2vh;  
+        transition: .3s;
+        position: relative;
+    }
+
+    .file_img
+    {
+        height: 4vh;
+        top: 2px;
+        left: 0;
+        position: absolute;
+    }
+
+    .fname
+    {
+        text-align: left;
+        width: 32vh;
+        display: inline-block;
+        left: 5vh;
+        top: .3vh;
+        position: absolute;
+        overflow: hidden;
+    }
+
+    .rem_img
+    {
+        height: 4vh;
+        right: 1.5vh;
+        top: .3vh;
+        position: absolute;
+        cursor: pointer;
+        border-left: 1px solid lightgray;
+    }
+
+    .chat_video
+    {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 1vh;
+        padding: 2vh;
+    }
+
+    .fileTitle
+    {
+        margin: .5vh 0 .5vh 1vh;
+        font-size: 2.4vh;
+        min-height: 3vh;
+        float: left;
+    }
+    .templateArrow{
+        position: absolute;
+        height: 5vh;
+        width: 1.6vw;
+        right: 0;
+        z-index: 1;
+        background-color: #fff;
+        border-bottom-left-radius: 1vh;
+        border-top-left-radius: 1vh;
+        border-bottom: 0.3vh solid #dadada;
+        border-top: 0.3vh solid #dadada;
+        border-left: 0.3vh solid #dadada;
+        cursor: pointer;
+        display: none;
+        transition: 0.3s;
+        padding-top: 0.7vh;
+    }
+    #templateArrowImg{
+        max-height: 5vh;
+        transition: 0.4s;
+        transform: rotate(180deg);
+    }
+/*----------------------------templates---------------------------*/
+    .templates
+    {
+        overflow-y: auto;
+        overflow-x: hidden;
+        width: 0/*30vh*/;
+        height: 82vh;
+        position: absolute;
+        left: 110vh;
+        transition: 0.4s;
+        display: none;
+    }
+
+    .template
+    {
+    position: relative;
+        width: 100%;
+        max-height: 30vh;
+        overflow-y: auto;
+        cursor: pointer;
+        border-bottom: .5vh solid #e0e0e0;
+        text-align: left;
+        padding: 1vh;
+        /*background: red;*/
+    }
+    .template::-webkit-scrollbar 
+    {
+        width: 0vh;
+    }
+    .template:hover
+    {
+        background: #91a7cf;
+    }
+
+    .isused
+    {
+        background: rgba(0,0,0,0.2);
+    }
+    .isused:hover
+    {
+        background: rgba(0,0,0,0.2);
+    }
+
+    .fresh
+    {
+        width: 2.5vh;
+        position: absolute;
+        right: .5vh;
+        top: .5vh;
+    }
+
+    .template h4
+    {
+        margin: 0;
+        font-size: 1.5vh;
+    }
+
+    .content
+    {
+        margin-top: 1vh;
+        width: 100%;
+        max-height: 16vh;
+        overflow-x: auto;
+        overflow-y: auto;
+    }
+
+    .content::-webkit-scrollbar 
+    {
+        width: .5vh;
+    }
+
+    .temp_image
+    {
+        user-select: none;
+        max-width: 8vh;
+        max-height: 8vh;
+        display: inline-grid;
+        border-right: .2vh solid #e0e0e0;
+    }
+
+    .temp_audio
+    {
+        user-select: none;
+        background: gray;
+        border-radius: 2vh;
+        width: 90%;
+        position: relative;
+        padding-left: 5vh; 
+        padding-bottom: .5vh;
+        margin-bottom: 1vh;
+    }
+
+    .temp_audio img
+    {
+        position: absolute;
+        top: .5vh;
+        left: 1vh;
+        max-width: 3.5vh;
+        max-height: 3.5vh;
+    }
+    .temp_audio a
+    {
+        font-size: 1.5vh;
+    }
+
+    .temp_file
+    {
+        margin-bottom: .5vh;
+        width: 100%;
+        height: 4vh;
+        position: relative;
+        padding-left: 5vh;
+        background: rgba(0,0,0,0.2);
+        padding-top: .2vh;
+        border-radius: 2vh;
+        user-select: none;
+    }
+
+    .temp_file:hover
+    {
+        background: white;
+    }
+
+    .temp_file img
+    {
+        height: 3vh;
+        left: 2vh;
+        top: 1;
+        position: absolute;
+    }
+    .temp_file p
+    {
+        margin: 0;
+        margin-top: 1vh;
+        font-size: 2vh;
+    }
+
+    .temp_video
+    {
+        margin-left: 1vh;
+        width: 90%;
+        display: inline-block;
+        margin-bottom: 1vh;
+    }
+    .nopeTemplates
+    {
+        font-weight: 400;
+        font-size: 2.5vh;
+        font-family: PT-Serif, "serif";
+    }
+/*---------------------------contactlist-----------------------------------*/
+    .contacts
+    {
+        overflow-y: auto;
+        width: 30vh;
+        height: 82vh;
+        border-right: 0.15vh solid #e0e0e0;
+        position: absolute;
+    }
+
+    .contact
+    {
+        margin: 0;
+        width: 100%;
+        height: 8vh;
+        cursor: pointer;
+        border-bottom: 0.2vh solid #e0e0e0;
+        overflow: hidden;
+        font-family: 'PT Serif', serif;
+        text-align: left;
+    }
+
+    .current_contact
+    {
+        background: rgba(146, 167, 208, 0.25);
+    }
+
+    .contact:hover
+    {
+        background: rgba(146, 167, 208, 0.25);
+    }
+
+    .photo_div
+    {
+        width: 20%;
+        height: inherit;
+        display: inline-grid;
+        position: relative;
+    }
+
+    .photo
+    {
+        background: #eee;
+        /*border: 1px solid #0088b8;*/
+        position: absolute;
+        border-radius: 100%;
+        max-width: 85%;
+        top: 1.5vh;
+        left: 1vh;
+    }
+
+    .info_div
+    {
+        width: 80%;
+        display: inline-grid;
+        height: inherit;
+        position: relative;
+    }
+
+    .name
+    {
+        margin: 0;
+        position: absolute;
+        top: 2.8vh;
+        left: 5%;
+        font-size: 2vh;
+        font-weight: 400;
+    }
+
+    .type
+    {
+        margin: 0;
+        height: 2vh;
+        position: absolute;
+        left: 2vh;
+        top: 3vh;
+        user-select: none;
+    }
+
+    .type p
+    {
+        margin: 0;
+        display: inline;
+        font-size: 1.3vh;
+        color: #333;
+        display: none;
+    }
+
+    .type strong
+    {
+        margin: 0;
+        display: inline;
+        font-size: 1.8vh;
+        color: #91a7cf;
+        display: none;
+    }
+
+    .missCount
+    {
+        width: 4vh;
+        height: 4vh;
+        display: flex;
+        user-select: none;
+        position: absolute;
+        right: 1vh;
+        bottom: 2vh;
+        background: rgb(146, 167, 208);
+        padding: .6vh;
+        border-radius: 100%;
+        justify-content: center;
+        align-items: center;
+    }
+/*--------------------------POPuP WITH PICT-----------------------------------*/
+    .popImg
+    {
+        display: none;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 20;
+        top: 0vh;
+        left: 0;
+        position: fixed;
+        background: rgba(0,0,0,0.8);
+    }
+    #popImg {
+        z-index: 9999;
+        margin-top: 5%;
+        border-radius: 10px;    
+    }
+    .picture
+    {
+        display: block;
+        margin: auto auto;
+        animation-name: zoom;
+        animation-duration: .8s;
+        max-width: 80%;
+        max-height: 80%;
+    }
+    .buttons{
+        width: 7vh;
+        transition: .3s ease;
+        position: absolute;
+        bottom: 2vh;
+        text-align: center;
+        height: 13vh;   
+        left: 1vh;
+    }
+    .btnChat{
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        padding: 0.4vh 0;
+    }
+
+    /*popup with tests and homeworks*/
+    .bg{
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: transparent;
+        z-index: 49;
+    }
+    .popupWindow{
+        width: 35vw;
+        height: 60vh;
+        z-index: 50;
+        background: #fff;
+        border-radius: 2vh;
+        border:0.33vh solid #dadada;
+        position: absolute;
+        margin-top: -58%;
+        overflow-x: hidden;
+        display: block;
+        position: absolute;
+        z-index: 999;
+        width: 286px;
+        margin-left: -133px;
+        margin-top: -330px;
+        border: 1px solid #dfdfdf;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        background: #fff;
+        padding: 0;
+        min-height: 300px;
+        max-height: 300px;
+        width: 350px;
+        bottom: 16.5vh;
+        left: 23.5vh;
+        -webkit-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.55);
+        -moz-box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.55);
+        box-shadow: 0px 2px 10px 0px rgba(0,0,0,0.55);
+        overflow: hidden;
+    }
+    .popup_window_body {
+        /*height: 265px;*/
+        width: 100%;
+        overflow: auto;
+    }
+    
+    @media screen and (max-width: 600px) {
+      .popupWindow {
+        min-height: 150px;
+        max-height: 150px;
+        height: 115px;
+        width: 200px;
+      }
+      .popup_window_body {
+        height: 115px;
+      }
+    }
+
+    @media screen and (max-width: 1200px) {
+      .popupWindow {
+        min-height: 250px;
+        max-height: 250px;
+        width: 300px;
+      }
+      .popup_window_body {
+        height: 215px;
+      }
+    }
+    .popupButton{
+        width: 50%;
+        float: left;
+        border: 0;
+        height: 35px;
+        padding: 1vh 0;
+        vertical-align: bottom;
+        border-top-right-radius: inherit; 
+        border-bottom: 0.33vh solid #dadada;
+        border-left: 0.15vh solid #dadada;
+        background: transparent;
+        transition: 0.3s ease;
+    }
+    .popupButton:first-child{
+        border-left: 0;
+        border-top-right-radius: 0;
+        border-right: 0.15vh solid #dadada;
+        border-top-left-radius: inherit;
+    }
+    .popupButton:hover{
+        background: rgba(32, 124, 202, 0.5);
+    }
+    .selectButton{
+        background: rgba(32, 124, 202, 0.8);
+    }
+    .Tester{
+        width: 100%;
+        padding: 1vh 5%;
+        height: 15%;
+        float: left;
+        text-align: center;
+        border-bottom: 0.33vh solid #dadada;
+        cursor: pointer;
+        transition: 0.3s ease;
+    }
+    .Tester:hover{
+        background: rgba(32, 124, 202, 0.25);
+        /*transform: scale(1.1);   */
+    }
+    .testHref{
+        background-color: #fff !important;
+        border: 0.1vw solid #92a7d0;
+        color:  black;
+        padding: 1vh;
+    }
+    .testHref>a{
+        width: 7.5vw;
+        float: left;
+        height: auto;
+        padding: 0.5vh 0;
+        text-transform: none;
+        text-align: center;
+        color: rgba(3, 0, 89, 1);
+    }
+    .testHref>a>span{
+        display: block;
+    }
+    .testHref>a>img{
+        position: relative;
+        display: block;
+        width: 60%;
+        margin-left: 20%;
+        margin-bottom: 2vh;
+    }
+    .nopeTask{
+        margin: 15% 15% 0;
+        padding-bottom: 5%;
+        border-radius: 3vh;
+        border-bottom: 0.5vh solid #dadada;
+    }
+    .img_message{
+        padding: 1vh;
+        padding-bottom: 2vh;
+        height: auto;
+        width: 30vh;
+        /*border: 0;*/
+        /*background-color: rgba(0,0,0,.1);*/
+    }
+    .send_message{
+        position: absolute;
+        bottom: 10.5vh;
+        right: 0;
+        height: 4vh;            
+        transition: .3s ease;
+        cursor: pointer;
+    }
+
+
+
+.caption {
+    margin: auto;
+    display: block;
+    /*max-width: 100vh;*/
+    /*max-height: 70vh;*/
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+.caption { 
+    animation-name: zoom;
+    animation-duration: .7s;
+
+}
+
+.backzoom {
+    margin: auto;
+    display: block;
+    /*max-width: 100vh;
+    max-height: 70vh;*/
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+.backzoom {
+    animation-name: backzoom;
+    animation-duration: .4s;
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+
+@keyframes backzoom {
+    from {transform:scale(1)} 
+    to {transform:scale(0)}
+}
+
+.bottom_arrow {
+    -webkit-transition: bottom .5s, opacity .5s, visibility 0.5s;
+    -webkit-transition-property: bottom, opacity, visibility;
+    -webkit-transition-duration: 0.5s;
+    visibility: hidden;
+    opacity: 0;
+    bottom: 15%;
+    position: absolute;
+    right: 5%;
+    width: 6vh;
+    height: 6vh;
+    border-radius: 50%;
+    background: #fff;
+    -webkit-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.62);
+    -moz-box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.62);
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.62);
+    padding-top: 1.5vh;
+    padding-right: 1.2vh;
+    padding-bottom: 1.2vh;
+    padding-left: 1.2vh;
+    z-index: 10;
+    cursor: pointer;
+}
+.bottom_arrow img {
+    width: 100%;
+    height: 100%;
+}
+
+.answerMesBlock{
+    height: 2vh;
+    margin: 1vh;
+    margin-top: 2vh; 
+    position: relative;
+    cursor: pointer;
+}
+.refer{
+    background: rgba(0,0,0,0.1);
+    width: calc(100% + 4vh);
+    margin-left: 0;
+    border-left: 5px solid dodgerblue;
+    padding-left: 5px;
+    margin-bottom: 1vh;
+}
+.refer>img{
+	height: 10vh;
+}
+.select_name{
+    top: 0;
+    margin-bottom: 1vh;
+    position: relative;
+}
+
+div.selectMes{
+    background-color: rgb(59, 170, 224) !important;
+}
+
+.fullMes{
+    float: left;
+    width: 100%;
+}
+.messageChees{
+    display: flex;  
+
+}
+
+.refMesInBlock{
+    position: absolute;
+    background-color: #fff;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    border-left: 0.5vw solid rgb(59, 170, 224);
+    border-top: 0.5vh solid rgba(0,0,0,0.25);
+    z-index: 10;
+    font-size: 1em;
+    overflow-wrap: break-word;
+    padding: 1.25em 0;
+}
+
+.refMesInBlock>div>.refer, .refMesInBlock>div>.sms_date, .refMesInBlock>div>.student_name{
+    display: none;
+}
+.refMesInBlock>div>.chat_picture{
+    width: 12.5%;
+    float:left;
+}
+.refMesInBlock>div>.chat_video{
+    float:left;
+    height: 20vh;
+}
+.refer>video{
+	height: 20vh;
+}
+.closeAns{
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    height: 1.25em;
+}
+
+.loadIMG{
+    height: 4vh;
+    position: absolute;
+    bottom: 4.5vh;
+    right: 1vh;
+    z-index: 1000000;
+}

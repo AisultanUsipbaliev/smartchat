@@ -1,0 +1,190 @@
+/*    layout 1    */
+.choose_course{
+	text-align: center;
+	margin: 5px 0;
+    font-weight: 800;
+	font-size: 18px;
+    color: #1e83d4;
+}
+.content_block{
+    background-color: #fafafa;
+    height: calc(100vh - 50px);
+    top: 50px;
+    position: absolute;
+    width: calc(100vw - 60px);
+    left: 60px;
+    z-index: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+    padding: 15px 50px;
+    box-shadow: inset 20px 20px 20px -30px rgba(0,0,0,.75);
+    display: flex;
+    justify-content: center;
+}
+.request_blocks{
+	margin-top: 30px;
+	height: 90%;
+	width: auto;
+    min-width: 50%;
+    box-shadow: 0 0 20px -2px lightgray;
+  	background-color: #fff;
+  	border-radius: 10px;
+    flex-direction: column;
+}
+.warning_course{
+	font-size: 14px;
+	text-align: center;
+	margin: 0 0 5px;
+}
+.head_choose{
+	height: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-bottom: 1px solid lightgray;
+    align-items: center;
+    padding: 0 10px;
+    margin: 0 auto;    
+}
+.body_choose{
+	height: calc(100% - 110px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+    border-bottom: 1px solid lightgray;
+}
+.day_row{
+	display: flex;
+    align-items: center;
+    height: 100%;
+    box-shadow: 0px 1px lightgrey;
+}
+.w-20{
+	height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 1px 0 lightgrey;
+    padding: 0 10px;
+    color: #1e83d4;
+    width: 200px;
+}
+.w-80{
+	width: calc(100% - 200px);
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+}
+.noborder{
+	border: none;
+    padding: 5px;
+    font-size: 15px;
+    outline: none;
+    cursor: pointer;
+    background-color: transparent;
+}
+.plus_button{
+	height: 20px;
+	padding: 0 10px;
+	cursor: pointer;
+}
+.foot_choose{
+	height: 50px;
+    display: flex;
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+}
+.lesson_count{
+	border-right: 1px solid #b6b6b6;
+	padding: 0 5px;
+}
+.ready{
+	cursor: pointer;
+	padding: 8px 20px;
+    border-radius: 5px;
+    border: none;
+    background: #33b5e6;
+    font-size: 16px;
+    color: white;
+}
+
+
+/*      layout 2      */
+.teachers_blocks{
+    display: flex;
+    box-shadow: 0 0 20px -2px lightgrey;
+    width: 80%;
+    max-height: 90%;
+    margin: 15px auto 0;
+    background-color: #fff;
+    border-radius: 10px;
+    max-width: 768px;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.teacher_choose{
+    font-size: 20px;
+    font-weight: 600;
+    color: #1e83d4;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+.teacher_name{
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    width: 33%;
+}
+.recommend, .other{
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+.star{
+    height: 30px;
+}
+.rec_div{
+    display: flex;
+    align-items: center;
+    padding: 0px 10px;
+    border-top: 1px solid lightgray;
+}
+.stars{
+    width: 33%;
+    display: flex;
+    justify-content: center;
+}
+.choose{
+    padding: 5px;
+    color: black;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+}
+.bb{
+    border-bottom: 1px solid lightgray;
+}
+.choose:hover{
+    background-color: #1e83d4;
+    color: white;
+    transition: .2s ease;
+}
+.choose_button{
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 15px;
+    height: 100%;
+    width: 34%;
+}

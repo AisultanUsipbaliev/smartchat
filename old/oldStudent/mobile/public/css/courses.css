@@ -1,0 +1,73 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+.contentBlock{
+	margin-top: 60px;
+}
+.courses{
+	font-size: 18px;
+	font-family: 'Montserrat', sans-serif;
+}
+.courseState{
+	padding: 1vh;
+	text-align: center;	
+}
+.courseBlock{
+	width: 90%;
+	margin: 5vh auto;
+	border: 1px solid #e6edf4;
+	border-radius: 3vh;
+	font-family: 'Montserrat', sans-serif;
+}
+.courseHead{
+	padding: 1vh 0;
+	background-color: #e6edf4;
+	text-align: center;
+	border-top-right-radius: 2vh;
+	border-top-left-radius: 2vh;
+	border-bottom: 1px solid #dadada;
+}
+.courseHead h1{
+	font-weight: 600;
+	font-size: 18px;
+}
+.courseBody{
+	background-color: #fff;
+	padding: 1vh;
+}
+.courseTitle{
+	margin: 0;
+	padding: 1vh;
+	font-size: 16px;
+}
+.cost{
+	color: #1A7C1F;
+}
+.group_type{
+	font-weight: 400;
+	font-size: 14px;
+}
+.buttons a{
+	width: 100%;
+	display: block;
+	background-color: #e6edf4;
+	padding: 2vh 0 1vh;
+	box-sizing: border-box;
+	border-bottom-right-radius: 2vh;
+	border-bottom-left-radius: 2vh;
+	text-decoration: none;
+	font-size: 16px;
+	color:  black;
+}
+button.deleteBtn {
+    border: none;
+    padding: 10px 30px;
+    margin: 0 10px;
+    border-radius: 5px;
+    color: white;
+    background-color: #4487c3;
+	font-family: 'Montserrat', sans-serif;
+}
+
+.prev_cost{
+	color: red;
+	text-decoration: line-through;
+}

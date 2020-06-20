@@ -1,0 +1,71 @@
+/*.block_tests{
+	width: 100%;
+    background: white;
+    height: 80%;
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0 0 15px -2px rgba(0,0,0,.75);
+}
+.green{
+	color: green;
+}
+.red{
+	color: red;
+}
+.head_tests{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    height: 12%;
+    align-items: center;
+    font-weight: 600;
+    padding: 0 1%;
+    box-sizing: border-box;
+    border-bottom: 1px solid lightgray;
+    color: #33b5e6;
+}
+.result_show{
+    width: 70%;
+    border: 1px solid #33b5e6;
+    background: white;
+    padding: 5px;
+    color: black;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.result_show:hover{
+    background-color: #33b5e6;
+    color: white;
+}
+.head_tests div{
+    width: 20%;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.body_tests{
+    height: 88%;
+    height: 88%;
+    overflow: hidden;
+    overflow-y: scroll;
+    padding: 0 1%;
+}
+.test_row{
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid lightgray;
+    height: 12%;
+    justify-content: space-between;
+}
+.test_row_unit{
+    width: 20%;
+    align-items: center;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    padding: 0 5px;
+    font-size: 14px;
+}*/

@@ -1,0 +1,528 @@
+/*.block_chat{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+.content_chat{
+    background-color: #eaf2f5;
+    height: calc(100vh - 50px);
+    top: 50px;
+    position: absolute;
+    width: calc(100vw - 60px);
+    left: 60px;
+    box-sizing: border-box;
+    font-family: 'Arsenal', bold;
+    padding: 15px 20px;
+    box-shadow: inset 20px 20px 50px -30px rgba(0,0,0,.75);
+}
+.search_message_input{
+    border-radius: 5px;
+    border: none;    
+    padding: 5px 30px 5px 10px;
+    background: white;
+    font-size: 14px;    
+    background-image: url(../../../static/tutorial/images/search.png);
+    background-repeat: no-repeat;
+    background-position: 95%;
+    background-size: 25px;
+}
+.search_message_input:focus{
+    box-shadow: 0 0 1px 1px #b6b6b6;
+}
+.photo-welcome{
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin: 0 5px;
+    object-fit: cover;
+}
+.chat_tutorial{
+    background: #fff;
+    height: 100%;
+    box-shadow: 0 0 15px -2px rgba(0,0,0,.75);
+    width: 100%;
+    margin: 0 auto;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.search_messages{
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    width: 90%;
+    margin: 0 auto;
+    height: 50px;
+    align-items: center;
+}
+.companion{
+    display: flex;
+    align-items: center;
+}
+.name_in_up{
+    padding: 0 10px;
+    font-weight: 600;
+}
+.group_name{
+    padding: 0 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+.photo_in_searchblock{
+    width: 30px;
+    height: 30px;
+    background-color: #1e93d4;
+    border-radius: 50%;
+}
+.message_send{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    position: relative;
+    justify-content: space-between;
+}
+.chat_body{
+    border-bottom: 1px solid lightgray;
+    border-top: 1px solid lightgray;
+    height: calc(100% - 100px);
+    width: 90%;
+    margin: 0 auto;
+    padding: 5px 0;
+    display: flex;
+    position: relative;
+    align-items: center;
+    box-sizing: border-box;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.draganddrop{
+    height: 76%;
+    width: 90%;
+    margin: 0 auto;
+    border: 3px dashed #1e83d4;
+    overflow-y: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.active_message{
+    background-color: rgba(30,131,212,.1);
+}
+.new_message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+}
+.added_files{
+
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+.new_message hr{
+    width: 50%;
+    height: 1px;
+    background-color: lightgray;
+    border: none;
+}
+.new_message span{
+    font-size: 14px;
+    margin: 0 10px;
+    white-space: nowrap;
+}
+.text_drag{
+    color: #1e83d4;
+    font-size: 18px;
+}
+.messages{
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    position: absolute;
+    top: 0;
+    padding: 10px 0;
+    flex-direction: column; 
+    justify-content: flex-end;
+}
+.message_input{
+    width: calc(100% - 80px);
+    padding: 8px 30px 8px 15px;
+    font-size: 16px;
+    box-sizing: border-box;
+    border-radius: 50px;
+    border: 1px solid lightgray;
+    height: 75%;
+    resize: none;
+}
+.send_button{
+    height: 25px;
+    cursor: pointer;
+}
+.screpka{
+    height: 25px;
+    cursor: pointer;
+}
+.left_message, .right_message{
+    font-family: 'Arsenal', bold;
+}
+.left_message{
+    padding: 5px 0;
+    max-width: 100%;
+    display: flex;
+}
+.new_message_time{
+    display: block;
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+    font-size: 14px;
+}
+.name_in_message{
+    margin: 0;
+    padding: 0 0 5px 0;
+    font-size: 16px;
+}
+.left_message_content{
+    min-width: 75px;
+    background: #dbe8ed;
+    width: 100%;
+    padding: 5px 8px 20px 8px;
+    box-sizing: border-box;
+    position: relative;
+    border-radius: 0 10px 10px;
+}
+.doc_icon{
+    height: 30px;
+    padding: 0 5px 0 0;
+}
+.time_sended{
+    font-size: 12px;
+    position: absolute;
+    bottom: 3px;
+    right: 5px;
+}
+.document{
+    background: white;
+    padding: 5px;
+    display: flex;
+    cursor: pointer;
+    border-radius: 5px;
+    align-items: center;
+}
+.add_document{
+    background: white;
+    width: 100%;
+    display: flex;
+    cursor: pointer;
+    height: 40px;   
+    justify-content: space-between;
+    padding: 0px 10px;
+    box-sizing: border-box;
+    align-items: center;
+}
+.document_name{
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}
+.message_text{
+    overflow-wrap: break-word;
+    display: block;
+    font-size: 16px;
+}
+.message_time{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    flex-direction: column;
+    font-size: 14px;
+    justify-content: flex-end;
+}
+.message_time span{
+    margin: 10px 0;
+}
+.right_message{
+    display: flex;
+    flex-direction: row;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    padding: 5px 0;
+}
+.name_in_message_right{
+    text-align: right;
+    margin: 0;
+    padding: 0 0 5px 0;
+    font-size: 16px;
+}
+.right_message_text{
+    text-align: right;
+    font-size: 16px;
+}
+.right_messages_photo{
+    margin: 0 10px;
+}
+.right_message_content{
+    min-width: 30px;
+    border-radius: 5px 0 5px 5px;
+    background: #dbe8ed;
+    width: 100%;
+    position: relative;
+    padding: 5px 8px 20px 8px;
+    box-sizing: border-box;
+}
+.w-60{
+    max-width: 60%;
+}
+.voice{
+    height: 20px;
+    cursor: pointer;
+    position: absolute;
+    right: 55px;
+}
+.online{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: 40px;
+}
+.online_or_not{
+    font-size: 12px;
+    padding: 0 10px;
+}
+.img_in_message{
+    width: 100%;
+    margin: 5px 0;
+    cursor: pointer;
+    max-width: 300px;
+}
+.message_answer{
+    font-size: 14px;
+    display: block;
+    box-shadow: -3px 0 #33b5e6;
+    padding: 0 0 0 5px;
+}
+.videocontent{
+    width: 100%;
+    margin: 5px 0;
+    max-width: 300px;
+}
+.name_reanswer{
+    font-weight: 800;
+}
+.name_reanswer, .msg_reanswer{
+    display: block;
+    font-size: 12px;
+}
+.resend{
+    height: 12px;
+    cursor: pointer;
+}
+.readed{
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-size: 12px;
+    color: #333;
+}
+.resend_div{
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: 0.3s;
+}
+.answer_on_input{
+    display: flex;
+    height: 100%;
+    border-left: 3px solid #33b5e6;
+    padding: 0 5px;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 14px;
+}
+.test_link{
+    display: flex;
+    cursor: pointer;
+    height: 100px;
+    justify-content: center;
+}
+.test_link img{
+    width: 85px;
+}
+.home_link{
+    display: flex;
+    height: 100px;
+    justify-content: center;
+}
+.home_link img{
+    width: 100px;
+}
+#backpop{
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,.5);
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center
+}
+.backpop_img{
+    transition: .3s;
+    max-width: 70%;
+    max-height: 70%;
+    border-radius: 10px;
+    width: 70%;
+}
+.current_chat{
+    background-color: #e6e6e6;
+}
+.head{
+    background: #33b5e6;
+    padding: 10px;
+    color: white;
+    height: 100px;
+}
+.modal{
+    width: 30%;
+    height: 70%;
+    border-radius: 5px;
+    font-family: 'Arsenal', bold;
+    overflow: hidden;
+}
+#close_info{
+    float: right;
+}
+.group_info_name{
+    margin: 25px 0 0;
+}
+.count_students{
+    margin: 5px 0 15px;
+}
+.body_info{
+    height: calc(100% - 100px);
+    background: white;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.student_row{
+    display: flex;
+    padding: 10px;
+    box-shadow: 0px -1px lightgray;
+    width: 90%;
+    margin: 0 auto;
+}
+.name_div{
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 10px;
+    justify-content: space-between;
+}
+.info_name{
+    cursor: pointer;
+}
+.timeline{
+    font-size: 12px;
+}
+.record_audio{
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    left: 46px;
+    z-index: 111;
+    width: calc(100% - 92px);
+}
+.first_audio_div{
+    display: flex;
+    align-items: center;
+}
+.second_audio_div{
+    width: 30px;
+    height: 30px;
+    background: #1e83d4;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.record_div{
+    background: #c9c5c5;
+    width: 30px;
+    height: 30px;
+    left: 55px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.square{
+    background: red;
+    border-radius: 50%;
+    height: 12px;
+    width: 12px;
+    animation: audio 1s infinite;
+}
+.stop_audio{
+    height: 14px;
+}
+.message_input:disabled{
+    background-color: #fff;
+}
+.timer_audio{
+    right: 60px;
+    margin: 0 10px;
+}
+@keyframes audio{
+    0%{transform: scale(1);}
+    50%{transform: scale(1.2);}
+    100%{transform: scale(1);}
+}
+
+
+
+.voicePlay{
+    height: 32px;
+    width: 32px;
+    display: flex;
+    justify-content: center;
+    background-color: #1e83d4;
+    align-items: center;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.playPause{
+    height: 16px;
+}
+.audio{
+    display: flex;
+    align-items: center;
+}
+.audio_time{
+    font-size: 12px;    
+    margin: 0 5px;
+}
+.lengthAudio{
+    width: 200px;
+    height: 3px;
+    background-color: #1e83d4;
+    border-radius: 20px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.duration{
+    background: white;
+    height: 100%;
+    width: 0;
+}*/

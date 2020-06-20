@@ -1,0 +1,381 @@
+.true-div{
+	max-height: calc(100% - 10px);
+	margin-right: 20px;
+}
+.magical-content{
+  	background-color: #fafafa;
+	height: calc(100vh - 50px);
+	top: 50px;
+	position: absolute;
+	width: calc(100vw - 60px);
+  	border-radius: 10px 0 0 0;
+	left: 60px;
+	box-sizing: border-box;
+	font-family: 'Roboto', sans-serif;
+	padding: 15px 0px 15px 50px;
+	box-shadow: inset 20px 20px 30px -30px rgba(0,0,0,.75);
+}
+.student-profile-info{
+	width: 25%;
+	background-color: #fff;
+	padding: 10px 30px;
+	box-sizing: border-box;
+	min-width: 300px;
+	font-family: 'Roboto', sans-serif;
+	border-radius: 10px;
+	height: 100%;
+	box-shadow: 0 0 20px -2px lightgray;
+}
+.student-name-profile{
+	text-align: center;
+	font-size: 18px;
+	font-weight: 500;
+	margin: 8px 0 18px;
+	letter-spacing: 1.5px;
+}
+.profile-flexim{
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	padding: 15px 15px 0;
+	box-sizing: border-box;
+	height: calc(100% - 55px);
+	overflow-x: scroll;
+}
+.photo-block-profile{
+	width: 100%;
+	height: 150px;
+	text-align: center;
+	margin: 10px 0 0;
+}
+.photo-with-circle{
+	width: 150px;
+	height: 150px;
+	object-fit: cover;
+	border-radius: 50%;
+	box-sizing: border-box;
+	border: 5px solid skyblue;
+}
+.level-about-into-profile{
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+}
+.level-picture{
+	height: 40px;
+	margin-right: 5px;
+}
+.level-name-into-block{
+	font-size: 16px;
+	font-weight: 600;
+	color: #1e83d4;
+	display: flex;
+	align-items: flex-end;
+}
+.level-up-progress{
+	height: 8px;
+	width: 100%;
+	border: 1px solid #1e83d4;
+	margin: 5px 0 2px;
+	cursor: pointer;
+	border-radius: 50px;
+}
+.width-progress{
+	background-color: #1e83d4;
+	height: 100%;
+}
+.next-level-experience{
+	font-size: 14px;	
+	text-align: center;
+	display: block;
+	color: #1e83d4;
+}
+.english-level-student{
+	font-size: 18px;
+	padding: 15px 0 10px;
+	text-align: center;
+	color: #666;
+	font-weight: 300;
+	border-bottom: 2px solid lightgray;
+}
+.mail-student, .callmemaybe{
+	font-size: 16px;
+	font-weight: 300;
+	text-align: center;
+	color: #666;
+	cursor: default;
+	padding: 5px;
+}
+.mail-student::selection, .callmemaybe::selection{
+	background-color: transparent;
+}
+
+/*.near-lesson .near-lesson .near-lesson .near-lesson .near-lesson .near-lesson .near-lesson .near-lesson .near-lesson .near-lesson */
+.fd{
+	display: flex;
+	flex-direction: column;
+	width: 30%;
+	margin-right: 20px;
+	min-width: 300px;
+	justify-content: space-between;
+	height: calc(100% - 10px);
+}
+.nearLesson-div{
+	background-color: #fff;
+	box-shadow: 0 0 20px -2px lightgray;
+	border-radius: 10px;
+	overflow: hidden;
+	height: calc(50% - 20px);
+}
+.nearLesson-title, .homeFrame-title{
+	height: 50px;
+	background-color: #fff;
+	display: flex;
+	position: sticky;
+	top: 0;
+	align-items: center;
+	justify-content: center;
+	font-size: 18px;
+	font-weight: 500;
+}
+.certificate-title{
+	z-index: 200;
+}
+.donthavelesson{
+	background-color: #fff;
+	box-shadow: 0 0 20px -2px lightgray;
+	border-radius: 10px;
+	overflow: hidden;
+}
+.clock-png{
+	height: 20px;
+	margin: 0 5px;
+}
+.links-to-courses{
+	padding: 10px 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.buttons-goto-courses{
+	padding: 8px 10px;
+	text-align: center;
+	/*border: 1px solid lightgray;*/
+	border-radius: 5px;
+	margin: 5px 0;
+	width: 70%;
+	color: white;
+	background-color: #1e83d4;
+}
+.body-nearLesson{
+	height: calc(100% - 50px);
+	overflow-y: scroll;
+}
+.rowNearLesson{
+	height: 70px;
+	display: flex;
+	font-weight: 200;
+	width: 90%;
+	font-size: 14px;
+	margin: 0 auto;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-top: 2px solid lightgray;
+	box-sizing: border-box;
+}
+.time-nearLesson{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 0 10px;
+}
+
+.homeFrame{
+	background-color: #fff;
+	box-shadow: 0 0 20px -2px lightgray;
+	border-radius: 10px;
+	height: 50%;
+	overflow: hidden;
+}
+.body-homeFrame{
+	height: calc(100% - 50px);
+	overflow-y: scroll;
+}
+.rowHomeFrame{
+	height: calc(100% / 3);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	border-top: 2px solid lightgray;
+	width: calc(90% - 10px);
+	font-weight: 300;
+	margin: 0 auto;
+	min-height: 60px;
+	padding: 10px 0;
+	box-sizing: border-box;
+}
+.home-quiz{
+	font-size: 14px;
+	display: block;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.bottom-settings-quiz{
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	font-size: 12px;
+}
+.bottom-settings-quiz a{
+	color: #1e83d4;
+	text-decoration: underline;
+}
+.certificateBlock{
+	width: 30%;
+	min-width: 300px;
+	max-height: calc(100% - 10px);
+	border-radius: 10px;
+	overflow: hidden;
+	overflow-y: scroll;
+	background-color: #fff;
+	box-shadow: 0 0 20px -2px lightgray;
+	padding: 0;
+	box-sizing: border-box;
+}
+.level-block{
+	position: relative;
+}
+.certificate-row{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: #fff;
+	height: 50px;
+	width: 90%;
+	color: #1e83d4;
+	cursor: pointer;
+	margin: 0 calc(5% + 3px) ;
+	position: relative;
+	padding: 0 10px;
+	box-sizing: border-box;
+	border-top: 2px solid lightgray;
+}
+.sert-png{
+	height: 30px;
+	position: absolute;
+	left: 5px;
+}
+.certificate-row svg{
+	position: absolute;
+	right: 10px;
+	font-size: 18px;
+	color: #1e83d4;
+}
+.info-circle{
+	cursor: pointer;
+}
+.info-plus-level{
+	position: absolute;
+	background-color: #fff;
+	padding: 10px;
+	z-index: 103;
+	left: calc(100% + 5px);
+	box-shadow: 0 0 20px 5px lightgray;
+	border-radius: 0 10px 10px 10px;
+	width: 220px;
+	top: 45px;
+}
+.exp-about{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 14px;
+	margin: 3px 0;
+}
+.plus-exp{
+	color: #1e83d4;
+	font-size: 16px;
+}
+.slide-fade-enter-active, .slide-fade-leave-active {
+  transition: all .2s ease;
+}
+.slide-fade-enter, .slide-fade-leave-to{
+  transform: translateX(10px);
+  opacity: 0;
+}
+.hint-popup{
+	position: absolute;
+	margin: 15px auto 0;
+	cursor: default;
+	color: white;
+	font-size: 12px;
+	max-width: 100%;
+	display: block;
+	background-color: #1e83d4;
+	padding: 3px 5px;
+	z-index: 99;
+	text-align: center;
+	border-radius: 7px;
+}
+.text-welcome-to-the-party{
+	margin: 0 0 15px;
+	font-size: 15px;
+	width: 90%;
+	text-align: center;
+}
+
+@media screen and (max-width: 768px){
+	.true-div{
+		width: calc(100% - 40px);
+		margin: 20px auto 0;
+	}
+	.magical-content{
+		position: fixed;
+		top: 50px;
+		padding: 0;
+		left: 0;
+		border-radius: 0;
+		width: 100vw;
+		height: calc(100% - 50px);
+		overflow: hidden;
+		overflow-y: scroll;
+	}
+	.profile-flexim{
+		height: auto;
+		width: 100%;
+		padding: 0;
+		flex-direction: column;
+	}
+	.student-profile-info{
+		width: 100%;
+		height: auto;
+		padding: 10px 20px;
+		margin: 0 0 20px;	
+	}
+	.fd{
+		width: 100%;
+		margin: 0 auto;
+	}
+	.nearLesson-div{
+		margin: 0 auto 20px;
+		height: auto;
+		width: calc(100% - 40px);
+	}
+	.certificateBlock{
+		width: 100%;
+		height: auto;
+	}
+	.body-nearLesson{
+		max-height: 350px;
+		overflow: hidden;
+	}
+	.homeFrame, .donthavelesson, .certificateBlock{
+		margin: 0 auto 20px;
+		width: calc(100% - 40px);
+	}
+}

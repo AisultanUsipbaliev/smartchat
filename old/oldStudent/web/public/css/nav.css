@@ -1,0 +1,332 @@
+/*************common***************/
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+body
+{
+	margin: 0;
+	padding: 0; 
+	overflow: hidden;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+.wrapper
+{
+	margin-top: 8vh;
+	width: 100%;
+	height: 92vh;
+	background: linear-gradient(to bottom, #FFF ,#e8eaec );
+	overflow-x: hidden;
+}
+
+.content
+{
+ 	margin-left: 175px;
+    width: calc(100% - 175px);
+    height: 92vh;
+    position: fixed;
+}
+
+.backpop
+{
+	width: 100%;
+	height: 95vh;
+	background: rgba(0,0,0,0.5);
+	z-index: 2;
+	position: fixed;
+	display: none;
+}
+
+/*.popup
+{
+	width: 50%;
+	height: 80vh;
+	position: fixed;
+	z-index: 2;
+	margin: 6vh auto;
+	position: relative;
+	border: .1vh solid white;
+	background: white;
+	border-radius: 5px;
+}*/
+.popup img{
+	border-radius: 2vh;
+}
+ 
+.popup {
+    margin: auto;
+    display: block;
+    max-width: 100vw;
+    max-height: 80vh;
+    /*text-align: center;*/
+    padding: 0;
+    height: 150px;
+}
+
+.popup { 
+    animation-name: zoom;
+    animation-duration: .7s;
+
+}
+
+.popup-back {
+	margin: auto;
+    display: block;
+    max-width: 100vw;
+    max-height: 80vh;
+    /*text-align: center;*/
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+}
+
+.popup-back {
+	animation-name: backzoom;
+    animation-duration: .4s;
+}
+
+@keyframes zoom {
+    from {transform:scale(0)} 
+    to {transform:scale(1)}
+}
+
+
+@keyframes backzoom {
+    from {transform:scale(1)} 
+    to {transform:scale(0)}
+}
+
+
+/*********scroll*********/
+::-webkit-scrollbar{
+width: .7vh;
+}
+
+::-webkit-scrollbar-track {
+background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+-webkit-border-radius: 1vh;
+-webkit-height: .2vh;
+border-radius: 1vh;
+background-color: gray;
+}
+
+/*********hidden scroll************/
+
+.hidden_scroll::-webkit-scrollbar{
+width: .2vh;
+}
+
+.hidden_scroll::-webkit-scrollbar-track 
+{
+background-color: transparent;
+}
+
+.hidden_scroll::-webkit-scrollbar-thumb 
+{
+-webkit-border-radius: .2vh;
+-webkit-height: .2vh;
+border-radius: 0vh;
+background-color: gray;
+}
+/************left menu***********/
+.nav_menu
+{
+	float: left;
+	/*width: 26vh;*/
+	width: 175px;
+	height: 100%;
+	min-width: 5vh;
+	border-right: 1px solid lightgray;
+	overflow: hidden;
+	position: relative;
+	/*border-bottom: .1vh solid #97b2ca;*/
+}
+
+.nav_menu a
+{
+	text-decoration: none;
+}
+
+.nav_menu div
+{
+	display: flex;
+}
+
+.menu_item--desc
+{
+	padding: 1.5vh 2vh;
+	cursor: pointer;
+	position: relative;
+	vertical-align: middle;
+    font-family: 'Montserrat', sans-serif;
+}
+.menu_item--desc:hover
+{
+	background: #e6edf4;
+	border-right: 1px solid #97b2ca;
+}
+.menu_item--desc img
+{
+	height: 3vh;
+	float: left;
+	margin: 0 2vh 0 0;
+}
+.menu_item--desc span
+{
+	float: left;
+	color: #97b2ca;
+	font-size: 2.2vh;
+}
+div.notActivated{
+	position: fixed;
+	width: 176px;
+	bottom: 0;
+	display: block;
+	height: 20%;
+	color: #e6ecf1;
+	text-align: center;
+	background-color: #4f4f4f;
+	animation: jumper 8s linear 1s infinite running;
+	cursor: default;
+	user-select: none;
+	overflow: hidden;
+}
+@keyframes jumper{
+	from{bottom: 0}
+	51%{bottom: 0}
+	52.5%{bottom: 5vh}
+	54%{bottom: 0}
+	to{bottom: 0}
+}
+.emBut{
+	border: 0.1vh solid #000;
+	background-color: transparent;
+	float: left;
+	width: 93.5%;
+	padding: 3% 5%;
+	margin: 2.5%;
+	cursor: pointer;
+	color: #e6ecf1;
+	outline: none;
+}
+.emBut:hover{
+	background-color: #e6ecf1;
+	color: #000;
+}
+.emInput{
+	background-color: transparent;
+	border: 0.1vh solid #000;
+	color: #e6ecf1;
+}
+/************left menu end********/
+
+
+/************header**************/
+.header
+{
+	position: fixed;
+	top: 0;
+	right: 0;
+	left: 0;
+	height: 8vh;
+	background: linear-gradient(135deg, #3b679e 0%,#2b88d9 10%,#207cca 23%,#7db9e8 100%);
+	/* background: linear-gradient(45deg, rgba(92,123,158,0.8) 3%, rgba(4,152,201,1) 15%, rgba(109,141,159,1) 20%, rgba(92,123,158,0.8) 100%); */
+  box-shadow: 0 0 4vh .2vh #eceef1;
+  z-index: 20;
+}
+
+.logo
+{
+	float: left;
+	cursor: pointer;
+	margin: 0 5vh;
+}
+
+.logo img
+{
+	padding-top: 1vh;
+	width: 10vh;
+	float: left;
+}
+
+.smart_title
+{
+	color: #eee;
+    float: left;
+    font-size: 4vh;
+    vertical-align: middle;
+    padding: 1.5vh 1vh;
+}
+.smart_title a
+{
+	color: #eee;
+	text-decoration: none;
+}
+
+.current_nav
+{
+	background: #d6ddf9;
+	border-right: 1px solid #97b2ca;
+}
+.newMessage{
+	width: 1.25vh;
+	height: 1.25vh;
+	border-radius: 50%;
+	position: absolute;
+	right: 1vw;
+	margin-top: 1vh;
+	background: rgba(4,132,181,0.8);
+	color: #fff;
+	vertical-align: middle;
+	text-align: center;
+	align-items: center;
+	justify-content: center;
+	animation: alphaColor 2s linear infinite alternate;
+}
+@keyframes alphaColor{
+	from{opacity: 1}
+	to{opacity: 0.5}
+}
+
+/************header end**********/
+
+/*Это для браузера Chrome:*/
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/*Это для браузера Firefox:*/
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+input[type="number"]:hover,
+input[type="number"]:focus {
+  -moz-appearance: number-input;
+}
+
+.scroll{
+    position:absolute;
+    display: none;
+    top: 0;
+    right:0%; 
+    width: 0.5vw; 
+    min-height:2vh;
+    background: #0088b8;
+    cursor:pointer;
+    border-radius: 0.5vh;
+    transition: 0.1s;
+}
+.loadIMG{
+	height: 7vh;
+	position: absolute;
+	top: 0.5vh;
+	right: 0.5vw;
+	z-index: 1000000;
+}

@@ -1,0 +1,147 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Serif');
+.result-list {
+	background: #fff;
+    padding: 0;
+    border-radius: .5vh;
+    width: 125vh;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    height: 65vh;
+    margin: 12vh 0 0 10vh;
+	font-family: 'PT Serif', serif;
+}
+.result-list__header {
+	background-color: #e6edf4;
+	/*border-radius: 0.5vh;*/
+}
+.table-row {
+	display: flex; 
+	border-bottom: 0.3vh solid #dadada;
+	font-size: 2.2vh;
+	height: 8vh;
+}
+.table-cell {
+	position: relative;
+	border-left: 0.3vh solid #dadada;
+	width: 20%; 
+	display: flex;  
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+.table-cell:first-child {
+	border-left: 0;
+}
+.table-cell_width10{
+	width: 7%;
+}
+.table-cell_width25 {
+	width: 25%;
+}
+.table-cell_width15 {
+	width: 15%;
+}
+.table-cell_width30{
+	width: 30%;
+}
+.result-list__body{
+	background-color: #fff;
+	overflow: hidden;
+	/*height: 100%;*/
+}
+.result-list__body::-webkit-scrollbar {
+	/*width: 2vh;*/
+	width: 0vh;
+} 
+.result-list__body::-webkit-scrollbar-thumb {
+  background-color: #97b2ca;
+  border-radius: 1vh;
+}	
+.nopeResult{
+	width: 70%;
+	margin: 8vh auto;
+	text-align: center;
+	font-size: 20px;
+	padding: 2vh 1vh;
+	border-bottom: 1px solid lightgray;		
+	font-weight: 400;	
+}
+
+/*hw*/
+.arrowSort{
+	width: 15px;
+	position: absolute;
+	right: 10px;
+	transition: 0.3s;
+	cursor: pointer;
+}
+.assessment{
+	cursor: pointer;
+	border: 0.2vh solid #85a4af;
+	background-color: transparent;
+	border-radius: 2vh;
+	padding: 0.5vh 0.5vw;
+	text-align: center;
+	transition: 0.3s;
+}
+.assessment:hover{
+	background-color: #0088b8;
+	color: #fff;
+}
+.deleteImg{
+	width: 15%;
+	margin: 0.1vh 0.3vw;
+	cursor: pointer;
+}
+.deleteImg:hover{
+	transform: scale(1.1);
+}
+#scroll{
+	position:absolute;
+	display: none;
+	top: 0;
+	right:0%; 
+	width: 0.5vw; 
+	min-height:5vh;
+	background: #0088b8;
+	cursor:pointer;
+	border-radius: 0.5vh;
+}
+.home-work__button {
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    width: 9vw;
+    font-size: 90%;
+    display: inline-block;
+    padding: 1.3vh 1.3vw;
+    position: relative;
+    background-color: transparent;
+    overflow: hidden;
+    border: 0.2vh solid #85a4af;
+    border-radius: 2vh;
+    font-family: 'Montserrat', sans-serif;
+    color: #4b717d;
+    transition: .2s ease-in-out;
+    /*width: 120%;*/
+}
+.home-work__button:before {
+  content: "";
+  background: linear-gradient(90deg, rgba(255,255,255,.1), rgba(255,255,255,.5));
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top: -8px;
+  left: -75px;
+  transform: skewX(-45deg);
+}
+.home-work__button:hover {
+    background: #5ba3ea;
+    color: #fff;
+}
+.home-work__button:hover:before {
+  left: 150px;
+  transition: .5s ease-in-out;
+}

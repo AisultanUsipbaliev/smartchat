@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<title>SmartChat</title> 
+	<meta charset="utf-8">
+	<link rel="icon" type="img/png" href="static/img/logo.png">
+	<link rel="stylesheet" type="text/css" href="static/style/result.css?ver=<%=version%>">
+	<link rel="stylesheet" type="text/css" href="static/style/profile.css?ver=<%=version%>">
+</head>
+<body>
+	<% include ../partial/header %>
+	<div class="wrapper">
+		<% include ../partial/menu %>
+		<div class="result-list container">
+			<div class="result-list__header" id="list__header" style="height: calc(100% - 0.125vh)"></div>
+		</div>
+	</div>
+<script src="static/js/homework/result.js?ver=<%=version%>"></script>
+</body>
+</html>

@@ -1,0 +1,381 @@
+/*.start_book{
+	height: 150px;
+}
+.start_block{
+	background: white;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    border-radius: 20px;
+}
+.start_block span{
+	margin: 30px 0;
+	width: 100%;
+	font-family: 'Arsenal', bold;
+	font-size: 18px;
+}
+.start_btns{
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.start_btns button{
+	padding: 5px 15px;
+	border-radius: 5px;
+	font-size: 16px;
+	margin: 0 10px;
+}
+.start_btns button:hover{
+	transform: scale(1.05);
+	transition: .1s ease;
+}
+.skip_start{
+	background-color: transparent;
+	color: #1e83d4;
+	border: 1px solid #1e83d4;
+}
+.start_btn{
+	background-color: #1e83d4;
+	color: white;
+	border: none;
+}
+button{
+	font-family: 'Arsenal', bold;
+	outline: none;
+	cursor: pointer;
+}
+.text_block{
+    position: absolute;
+    background: white;
+    width: 250px;
+    padding: 10px;
+	font-family: 'Arsenal', bold;
+    text-align: center;
+	z-index: 102;
+    border-radius: 20px;
+    color: #1e83d4;
+    box-shadow: 0 0 30px -10px #000;
+}
+.tutorial{
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	left: 0;
+	top: 0;
+	background-color: rgba(0,0,0,.5);
+	z-index: 100;
+	display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.smarti{
+	height: 250px;
+	position: absolute;
+	z-index: 102;
+}
+.disb{
+	display: none;
+}
+.text_content{
+	font-size: 16px;
+	line-height: 100%;
+}
+.tale{
+	z-index: 102;
+	position: absolute;
+    height: 25px;
+}
+.buttons_block{
+	margin: 20px 0 0;
+    justify-content: space-around;
+    display: flex;
+}
+.next_prev{
+	cursor: pointer;
+	font-size: 14px;
+}
+.next_prev:hover{
+	transform: scale(1.2);
+	transition: .1s ease;
+}
+.skip{
+	font-size: 18px;
+    color: #258acc;
+    position: absolute;
+    bottom: 5px;
+    right: 20px;
+    z-index: 101;
+    cursor: pointer;
+    background: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .3s;
+}
+.fade-enter, .fade-leave-to{
+  opacity: 0;
+}
+.lost-enter-active, .lost-leave-active {
+  transition: .3s;
+}
+.lost-enter, .lost-leave-to{
+	opacity: 0;
+}
+.zix{
+  z-index: 101;
+}
+.zis{
+  z-index: 101;
+  box-shadow: 0 0 100px 2px #1e83d4;
+}
+.notification_tutorial{
+	background-color: #fff;
+	position: absolute;
+	right: 10px;
+	top: 60px;
+	z-index: 101;
+	border-radius: 10px;
+	width: 300px;
+}
+.notification_title{
+	text-align: center;
+	border-bottom: 1px solid lightgray;
+	padding: 10px;
+}
+.notificate_body{
+	display: flex;
+	align-items: center;
+}
+.notificate_mail{
+	height: 30px;
+	margin: 5px;
+}
+.confirmed_mail{
+	font-size: 14px;
+	margin-right: 10px;
+}
+.profile_smarti{
+    bottom: 30px;
+    right: 0;
+}
+.profile_text{
+    right: 180px;
+    bottom: 200px;
+}
+.profile_tale{
+    bottom: 15px;
+    right: -21px;
+    transform: rotate(-90deg);
+}
+.arrow_profile{
+	z-index: 105;
+    position: absolute;
+    height: 50px;
+    left: 80px;
+    top: 70px;
+    transform: rotateX(180deg) rotate(90deg);
+}
+.arrow_courses{
+	z-index: 105;
+    position: absolute;
+    height: 50px;
+    left: 80px;
+    top: 120px;
+    transform: rotateX(180deg) rotate(90deg);
+}
+.arrow_schedule{
+	z-index: 105;
+    position: absolute;
+    height: 50px;
+    left: 80px;
+    top: 170px;
+    transform: rotateX(180deg) rotate(90deg);	
+}
+.arrow_chat{
+	z-index: 105;
+    position: absolute;
+    height: 50px;
+    left: 80px;
+    top: 220px;
+    transform: rotateX(180deg) rotate(90deg);	
+}
+.arrow_test{
+	z-index: 105;
+    position: absolute;
+    height: 50px;
+    left: 80px;
+    top: 270px;
+    transform: rotateX(180deg) rotate(90deg);	
+}
+.arrow_home{
+	z-index: 105;
+    position: absolute;
+    height: 50px;
+    left: 80px;
+    top: 320px;
+    transform: rotateX(180deg) rotate(90deg);	
+}
+.arrow_feed{
+	z-index: 105;
+    position: absolute;
+    height: 50px;
+    left: 80px;
+    top: 370px;
+    transform: rotateX(180deg) rotate(90deg);	
+}
+.arrow_faq{
+	z-index: 105;
+    position: absolute;
+    height: 50px;
+    left: 80px;
+    top: 370px;
+    transform: rotateX(180deg) rotate(90deg);	
+}
+.arrowSearch{
+	top: 110px;
+	position: absolute;
+	z-index: 105;
+	right: 7%;
+	height: 50px;
+	transform: rotate(0deg) rotateX(180deg);
+}
+.arrow_hw{
+	position: absolute;
+	z-index: 105;
+	height: 50px;
+	right: 280px;
+	top: 245px;
+	transform: rotate(90deg) rotateX(180deg) rotateY(180deg);
+}
+.active_li_side{
+	position: relative;
+    z-index: 101;
+	box-shadow: inset 25px 0 35px -25px #33b5e5;
+    cursor: pointer;
+    background: white;
+}
+.faq_text{
+	left: 180px;
+	bottom: 180px;
+}
+.faq_smarti{
+	left: 0;
+    bottom: 10px;
+}
+.faq_tale{
+	left: -21px;
+    transform: rotate(90deg);
+    bottom: 17px;
+}
+
+
+.header_text{
+	left: 180px;
+	bottom: 180px;
+}
+.header_smarti{
+	left: 0;
+    bottom: 10px;
+}
+.header_tale{
+	left: -21px;
+    transform: rotate(90deg);
+    bottom: 17px;
+}
+
+.settings_text{
+	left: 20px;
+	bottom: 270px;
+}
+.settings_smarti{
+	left: 0;
+    bottom: 10px;
+}
+.settings_tale{
+	left: 51px;
+    transform: rotate(0deg);
+    bottom: -25px;
+}
+
+.sidebar_text{
+	left: 80px;
+	bottom: 270px;
+}
+.sidebar_smarti{
+	left: 40px;
+    bottom: 10px;
+}
+.sidebar_tale{
+	left: 71px;
+    transform: rotate(0deg);
+    bottom: -25px;
+}
+.time_text{
+	right: 20px;
+	bottom: 300px;
+}
+.time_smarti{
+	right: 0px;
+    bottom: 30px;
+}
+.time_tale{
+	right: 100px;
+    transform: rotate(0deg);
+    bottom: -25px;
+}
+.chat_text{
+	right: 20px;
+	bottom: 350px;
+}
+.chat_smarti{
+	right: 0px;
+    bottom: 80px;
+}
+.chat_tale{
+	right: 100px;
+    transform: rotate(0deg);
+    bottom: -25px;
+}
+.chat1_text{
+	left: 20px;
+	top: 20px;
+}
+.chat1_smarti{
+	left: 0px;
+    top: 150px;
+}
+.chat1_tale{
+	left: 90px;
+    transform: rotate(0deg);
+    bottom: -25px;
+}
+
+
+.skip_t{
+	background: white;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+	font-family: 'Arsenal', bold;
+    height: 140px;
+}
+.skip_t>.btns>button{
+	border-radius: 5px;
+	border: none;
+	padding: 5px 10px;
+	color: white;
+	margin: 0 10px;
+	cursor: pointer;
+	font-size: 15px;
+	font-family: 'Arsenal', bold;
+	background-color: #1e83d4;
+}
+.z9{
+	z-index: 999;
+}*/

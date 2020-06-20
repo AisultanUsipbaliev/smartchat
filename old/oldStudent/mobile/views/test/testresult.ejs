@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="icon" type="img/png" href="/mobile/img/logo.png">
+	<meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="/mobile/css/test.css?ver=<%=version%>">
+	<%include ./../parts/metrica%>
+</head>
+<body>
+<%include ./../parts/header%>
+	<div class="testBlock" id="contentResult">
+		
+	</div> 
+<script type="text/javascript">
+	let id = top.location.href.split('/').slice(4);
+	let contentResult = document.getElementById('contentResult')
+	let corAns = 0;
+	POST('/test', `method=GET-RESULT&&test_id=${id}`, function(res, status){
+		contentResult.innerHTML =`
+		<div class="testTitle"></div><div class="testBody" id="testBody">
+		</div>
+		`;
+		let result = JSON.parse(res.result.answers);
+		let layout = document.getElementById('testBody')
+		for(let i = 0; i < res.testInfo.length; i++){
+			res.testInfo[i].variants = res.testInfo[i].variants.split('%%');
+			paintResult(res.testInfo[i], result[i], layout, i)
+		}
+		document.getElementsByClassName('testTitle')[0].innerHTML = `
+		Тест: ${res.testName.trim()}
+		<span>${corAns} / ${res.testInfo.length}</span>
+		<a class = 'test_button' href="/tests">Назад</a>`;
+	});
+
+	function paintResult(data, result, layout, i){
+		let div = `<div class="test_question"><div class="questTitle">${i+1}) ${data.quest_title}</div>`
+		let color = '';
+		let ans = false;
+		if(data.correct == result.correct){
+			ans = true;
+		}
+		for (let i = 0; i < data.variants.length - 1; i++) {
+			if(i+1 == getInt(data.correct)){
+				color = 'rgba(95, 175, 75, 1)';
+				if(ans) corAns++;
+			}else if(ans == false && i+1 == getInt(result.correct)){
+				color = 'rgba(220, 75, 75, 1)';
+			}else{
+				color = 'none';
+			}
+			div += `<div class="right_result" style="color: ${color}">${data.variants[i]}</div>`;
+		}
+		div += '</div>'
+		layout.innerHTML +=div;
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+.content{
+  background: #fff;
+  padding: 20px;
+}
+.journal-message {
+  white-space: normal;
+}
+.delete-btn{
+	position: fixed;
+	right: 10px;
+	bottom: 10px;
+	background-color: #fff;
+	border: none;
+	outline: none;
+	color: #009688;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
+	width: 50px;
+	font-size: 25px;
+	transition: 0.1s;
+	cursor: pointer;
+}
+.delete-fade-enter-active, .delete-fade-leave-active{
+  transition: 0.3s;
+  transform: scale(1.075);
+}
+.delete-fade-enter, .delete-fade-leave-to{
+  opacity: 0;
+  transform: scale(0.2);
+}

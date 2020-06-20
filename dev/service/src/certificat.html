@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<div class="certificate_border">
+	<img src="./number_sign.png" class="number">
+	<span class="numbers">${number}</span>
+	<img src="./interp.png" class="inter">
+	<h1 class="certificate_title">CERTIFICATE</h1>
+	<p class="certify">This is to certify that</p>
+	<p class="name_certify">${name}</p>
+	<div class="bottom"></div>
+	<p class="achievement">has been awarded achievement.</p>
+	<p class="level">Level: ${level}</p>
+	<p class="director">Director:  <br>
+		Bakhram Tashtemirov
+	</p>
+	<div class="bb"></div>
+	<p class="first">Date of issue: <span>${date}</span></p>
+	<img src="./stamp.png" class="stamp">
+	<img src="./podpis.png" class="podpis">
+</div>
+<style type="text/css">
+	@import url('https://fonts.googleapis.com/css?family=Lato:900');
+	@import url('https://fonts.googleapis.com/css?family=Charm|Roboto');
+	* {
+		font-family: 'Lato';
+	}
+	.certificate_border{
+		width: 785px; /*825*/
+		height: 539px; /*579*/
+		margin: 27px 20px 0;
+		border: 5px solid #1e83d4;
+		background-image: url(./transparent_logo.png);  
+		background-size: 90%;
+		background-repeat: no-repeat;
+		background-position: center center;
+		padding: 13px 20px;
+		border-radius: 1px;
+		box-sizing: border-box;
+		position: relative;
+	}
+	.inter{
+		width: 150px;
+		position: absolute;
+		right: 25px;
+	}
+	.first{
+		position: absolute;
+	    bottom: 15px;
+	    right: 20px;
+	}
+	.certificate_title{
+		font-size: 60px;
+		letter-spacing: 1px;
+		position: absolute;
+		left: 200px;
+		font-family: 'Lato', sans-serif;
+		text-align: center;
+		color: #1e83d4;
+	}
+	.certify{
+		text-align: center;
+		top: 170px;
+		font-weight: 600;
+		font-size: 18px;
+		position: absolute;
+		width: calc(100% - 40px);
+	}
+	.about{
+		text-align: center;
+		top: 160px;
+	    font-size: 20px;
+	    position: absolute;
+	    left: 200px;
+	}
+	.certify, .achievement, .level{
+		margin: 0;
+	}
+	.name_certify{
+		padding: 10px 0 5px;
+		font-size: 30px;
+		margin: 0;
+		width: 100%;
+		font-family: 'Charm', cursive;
+		text-align: center;
+		top: 190px;
+		position: absolute;
+	}
+	.achievement{
+		padding: 5px 0 10px;
+	    width: calc(100% - 40px);
+	    text-align: center;
+	    top: 250px;
+	    position: absolute;
+	    font-weight: 600;
+	    font-size: 18px;
+	    color: black;
+	}
+	.level{
+	    width: calc(100% - 40px);
+	    text-align: center;
+	    font-weight: 600;
+	    font-size: 18px;
+	    position: absolute;
+	    top: 298px;
+	}
+	.bottom{
+		position: absolute;
+		border-bottom: 2px solid;
+		width: 500px;
+		left: 140px;
+		top: 235px;
+	}
+	.bb{
+		position: absolute;
+		border-bottom: 1px solid;
+		width: 130px;	
+		bottom: 40px;
+		left: 40px;		
+	}
+	.stamp{
+		height: 120px;
+		position: absolute;
+		bottom: 5px;
+		left: 120px;
+	}
+	.podpis{
+		height: 100px;
+	    position: absolute;
+	    bottom: -3px;
+	    left: 70px;
+	}
+	.director{
+		position: absolute;
+	    bottom: 55px;
+	    left: 40px;
+	}
+	span{
+		font-family: 'Roboto', sans-serif;
+	}
+	.number{
+		position: absolute;
+		top: 16px;
+		height: 12px;
+	}
+	.numbers{
+		position: absolute;
+		left: 40px;
+	}
+</style>

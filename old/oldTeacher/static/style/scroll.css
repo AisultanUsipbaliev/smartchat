@@ -1,0 +1,11 @@
+.scroll{
+	position:absolute;
+	display: none;
+	top: 0;
+	right:0%; 
+	width: 0.5vw; 
+	min-height:5vh;
+	background: #0088b8;
+	cursor:pointer;
+	border-radius: 0.5vh;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<link rel="icon" type="img/png" href="/mobile/img/logo.png">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+	<link rel="stylesheet" href="/mobile/css/homework.css?ver=<%=version%>">
+	<%include ./../parts/metrica%>
+</head>
+<body>
+	<%include ./../parts/header%> 
+	<div class="home-work" id="content"></div>
+<script type="text/javascript">
+	let template = top.location.href.split('/').slice(4);
+	let content = document.getElementById('content');
+
+	POST('/homework', `method=CONTENT&&temp_id=${template}`, (res, stat)=>
+		{
+				console.log(res)
+			if(stat === 200){
+				content.innerHTML = `
+				<div class="home-work__header">
+					<div>Задание</div>
+				</div>
+				<div class="home-work__body">
+					<div class="home-work__task">
+						<div class="home-work__text" id="task">${res.body[0].content}</div>
+						<div class="home-work__template" id="template"></div>
+					</div>
+				</div>
+				<input type="file" id="file_input" change="getChahge()" style="display: none;">
+				`;
+				let template = document.getElementById('template')
+				for(let i = 0; i < res.body.length; i++)
+					paintHomework(res.body[i], template);
+				content.innerHTML +=`
+				<div class="home-work__footer" id="footer">
+					${!res.results.filePath ?
+						'<button onclick="sendHW()">Отправить</button>'
+					:'<button><a href="/homeworks">Назад</a></button>'
+					}
+				</div>
+				`
+			}else{
+				content.innerHTML = `
+				<div class="home-work__header">
+					<div>Кажется что-то пошло не так</div>
+				</div>
+				`
+			}
+		})
+	function paintHomework(data, layout){
+		console.log(data)
+		layout.innerHTML +=`
+		<div class="temp">
+			${data.type == 2 ?
+			'<img src="/common/files/' + data.content +'">'
+			: data.type == 3 ?
+			'<audio src="/common/files/' + data.content + '"></audio>'
+			: data.type == 4 ?
+			'<a href="/common/files/' + data.content + '"><img src="/img/file.svg"></a>'
+			: data.type == 5 ?
+			'<video src="/common/files/' + data.content + '" controls="controls"></video>'
+			: ''
+			}
+		</div>
+		`;
+	}
+	function sendHW(){
+		document.getElementById('file_input').click();
+	}
+	function getChahge(){
+		let files = this.files[0];
+		uploadFile('/homework', files, {method: 'upload', template: template}, function(res){
+			if(res.status == 200)
+			top.location.href = '/homeworks';
+		});
+	}
+</script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+.reqHead{
+	text-align: center;
+	padding: 10px;
+	display: block;
+	margin-top: 8vh;
+	font-family: 'Montserrat', sans-serif;
+}
+.reqHead p{
+	font-size: 18px;
+}
+.reqHead h2{
+	font-size: 3vh;
+}
+.requestTitle{
+	font-size: 18px;
+	padding-bottom: 20px;
+	font-weight: 400;
+}
+.requestDayName{
+	padding: 15px 0;
+}
+.requestDays{
+	margin-top: 20px;
+}
+.blockWithDay{
+	text-align: center;
+	width: 100%;
+	background-color: #dadada;
+	border-radius: 1vh;
+	box-sizing: border-box;
+	margin-bottom: 30px;
+	padding-bottom: 20px;
+}
+.blockWithDay span{
+	font-size: 2.5vh;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+} 
+.blockWithDay img{
+	width: 30px;
+	height: 30px;
+	position: relative;
+	z-index: 1;
+	top: 8px;
+}
+.requestAccept{
+	background-color: #33b5e5;
+	border-radius: 1vh;
+	padding: 1.5vh 20%;
+	font-size: 2.5vh;
+	border: none;
+	outline: none;
+	color:  white;
+	margin: 20px auto;
+}
+.blockWithTime{
+	width: 100%;
+}
+.requestSelector{
+	font-size: 14px;
+	padding: 5px 20px;
+	border: 2px solid white;
+	border-radius: 1vh;
+	outline: none;
+	margin-bottom: 10px;
+}
+.nameTeacher{
+	width: 100%;
+	text-align: left;
+	padding: 2vh;
+	background-color: #dadada;
+	box-sizing: border-box;
+	margin-top: 1vh;
+	margin-bottom: 1vh;
+}
+.selectTeacher{
+	float: right;
+    padding: 1vh;
+    margin-top: -5px;
+    font-size: 1.5vh;
+	border-radius: 1vh;
+    background: #fff;
+    border: none;
+    outline: none;
+}
+
+.requestTeachers h2
+{
+	text-align: center;
+}
+
+.requestTeachers div
+{
+	margin-top: 1vh;
+	/*height: 5vh;*/
+	text-align: center;
+	border-bottom: .2vh solid gray;
+}
+
+/*.requestTeachers button
+{
+	float: right;
+    margin-right: 2vh;
+    border-radius: 1vh;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    background: lightblue;
+    border: .1vh solid #dadada;
+    color: black;
+    font-size: 80%;
+    height: 4vh;
+    width: 30%;
+}
+
+.requestTeachers button:hover
+{
+	background: skyblue;
+	border: .1vh solid white;
+}*/
+
+.requestTeachers button {
+    width: 25%;
+	height: 4vh;
+    margin-left: 2vh;
+    outline: none;
+    background: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    outline: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid #85a4af;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    color: #4b717d;
+    transition: .2s ease-in-out;
+}
+.requestTeachers button:before {
+  content: "";
+  background: linear-gradient(90deg, rgba(255,255,255,.1), rgba(255,255,255,.5));
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top: -8px;
+  left: -75px;
+  transform: skewX(-45deg);
+}
+.requestTeachers button:hover {
+    background: #5ba3ea;
+    color: #fff;
+}
+.requestTeachers button:hover:before {
+  left: 150px;
+  transition: .5s ease-in-out;
+}
+
+.requestTeachers p
+{
+	display: inline;
+	margin: 0;
+	margin-top: 1vh;
+	font-size: 4vh;
+}
+
+
+.redactInput{
+	padding: 5px;
+  width: 100%;
+  border-radius: 10px;
+  border: 1px solid #4486c3;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+  box-sizing: border-box;
+  margin-top: 15px;
+  outline: none;
+}
+
+.twoButton__container {
+	display: flex;
+	width: 100%;
+	height: 100%;
+}
+.twoButton {
+display: flex;
+  cursor: pointer;
+  text-decoration: none;
+  outline: none;
+  /* display: inline-block; */
+  padding: 1vh 3vw;
+  margin: 2.5vh 1vw;
+  position: relative;
+  overflow: hidden;
+  border: 2px solid #85a4af;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  color: #4b717d;
+  transition: .2s ease-in-out;
+  background: #fff;
+  font-size: 2vh;
+}
+.twoButton:before {
+  content: "";
+  background: linear-gradient(90deg, rgba(255,255,255,.1), rgba(255,255,255,.5));
+  height: 50px;
+  width: 50px;
+  position: absolute;
+  top: -8px;
+  left: -75px;
+  transform: skewX(-45deg);
+}
+.twoButton:hover {
+    background: #5ba3ea;
+    color: #fff;
+}
+.twoButton:hover:before {
+  left: 150px;
+  transition: .5s ease-in-out;
+}
+.sale{
+	width: 35%;
+	position: absolute;
+	bottom: 5.5vh;
+	right: 0;
+}
+
+.button-container {
+	display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.haveCourse-h2 {
+	margin: 0;
+	margin-top: 4%;
+}
+
+.haveCourse-h3 {
+	margin: 0;
+}
+
+.twoButton-delete {
+	width: 35%;
+	display: flex;
+	text-align: center;
+	justify-content: center;
+}

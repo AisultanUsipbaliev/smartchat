@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<link rel="icon" type="img/png" href="/mobile/img/logo.png">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+	<link rel="stylesheet" type="text/css" href="/mobile/css/test.css?ver=<%=version%>">
+	<%include ./../parts/metrica%>
+</head>
+<body>
+<%include ./../parts/header%>
+	<div class = 'testBlock'></div>
+	</div>
+<script>	
+window.audio = new Audio();
+window.current_time_td;
+window.current_progress;
+window.current_img = document.createElement('img');
+POST('/test','method=GET-LEVEL',function(res, status){
+	showPopUpTest(res.testList, 0)
+})
+function showPopUpTest(data, counter)
+{
+	let test = document.querySelector('.testBlock');
+	test.innerHTML = '';
+	for (var i = 0; i < data.length; i++) 
+		data[i].variants = data[i].variants.split('%%');
+
+	addTest(data, test);
+
+	window.cnt += counter;
+
+}
+
+//Глобальные переменные
+	window.cnt = 0;
+	let div_count = 0;
+	let dataer = {};
+//Функция создает тело
+function addTest(data, layout)
+{
+	dataer = data;		
+	let title = document.createElement('div');
+	title.classList.add('testTitle');
+	title.innerHTML = '<div class="test-title">Тест для определения уровня английского:</div>';
+	layout.appendChild(title);
+	let questions = data;
+	let div = document.createElement('div');
+	div.classList.add('testBody');
+	div.id = 'testBody';
+	for(let i = 0; i<questions.length; i++)
+		addQuestion(questions[i], div, i+1);
+
+	let max = data.reduce(function (prev, current) {
+	   return (prev.id > current.id) ? prev.id : current.id
+	});
+
+	max -= 10;
+
+
+	addTestControlPanel(title, div, max);
+
+	layout.appendChild(div);
+}
+//Функция создает вопросы
+function addQuestion(data, layout, num)
+{
+	let div = document.createElement('div');
+	div.classList.add('test_question');
+	div.id = data.id;
+	div.innerHTML =  `<div class = 'questTitle'>${data.question}</div>`;
+	if(data.title){
+		let title = document.createElement('div');
+		title.classList.add('questTitle');
+		title.style.backgroundColor = '#fff';
+		title.style.width = "calc(100% + 20px)";
+		title.style.marginLeft = "-10px";
+		title.style.marginTop = "-10px";
+		title.innerHTML = data.title;
+		div.firstChild.insertBefore(title, div.firstChild.firstChild);
+	}
+	if(data.audio) addAudioLevel(data, div.firstChild);
+	
+	layout.appendChild(div);
+
+	for(let i=0; i<data.variants.length; i++) addAnswer(data.variants[i], div, num);	
+}
+
+// Функция добавляет аудио в чат
+	function addAudioLevel(data, layout)
+	{
+		console.log(123)
+		layout.innerHTML +=`
+		<table>
+			<tr>
+				<td><img class="play_btn" src="/img/play.png" onclick="playAudio(this, '${data.audio}', ${data.id})"></td>
+				<td class="audio_time" id="audio_time${data.id}">00:00</td>
+				<td>
+					<div class="audio_line" id="audio_line${data.id}" onclick="polosa(event, ${data.id})">
+						<div class="audio_progress" id="progress${data.id}"></div>
+					</div>
+				</td>
+			</tr>
+		</table>
+		`
+	}
+
+//полоса
+function polosa(e, id){
+	let time_td = document.getElementById('audio_time' + id);
+	let progress = document.getElementById('progress' + id);
+	let line = document.getElementById('audio_line' + id);
+	if(!e.target.classList.contains('audio_progress') && progress == current_progress)
+	{
+		let max = line.offsetWidth;
+		let cur = e.offsetX;
+
+		let procent = cur/max;
+
+		let toset = audio.duration * procent;
+		audio.currentTime = toset;
+	}
+}
+//Проигрывание аудио
+function playAudio(img, content, id){
+	let ms = img.src.split('/');
+
+	if(ms[ms.length-1] == 'play.png') 
+	{
+		let buts = document.getElementsByClassName('play_btn');
+		for(let i = 0; i<buts.length; i++)
+		{
+			buts[i].src = '/img/play.png';
+		}
+		audio.src = '/common/audio/' + content;
+		audio.play(); 
+		img.src = '/img/pause.png';
+
+		let time_td = document.getElementById('audio_time' + id);
+		let progress = document.getElementById('progress' + id);
+		current_time_td = time_td;
+		current_progress = progress;
+		current_img = img;
+	}
+	else 
+	{
+		img.src = '/img/play.png'
+		audio.pause();
+	}
+};
+
+Audio.prototype.stop = function() {
+    this.pause();
+    // this.currentTime = 0;
+    // current_img.src = '/img/play.png';
+};
+
+function returnerTime(time){
+	let minuts = 0;
+	let seconds = 0;
+	if(time > 60)
+	while(time > 60){
+		minuts++;
+		time -= 60;
+	}
+	seconds = time;
+	if(minuts < 10) minuts = '0' + minuts;
+	if(seconds < 10) seconds = '0' + seconds;
+	return minuts + ':' + seconds;
+}
+
+// Движение слайдера!
+audio.addEventListener('timeupdate', () =>
+	{
+		current_time_td.innerHTML = returnerTime(audio.currentTime^0);
+
+		let position = audio.currentTime / audio.duration * 100;
+		current_progress.style.left = position + '%';
+
+		if(audio.currentTime == audio.duration) 	
+		{
+			current_img.src = '/img/play.png';
+			current_progress.style.left = '0%';
+		}
+	});
+
+//Функция создает ответы
+function addAnswer(data, layout, id)
+{
+	let p = document.createElement('p');
+	p.classList.add('test_answer', 'active');
+
+	p.innerHTML = `<input type = 'radio' class = 'active' name = '${id}'> <span>${data}</span>`;
+ 
+	p.addEventListener('click', ()=>{ p.querySelector('input').click(); });
+	layout.appendChild(p);
+}
+//Функция создает кнопки и проверяет их нажантие
+function addTestControlPanel(layout, layoutbody, id)
+{
+	if (div_count % 2 == 0) {
+		let div = document.createElement('div');
+		div.classList.add('test_control');
+		div.innerHTML = `
+			<button class = 'send_result home-work__button' id = 'save'>Далее</button>
+			<button class = 'test_button home-work__button' id = 'escape'>Отмена</button>
+		`;
+
+
+		div.querySelector('#escape').addEventListener('click', (e)=>{top.location.href = '/courses'; window.cnt = 0; audio.stop(); });
+
+		div.querySelector('#save').addEventListener('click', (e)=>
+			{
+				audio.stop();
+				sendTest(layoutbody, id);
+			});
+
+		layout.appendChild(div);
+	}
+}
+
+
+
+//Функция проверяет тест и отпровляет на сервер
+function sendTest(layout, id)
+{
+	 if(validateTest(layout)){
+		let question = [];
+		let answers = [];
+		let correct = 0;
+		let resultbody = [];
+		let obj = {};
+		for (var i = 0; i < layout.children.length; i++) {
+			for (var j = 1; j < layout.children[i].children.length; j++) {
+				answers[j-1] = layout.children[i].children[j].children[1].innerHTML;
+				if(layout.children[i].children[j].children[0].checked){
+					if(j-1 === 0){
+						correct = 'A';
+					}else if(j-1 === 1){
+						correct = 'B';
+					}else if(j-1 === 2){
+						correct = 'C';
+					}else if(j-1 === 3){
+						correct = 'D';
+					}else if(j-1 === 4){
+						correct = 'E';
+					}else if(j-1 === 5){
+						correct = 'F';
+					}else if(j-1 === 6){
+						correct = 'G';
+					}
+	 			}
+	 		}
+			obj = {
+				id: layout.children[i].id,
+				correct: correct
+			}
+			resultbody[i] = obj;
+			correct = [];
+	 	}
+		resultbody = JSON.stringify(resultbody);
+		POST('/test', `method=RESULT-LEVEL&&index=${id}&&answers=${resultbody}`, (res)=>
+			{
+				document.getElementById('backpop').addEventListener('click', popupCloseFunc);
+				if (res.status == 200) 
+				{
+					if (res.next) 
+					{
+						POST('/test','method=GET-LEVEL&index='+res.index,function(req,resu){
+			    			showPopUpTest(req.testList, res.rightAnswer);
+			    			window.scrollTo({
+							    top:0,
+							    behavior: "smooth"
+							});
+						})
+					} 
+					else 
+					{
+						document.querySelector('.testBlock').innerHTML =
+						`
+							<div class='levelSt'>
+								<h2>Вы набрали ${window.cnt+res.rightAnswer} баллов из ${res.index}! \n Поздравляем ваш уровень ${res.lvl_name}! Теперь вы можете записаться на курс. </h2>
+								<button onclick ="top.location.href='/request/1'" class="deleteBtn" style="margin: 0; padding: 2.5% 6%;">Хорошо</button>
+							</div>
+						`;
+					}
+
+
+				}
+				else
+				{
+					console.log(res);
+				}
+			});
+	}else{
+		let testBody = document.getElementById('testBody');
+		for (var i = 0; i < testBody.children.length; i++) {
+			if (testBody.children[i].children[1].style.backgroundColor == 'linen') 
+			{
+				document.getElementById(`${testBody.children[i].id}`).
+				scrollIntoView();
+				break;
+			}
+		}
+	}
+}
+
+//Функция проверяет отвечены ли все вопросы
+function validateTest(layout)
+{
+	let layout1 = layout.children;
+	let answers = [];
+	let check = true;
+
+	for (var i = 0; i < layout1.length; i++) {
+		for (var j = 1; j < layout1[i].children.length; j++) {
+			if(layout1[i].children[j].children[0].checked){	
+				for (var q = 1; q < layout1[i].children.length; q++) {
+					layout1[i].children[q].style.background = 'white';	
+				}			
+				answers[i] = layout1[i].children[j].children[0];
+				j = layout1[i].children.length;
+				check = true;
+			}else{
+				for (var q = 1; q < layout1[i].children.length; q++) {
+					layout1[i].children[q].style.background = 'linen';	
+					check = false;
+				}
+			}
+		}
+	}
+	for (var i = 0; i < layout1.length; i++) {
+		for (var q = 1; q < layout1[i].children.length; q++) {
+			if(layout1[i].children[q].style.background == 'linen'){
+				check = false;
+			}
+		}
+	}
+	return check;
+};  
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!Doctype html>
+<div class = 'backpop' id = 'backpop'>
+	<div id = 'popup' class = 'popup'></div>
+</div>
+<script type="text/javascript">
+
+	document.getElementById('backpop').addEventListener('click', popupCloseFunc);
+
+	function popupCloseFunc(e)
+	{
+		if(e.target.classList.contains('backpop'))
+		{
+			closePopup();
+		}
+	}
+
+	function closePopup()
+	{
+		document.getElementById('backpop').addEventListener('click', popupCloseFunc);
+		document.getElementById('popup').classList.remove('popup');
+		document.getElementById('popup').classList.add('popup-back');
+		setTimeout(()=>{ document.getElementById('backpop').style.display = 'none'; }, 400);
+		// document.getElementById('backpop').style.display = 'none';
+	}
+	function openPopup()
+	{
+		document.getElementById('backpop').style.display = 'block';
+	}
+	function showPopup(script, config)
+	{
+		let popup = document.getElementById('popup');
+		let backpop = document.getElementById('backpop');
+
+		popup.classList.remove('popup-back');
+		popup.classList.add('popup');
+
+		popup.setAttribute('style', '');
+
+		backpop.style.display = 'block';
+
+		// document.getElementById('backpop').style.display = 'block';
+
+		if(script) popup.innerHTML = script;
+		else popup.innerHTML = `<p>Функция showPopup(script) первым параметом принимает скрипт, который окажется во всплывающем окне. А вторым параметром принимает стили popup в виде объекта {width, height, border, background}</p>`;
+
+		if(!config) return;
+
+		if(config.width) popup.style.width = config.width;	
+
+		if(config.height) popup.style.height = config.height;
+
+		if(config.background) popup.style.background = config.background;
+
+		if(config.border) popup.style.border = config.border;
+
+		if(config.top) popup.style.marginTop = config.top;
+
+		if(config.padding) popup.style.padding = config.padding;
+
+		if(config.maxHeight) popup.style.maxHeight = config.maxHeight;
+
+		if(config.maxWidth) popup.style.maxWidth = config.maxWidth;
+
+		if(config.textAlign) popup.style.textAlign = config.textAlign;
+
+		if(config.close) document.getElementById('backpop').removeEventListener('click', popupCloseFunc, false);
+		else backpop.addEventListener('click', popupCloseFunc);
+
+		if(config.curtain) backpop.addEventListener('click', ()=>
+			{
+				document.getElementById('popup').classList.remove('popup');
+				document.getElementById('popup').classList.add('popup-back');
+				setTimeout(()=>{ document.getElementById('backpop').style.display = 'none'; }, 400);
+			});
+	}
+ 
+</script> 
+
+
+

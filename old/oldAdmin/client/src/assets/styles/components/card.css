@@ -1,0 +1,161 @@
+.card {
+  background-color: #fff;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  border-color: #eee;
+  margin-bottom: 2rem;
+  position: relative;
+  width: 100%;
+  padding: 0;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: .25rem;
+}
+.card:hover {
+  box-shadow: 0 3px 8px 0 rgba(0,0,0,0.1);
+}
+.card__header {
+  background-color: #fff;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  -moz-box-shadow: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #444;
+  padding: 20px;
+  position: relative;
+  border-bottom: 1px solid #eee;
+}
+.card__header h2 {
+  font-weight: 600;
+  color: #444;
+  position: relative;
+  font-size: 18px;
+  line-height: 1.2;
+}
+.card__body {
+  background-color: #fff;
+  font-weight: 400;
+  color: #444;
+  padding: 20px;
+  font-family: "Open Sans",sans-serif;
+  font-size: 14px;
+  color: #5A5A5A;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+.card__body img::selection {
+  background: transparent;
+}
+.card__action {
+  display: flex;
+  position: relative;
+}
+.card__action li {
+  padding-left: 20px;
+  cursor: pointer;
+}
+.card__action svg {
+  font-size: 16px;
+  color: #999;
+}
+.card.fullscreen {
+  height: 100%;
+  left: 0;
+  margin: 0;
+  position: fixed;
+  overflow-y: auto;
+  top: 0;
+  width: 100%;
+  z-index: 1040;
+  border-radius: 0 !important;
+}
+.card__dropdown {
+  z-index: 1000;
+  float: left;
+  min-width: 11rem;
+  padding: .5rem 0;
+  margin: .125rem 0 0;
+  font-size: 1rem;
+  color: #777;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: .25rem;
+  position: absolute;
+  top: 20px;
+  right: 0;
+  display: block;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  -ms-transition: all 0.2s ease-in-out;
+}
+.card__dropdown a {
+  color: inherit;
+  width: 100%;
+  display: block;
+  height: 100%;
+}
+.card__dropdown li:hover {
+  color: #212529;
+}
+.card__dropdown li {
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+.card__dropdown_animated {
+  -webkit-transform-origin: top right !important;
+  -moz-transform-origin: top right !important;
+  -ms-transform-origin: top right !important;
+  transform-origin: top right !important;
+  transform: scale(0, 0) !important;
+  -webkit-transform: scale(0, 0) !important;
+  -moz-transform: scale(0, 0) !important;
+  -ms-transform: scale(0, 0) !important;
+  display: block;
+  margin: 0px;
+  right: 0 !important;
+  left: auto !important;
+  top: auto !important;
+}
+.card__footer {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 0 20px 20px 20px;
+}
+.card__footer button {
+  background-color: #fff;
+  border: 1px solid #E5E5E5;
+  color: #777;
+}
+.card__footer button:first-child {
+  background-color: #009688;
+  border: 1px solid #00877a;
+  color: #fff;
+}
+.card__footer button:first-child:hover {
+ background-color: #00877a;
+}
